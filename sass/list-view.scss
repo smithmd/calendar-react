@@ -10,8 +10,18 @@
     text-align: center;
   }
 
-  #prettyEvents {
+  header {
+    clear:both;
+  }
 
+  #navigation {
+    background-color: #d0e2ed;
+    clear:both;
+    width:100%;
+  }
+
+  #prettyEvents {
+    clear:left;
     margin-top: 15px;
 
     .day {

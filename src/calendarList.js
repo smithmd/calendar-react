@@ -1,7 +1,7 @@
 /**
  * Created by smithmd on 7/21/15.
  */
-// rendering for each individual event.
+// rendering for each individual event
 var Event = React.createClass({
   render: function () {
     var time = printTime(this.props.event);
@@ -15,7 +15,7 @@ var Event = React.createClass({
     );
   }
 });
-// rendering for list of events.d
+// rendering for list of events
 var EventList = React.createClass({
   render: function () {
     var elementId = this.props.date + "-events";
@@ -33,6 +33,7 @@ var EventList = React.createClass({
     );
   }
 });
+
 // rendering for new fieldset/legend for each date in list of events
 var EventDate = React.createClass({
   render: function () {
