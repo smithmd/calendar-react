@@ -20,10 +20,8 @@ var EventList = React.createClass({displayName: "EventList",
   render: function () {
     var elementId = this.props.date + "-events";
     var events = this.props.events.map(function (ev, index) {
-      var zebra = index % 2 === 0;
-      var classes = "event" + (zebra ? " zebra" : "");
       return (
-          React.createElement(Event, {key: ev.uid, event: ev, classes: classes})
+          React.createElement(Event, {key: ev.uid, event: ev, classes: classNames('event',{ zebra: (index % 2 === 0) })})
       )
     });
     return (
