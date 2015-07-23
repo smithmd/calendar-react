@@ -34,11 +34,11 @@ var EventList = React.createClass({displayName: "EventList",
 
 // rendering for new fieldset/legend for each date in list of events
 var EventDate = React.createClass({displayName: "EventDate",
+  
   render: function () {
     var prettyDate = printDate(new Date(this.props.date));
     return (
         React.createElement("div", {id: this.props.date, className: "day"}, 
-          React.createElement("header", {className: "date"}, prettyDate), 
           React.createElement(EventList, {date: this.props.date, events: this.props.events})
         )
     );
@@ -89,6 +89,6 @@ var EventDateList = React.createClass({displayName: "EventDateList",
 });
 
 React.render(
-    React.createElement(EventDateList, {url: "json/calendar.json"}),
+    React.createElement(EventDateList, {url: "json/calendar.json", startDate: "", endDate: ""}),
     document.getElementById('prettyEvents')
 );

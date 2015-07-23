@@ -11,17 +11,87 @@
   }
 
   header {
-    clear:both;
+    clear: both;
   }
 
   #navigation {
-    background-color: #d0e2ed;
-    clear:both;
-    width:100%;
+    $selectedColor: #484949;
+    $prevBGColor: #b0bdc4;
+    $nextBGColor: #676666;
+    $navBGColor: #d0e2ed;
+
+    background-color: $navBGColor;
+    clear: both;
+    width: 100%;
+    color: #a2afb7;
+
+    .isToday, .isSelected {
+      color: $selectedColor;
+    }
+    .dayOfWeek {
+      font-weight: bold;
+    }
+
+    ul {
+      li {
+        line-height: 4;
+        text-decoration: none;
+        display: inline-block;
+        width: 12%;
+        cursor: pointer;
+        vertical-align: middle;
+        text-align: center;
+
+        &:hover {
+          color: $selectedColor;
+          background-color: darken($navBGColor, 5%);
+        }
+
+        &.navPaging {
+
+          &:hover {
+            background-color: $navBGColor;
+            cursor: default;
+          }
+
+          span {
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            margin: 0 5px;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            text-align: center;
+            line-height: .7;
+            color: white;
+            font-size: 1.8em;
+
+            &#prev {
+              background-color: $prevBGColor;
+              &:hover {
+                background-color: darken($prevBGColor, 10%);
+                color: darken(white, 10%);
+                cursor: pointer;
+              }
+            }
+
+            &#next {
+              background-color: $nextBGColor;
+              &:hover {
+                background-color: darken($nextBGColor, 10%);
+                color: darken(white, 10%);
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   #prettyEvents {
-    clear:left;
+    clear: left;
     margin-top: 15px;
 
     .day {
