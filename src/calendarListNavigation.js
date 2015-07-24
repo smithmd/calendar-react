@@ -3,9 +3,12 @@
  */
 
 var NavigationDay = React.createClass({
+  handleClick: function () {
+
+  },
   render: function () {
     return (
-        <li className={classNames({isToday: this.props.isToday})} data-day={this.props.date.format('YYYY/MM/DD')}>
+        <li className={classNames({isSelected: this.props.isSelected})} data-day={this.props.date.format('YYYY/MM/DD')}>
           <span className={classNames('dayOfWeek')}>{this.props.date.format('ddd')}&nbsp;</span>
           <span className='navDate'>{this.props.date.format('MM/DD')}</span>
         </li>
@@ -13,19 +16,26 @@ var NavigationDay = React.createClass({
   }
 });
 var Navigation = React.createClass({
+  getInitialState: function () {
+    return {date: moment()};
+  },
+  componentDidMount: function () {
+    var component = this;
+    selectedDate.subscribe(function (s) {
+      component.setState({date: moment(s.date)});
+      React.render(<Navigation />, document.getElementById('navigation'));
+    });
+  },
   render: function () {
-    var today = moment();
-    var todayInt = today.day();
+    var date = this.state.date;
+    var dayInt = date.day();
     var days = [];
     for (var i = 0; i < 7; i++) {
-      var delta = i - todayInt;
-      var d = moment().add(delta, 'days');
-      console.log('delta: ' + delta);
-      console.log("moment " + today.format('ddd YYYY/MM/DD'));
-      console.log("day " + d.format('ddd YYYY/MM/DD'));
-      var isToday = today.isSame(d, 'day');
+      var d = date.clone().add(i - dayInt, 'days');
+      var isSelected = date.isSame(d, 'day');
+      console.log(i + ": " + dayInt + " / " + (i - dayInt) + ' date: ' + d.format('MM/DD/YYYY'));
       days.push(
-          <NavigationDay day={i} date={d} key={'m'+d.format('YYYY/MM/DD')} isToday={isToday}/>
+          <NavigationDay day={i} date={d} key={'m'+d.format('YYYY/MM/DD')} isSelected={isSelected}/>
       );
     }
     return (

@@ -21,7 +21,7 @@ var EventList = React.createClass({
     var elementId = this.props.date + "-events";
     var events = this.props.events.map(function (ev, index) {
       return (
-          <Event key={ev.uid} event={ev} classes={classNames('event',{ zebra: (index % 2 === 0) })} />
+          <Event key={ev.uid} event={ev} classes={classNames('event',{ zebra: (index % 2 === 0) })}/>
       )
     });
     return (
@@ -34,12 +34,11 @@ var EventList = React.createClass({
 
 // rendering for new fieldset/legend for each date in list of events
 var EventDate = React.createClass({
-  
   render: function () {
-    var prettyDate = printDate(new Date(this.props.date));
+    //var prettyDate = printDate(new Date(this.props.date));
     return (
         <div id={this.props.date} className="day">
-          <EventList date={this.props.date} events={this.props.events}/>
+          <EventList date={this.props.date} events={this.props.events}/> :
         </div>
     );
   }
@@ -58,37 +57,28 @@ var EventDateList = React.createClass({
     });
   },
   getInitialState: function () {
-    return {data: []};
+    return {data: [], selDate: ''};
   },
   componentDidMount: function () {
     this.loadEvents();
+    var component = this;
+    selectedDate.subscribe(function (s) {
+      component.setState({selDate: s.date});
+      React.render(<EventDateList url="json/calendar.json"/>, document.getElementById('prettyEvents'));
+    });
   },
   render: function () {
-    var eventDateIndex = [];
-    var eventsByDates = [[]];
-    this.state.data.map(function (event) {
-      // add events to map keyed on date to iterate over when drawing events on list
-      var date = event.startDate;
-      if (eventDateIndex.indexOf(date) === -1) {
-        eventDateIndex.push(date);
-        eventsByDates[eventDateIndex.indexOf(date)] = [];
-      }
-      eventsByDates[eventDateIndex.indexOf(date)].push(event);
-    });
-    var eventDateNodes = eventDateIndex.map(function (date, index) {
-      return (
-          <EventDate  key={date} date={date} events={eventsByDates[index]}/>
-      );
+    var edl = this;
+    var events = this.state.data.filter(function (event) {
+      return edl.state.selDate == event.startDate;
     });
     return (
-        <div>
-          {eventDateNodes}
-        </div>
+        <EventDate key={edl.state.selDate} date={edl.state.selDate} events={events}/>
     );
   }
 });
 
 React.render(
-    <EventDateList url="json/calendar.json" startDate="" endDate="" />,
+    <EventDateList url="json/calendar.json"/>,
     document.getElementById('prettyEvents')
 );

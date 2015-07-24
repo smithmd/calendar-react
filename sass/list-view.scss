@@ -33,6 +33,8 @@
     }
 
     ul {
+      margin:0;
+
       li {
         line-height: 4;
         text-decoration: none;
@@ -92,7 +94,6 @@
 
   #prettyEvents {
     clear: left;
-    margin-top: 15px;
 
     .day {
       header.date {
