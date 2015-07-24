@@ -2,13 +2,36 @@
  * Created by smithmd on 7/22/15.
  */
 
-var NavigationDay = React.createClass({
-  handleClick: function () {
+var NavigationPaging = React.createClass({
+  handleClick: function (date,toPrev) {
 
+    var m = moment(date);
+    var newDate = m.clone();
+    if (toPrev) {
+      newDate.subtract(m.day()+ 7, 'days');
+    } else {
+      newDate.add(7 - m.day(),'days');
+    }
+    console.log("o: " + m.format('YYYY-MM-DD') + " n:" + newDate.format('YYYY-MM-DD'));
+    selectedDate.onNext({date:newDate.format('YYYY-MM-DD')});
   },
   render: function () {
     return (
-        <li className={classNames({isSelected: this.props.isSelected})} data-day={this.props.date.format('YYYY/MM/DD')}>
+        <li className="navPaging">
+          <span id="prev" onClick={this.handleClick.bind(this,this.props.date,true)}>&lsaquo;</span>
+          <span id="next" onClick={this.handleClick.bind(this,this.props.date,false)}>&rsaquo;</span>
+        </li>
+    );
+  }
+});
+var NavigationDay = React.createClass({
+  handleClick: function (date) {
+    selectedDate.onNext({date:date.format('YYYY-MM-DD')});
+  },
+  render: function () {
+    var boundClick = this.handleClick.bind(this,this.props.date);
+    return (
+        <li className={classNames({isSelected: this.props.isSelected})} data-day={this.props.date.format('YYYY/MM/DD')} onClick={boundClick} >
           <span className={classNames('dayOfWeek')}>{this.props.date.format('ddd')}&nbsp;</span>
           <span className='navDate'>{this.props.date.format('MM/DD')}</span>
         </li>
@@ -33,18 +56,14 @@ var Navigation = React.createClass({
     for (var i = 0; i < 7; i++) {
       var d = date.clone().add(i - dayInt, 'days');
       var isSelected = date.isSame(d, 'day');
-      console.log(i + ": " + dayInt + " / " + (i - dayInt) + ' date: ' + d.format('MM/DD/YYYY'));
       days.push(
-          <NavigationDay day={i} date={d} key={'m'+d.format('YYYY/MM/DD')} isSelected={isSelected}/>
+          <NavigationDay day={i} date={d} key={'m'+d.format('YYYY/MM/DD')} isSelected={isSelected} />
       );
     }
     return (
         <ul>
           {days}
-          <li className="navPaging">
-            <span id="prev">&lsaquo;</span>
-            <span id="next">&rsaquo;</span>
-          </li>
+          <NavigationPaging date={this.state.date} />
         </ul>
     );
   }
