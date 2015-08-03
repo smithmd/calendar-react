@@ -36,9 +36,15 @@ var EventList = React.createClass({displayName: "EventList",
 var EventDate = React.createClass({displayName: "EventDate",
   render: function () {
     //var prettyDate = printDate(new Date(this.props.date));
+    var eventList = null;
+    if (this.props.events.length <= 0) {
+      eventList = React.createElement("span", {id: "emptyList"}, "There are no events on this date.");
+    } else {
+      eventList = React.createElement(EventList, {date: this.props.date, events: this.props.events});
+    }
     return (
         React.createElement("div", {id: this.props.date, className: "day"}, 
-          React.createElement(EventList, {date: this.props.date, events: this.props.events}), " :"
+          eventList
         )
     );
   }
@@ -64,6 +70,7 @@ var EventDateList = React.createClass({displayName: "EventDateList",
     var component = this;
     selectedDate.subscribe(function (s) {
       component.setState({selDate: s.date});
+      // re-render list of events with new date
       React.render(React.createElement(EventDateList, {url: "json/calendar.json"}), document.getElementById('prettyEvents'));
     });
   },

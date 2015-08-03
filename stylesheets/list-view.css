@@ -1,10 +1,17 @@
+/* line 3, ../sass/list-view.scss */
+html, body {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
 @media all {
-  /* line 2, ../sass/list-view.scss */
+  /* line 10, ../sass/list-view.scss */
   html {
     font-family: Helvetica, Arial, sans-serif;
   }
 
-  /* line 6, ../sass/list-view.scss */
+  /* line 14, ../sass/list-view.scss */
   #pageTitle {
     font-weight: bold;
     font-size: 1.3em;
@@ -12,31 +19,75 @@
     text-align: center;
   }
 
-  /* line 13, ../sass/list-view.scss */
-  header {
-    clear: both;
+  /* line 21, ../sass/list-view.scss */
+  #emptyList {
+    display: block;
+    text-align: center;
+    line-height: 3;
   }
 
-  /* line 17, ../sass/list-view.scss */
+  /* line 27, ../sass/list-view.scss */
+  header {
+    clear: both;
+    background-color: #f6f6f6;
+  }
+  /* line 32, ../sass/list-view.scss */
+  header h1 {
+    display: inline-block;
+    font-size: 24px;
+    margin: 16px;
+  }
+  /* line 37, ../sass/list-view.scss */
+  header input, header #viewCalendar {
+    margin: 16px;
+    float: right;
+    vertical-align: middle;
+    height: 24px;
+    border-radius: 1px;
+  }
+  /* line 44, ../sass/list-view.scss */
+  header input {
+    padding-left: 5px;
+    background: white url("../img/calendar.png") 95% 50% no-repeat;
+    border: 1px solid #dcdcdc;
+    -webkit-box-shadow: inset 3px 3px 5px #f6f6f6;
+    -moz-box-shadow: inset 3px 3px 5px #f6f6f6;
+    box-shadow: inset 3px 3px 5px #f6f6f6;
+  }
+  /* line 52, ../sass/list-view.scss */
+  header #viewCalendar {
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.7em;
+    line-height: 2;
+    padding: 0 24px;
+    color: white;
+    background-color: #d42741;
+    border: 1px solid #d42741;
+  }
+
+  /* line 66, ../sass/list-view.scss */
   #navigation {
     background-color: #d0e2ed;
     clear: both;
     width: 100%;
     color: #a2afb7;
   }
-  /* line 28, ../sass/list-view.scss */
+  /* line 77, ../sass/list-view.scss */
   #navigation .isToday, #navigation .isSelected {
     color: #484949;
   }
-  /* line 31, ../sass/list-view.scss */
+  /* line 80, ../sass/list-view.scss */
   #navigation .dayOfWeek {
     font-weight: bold;
   }
-  /* line 35, ../sass/list-view.scss */
+  /* line 84, ../sass/list-view.scss */
   #navigation ul {
     margin: 0;
   }
-  /* line 38, ../sass/list-view.scss */
+  /* line 87, ../sass/list-view.scss */
   #navigation ul li {
     line-height: 4;
     text-decoration: none;
@@ -46,17 +97,17 @@
     vertical-align: middle;
     text-align: center;
   }
-  /* line 47, ../sass/list-view.scss */
+  /* line 96, ../sass/list-view.scss */
   #navigation ul li:hover {
     color: #484949;
     background-color: #bed7e6;
   }
-  /* line 54, ../sass/list-view.scss */
+  /* line 103, ../sass/list-view.scss */
   #navigation ul li.navPaging:hover {
     background-color: #d0e2ed;
     cursor: default;
   }
-  /* line 59, ../sass/list-view.scss */
+  /* line 108, ../sass/list-view.scss */
   #navigation ul li.navPaging span {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -70,79 +121,81 @@
     color: white;
     font-size: 1.8em;
   }
-  /* line 72, ../sass/list-view.scss */
+  /* line 121, ../sass/list-view.scss */
   #navigation ul li.navPaging span#prev {
     background-color: #b0bdc4;
   }
-  /* line 74, ../sass/list-view.scss */
+  /* line 123, ../sass/list-view.scss */
   #navigation ul li.navPaging span#prev:hover {
     background-color: #93a5ae;
     color: #e6e6e6;
     cursor: pointer;
   }
-  /* line 81, ../sass/list-view.scss */
+  /* line 130, ../sass/list-view.scss */
   #navigation ul li.navPaging span#next {
     background-color: #676666;
   }
-  /* line 83, ../sass/list-view.scss */
+  /* line 132, ../sass/list-view.scss */
   #navigation ul li.navPaging span#next:hover {
     background-color: #4d4d4d;
     color: #e6e6e6;
     cursor: pointer;
   }
 
-  /* line 95, ../sass/list-view.scss */
+  /* line 144, ../sass/list-view.scss */
   #prettyEvents {
     clear: left;
   }
-  /* line 99, ../sass/list-view.scss */
+  /* line 148, ../sass/list-view.scss */
   #prettyEvents .day header.date {
     font-weight: bold;
     display: block;
     margin: 0 auto;
     text-align: center;
   }
-  /* line 107, ../sass/list-view.scss */
+  /* line 156, ../sass/list-view.scss */
   #prettyEvents .event {
     line-height: 2;
     border-bottom: 1px solid #fff;
     background-color: #fbfafa;
+    display: flex;
   }
-  /* line 112, ../sass/list-view.scss */
+  /* line 162, ../sass/list-view.scss */
   #prettyEvents .event.zebra {
     background-color: #f6f6f6;
   }
-  /* line 116, ../sass/list-view.scss */
+  /* line 166, ../sass/list-view.scss */
   #prettyEvents .event span {
     padding-left: 10px;
     display: inline-block;
   }
-  /* line 121, ../sass/list-view.scss */
+  /* line 171, ../sass/list-view.scss */
   #prettyEvents .event span.time {
     width: 20%;
     background-color: #ebebeb;
+    font-weight: bold;
   }
-  /* line 126, ../sass/list-view.scss */
+  /* line 177, ../sass/list-view.scss */
   #prettyEvents .event span.title {
     width: 40%;
   }
-  /* line 130, ../sass/list-view.scss */
+  /* line 181, ../sass/list-view.scss */
   #prettyEvents .event span.venue {
     width: 35%;
   }
 }
 @media screen {
-  /* line 138, ../sass/list-view.scss */
+  /* line 189, ../sass/list-view.scss */
   #links {
     padding-left: 10px;
   }
 
-  /* line 143, ../sass/list-view.scss */
+  /* line 194, ../sass/list-view.scss */
   #prettyEvents div.bordered {
     width: 100%;
   }
 
-  /* line 148, ../sass/list-view.scss */
+  /* line 199, ../sass/list-view.scss */
   #filterset {
     border: 1px solid #999;
     border-radius: 0 0 5px 5px;
@@ -151,13 +204,13 @@
     margin: 10px;
   }
 
-  /* line 156, ../sass/list-view.scss */
+  /* line 207, ../sass/list-view.scss */
   #filterset input[type=text] {
     border: 1px solid #999;
     padding: 2px;
   }
 
-  /* line 161, ../sass/list-view.scss */
+  /* line 212, ../sass/list-view.scss */
   #filterset legend {
     padding: 1px 20px;
     border: 1px solid #999;
@@ -166,29 +219,29 @@
   }
 }
 @media print {
-  /* line 170, ../sass/list-view.scss */
+  /* line 221, ../sass/list-view.scss */
   html {
     font-family: Tahoma, Helvetica, Arial, sans-serif;
     font-size: 1.1em;
   }
 
-  /* line 175, ../sass/list-view.scss */
+  /* line 226, ../sass/list-view.scss */
   #prettyEvents div.bordered {
     margin: 0 10px 10px;
     padding: 0 10px 10px;
   }
 
-  /* line 180, ../sass/list-view.scss */
+  /* line 231, ../sass/list-view.scss */
   #prettyEvents span.date {
     font-size: 1.1em;
   }
 
-  /* line 184, ../sass/list-view.scss */
+  /* line 235, ../sass/list-view.scss */
   #filterset, #links {
     display: none;
   }
 
-  /* line 188, ../sass/list-view.scss */
+  /* line 239, ../sass/list-view.scss */
   div.event {
     border-bottom: 1px solid #fff;
     padding-top: 5px;
