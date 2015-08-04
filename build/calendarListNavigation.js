@@ -8,7 +8,7 @@ var NavigationPaging = React.createClass({displayName: "NavigationPaging",
     var m = moment(date);
     var newDate = m.clone();
     if (toPrev) {
-      newDate.subtract(m.day()+ 7, 'days');
+      newDate.subtract(m.day() + 7, 'days');
     } else {
       newDate.add(7 - m.day(),'days');
     }
