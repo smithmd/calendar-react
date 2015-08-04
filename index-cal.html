@@ -15,28 +15,22 @@
     <link href="stylesheets/list-view.css" type="text/css" rel="stylesheet"/>
     <script>
       $(function () {
-        var datePick = $('#datepicker');
-        datePick.val('');
-        datePick.datepicker();
-        datePick.change(function () {
-          var d = $.datepicker.parseDate('mm/dd/yy', datePick.val());
-          selectedDate.onNext({date: $.datepicker.formatDate('yy-mm-dd',d)});
-        });
-        var subscription = selectedDate.subscribe(function (s) {
-          var d = $.datepicker.parseDate('yy-mm-dd', s.date);
-          datePick.val($.datepicker.formatDate('mm/dd/yy',d));
+        var monthHead = $('#currentMonth');
+        var subscription = calendarDates.subscribe(function (s) {
+          var m = moment([s.currentYear, s.currentMonth,1]).format('MMM YYYY');
+          monthHead.html(m);
         });
       });
     </script>
   </head>
   <body>
     <header>
-      <h1>ICA Daily Schedule</h1>
+      <h1 id="currentMonth">ICA Daily Schedule</h1>
       <a id="viewCalendar" href="index-list.html">View Printable List</a>
     </header>
     <div id="navigation">
     </div>
-    <div id="prettyEvents"></div>
+    <div id="Calendar"></div>
     <script src="js/data.js"></script>
     <script src="build/calendarView.js"></script>
   </body>

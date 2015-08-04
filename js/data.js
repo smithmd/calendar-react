@@ -7,3 +7,10 @@ var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'A
 
 var selectedDate = new Rx.BehaviorSubject({date: moment().format('YYYY-MM-DD')});
 // selectedDate.onNext called by click and changes state
+
+var calendarDates = new Rx.BehaviorSubject({
+  currentMonth: moment().month(),
+  currentYear: moment().year(),
+  startDate: null,
+  endDate: null
+});
