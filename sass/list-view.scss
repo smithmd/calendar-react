@@ -208,24 +208,29 @@ html, body {
           header {
             background-color: inherit;
             line-height: 2;
-            padding-left:1em;
+            padding-left: 1em;
+          }
+          a {
+            display: block;
+            margin: .5em auto;
+            padding-bottom: .5em;
+            font-size: .8em;
+            width: 90%;
+            text-decoration: none;
           }
 
           .event {
             margin: .5em auto;
-            padding-bottom:.5em;
-            font-size:.8em;
-            width:90%;
+            padding-bottom: .5em;
+            font-size: .8em;
+            width: 90%;
             border-bottom: 1px dotted #c5c5c5;
 
             .time {
               font-weight: bold;
             }
             &.last {
-              border:0;
-            }
-            a {
-              text-decoration: none;
+              border: 0;
             }
           }
         }

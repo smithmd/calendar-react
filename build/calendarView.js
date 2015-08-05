@@ -13,33 +13,30 @@ var Event = React.createClass({displayName: "Event",
   }
 });
 
-var EventRemainder = React.createClass({displayName: "EventRemainder",
-  render: function () {
-    return (
-        React.createElement("div", {className: classNames('event', 'remainder', 'last')}, 
-           React.createElement("a", {href: "javascript:void(0)"}, "+ Show ", this.props.remainder, " More")
-        )
-    );
-  }
-});
-
 var EventDate = React.createClass({displayName: "EventDate",
+  getInitialState: function () {
+    return {printAll:this.props.printAll};
+  },
+  handleMoreClick: function () {
+    console.log('attempting to re-render: click');
+    this.setState({printAll: 'true'});
+  },
   render: function () {
     var component = this;
     var remaining = component.props.events.length - component.props.displayLength;
     var remainder = null;
     var eventList = this.props.events.map(function (event, index, events) {
       var last = false;
-      if (component.props.printAll == 'true') {
+      if (component.state.printAll == 'true') {
         last = index === (events.length - 1);
-        return (React.createElement(Event, {event: event, isLast: last}));
+        return (React.createElement(Event, {event: event, isLast: last, key: index}));
       } else if (index < component.props.displayLength) {
         last = index === (component.props.displayLength - 1) || index === (events.length - 1);
-        return (React.createElement(Event, {event: event, isLast: last}));
+        return (React.createElement(Event, {event: event, isLast: last, key: index}));
       }
     });
-    if (component.props.printAll == 'false' && remaining > 0) {
-      remainder = React.createElement(EventRemainder, {remainder: remaining})
+    if (component.state.printAll == 'false' && remaining > 0) {
+      remainder = React.createElement("a", {href: "javascript:void(0)", onClick: this.handleMoreClick}, "+ Show ", remaining, " More")
     }
     return (
         React.createElement("div", {className: classNames('day', (this.props.isCurr ? '' : 'notCurrentMonth'))}, 
