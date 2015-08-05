@@ -190,7 +190,7 @@ html, body {
     background-color: white;
 
     div {
-      width:100%;
+      width: 100%;
 
       .calendarRow {
         display: flex;
@@ -199,8 +199,34 @@ html, body {
 
         .day {
           border: 1px solid #d0d0d0;
-          &.notCurrent {
+          min-height: 11em;
+
+          &.notCurrentMonth {
             color: #d0d0d0;
+          }
+
+          header {
+            background-color: inherit;
+            line-height: 2;
+            padding-left:1em;
+          }
+
+          .event {
+            margin: .5em auto;
+            padding-bottom:.5em;
+            font-size:.8em;
+            width:90%;
+            border-bottom: 1px dotted #c5c5c5;
+
+            .time {
+              font-weight: bold;
+            }
+            &.last {
+              border:0;
+            }
+            a {
+              text-decoration: none;
+            }
           }
         }
       }
@@ -211,15 +237,9 @@ html, body {
       font-weight: bold;
       text-align: center;
       line-height: 3;
-      border:0;
-      margin:0;
+      border: 0;
+      margin: 0;
       flex: auto;
-    }
-
-    .day {
-      header {
-        background-color: inherit;
-      }
     }
   }
 }

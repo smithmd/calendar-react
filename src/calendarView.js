@@ -1,16 +1,23 @@
 var Event = React.createClass({
   render: function () {
+    var time = formatTime(new Date(this.props.event.startTime));
+    var venue = '';
+    if (this.props.event.venue != null && this.props.event.venue != '') {
+      venue = <span className='venue'>({this.props.event.venue})</span>;
+    }
     return (
-        <span>
-        </span>
+        <div className={classNames('event',(this.props.isLast ? 'last' : ''))}>
+          <span className='time'>{time}</span> - <span className='title'>{this.props.event.title}</span> {venue}
+        </div>
     );
   }
 });
 
-var EventList = React.createClass({
+var EventRemainder = React.createClass({
   render: function () {
     return (
-        <div>
+        <div className={classNames('event', 'remainder', 'last')}>
+           <a href="javascript:void(0)">+ Show {this.props.remainder} More</a>
         </div>
     );
   }
@@ -18,10 +25,27 @@ var EventList = React.createClass({
 
 var EventDate = React.createClass({
   render: function () {
-
+    var component = this;
+    var remaining = component.props.events.length - component.props.displayLength;
+    var remainder = null;
+    var eventList = this.props.events.map(function (event, index, events) {
+      var last = false;
+      if (component.props.printAll == 'true') {
+        last = index === (events.length - 1);
+        return (<Event event={event} isLast={last}/>);
+      } else if (index < component.props.displayLength) {
+        last = index === (component.props.displayLength - 1) || index === (events.length - 1);
+        return (<Event event={event} isLast={last}/>);
+      }
+    });
+    if (component.props.printAll == 'false' && remaining > 0) {
+      remainder = <EventRemainder remainder={remaining} />
+    }
     return (
-        <div classes={classNames("day", (this.props.isCurr ? '' : 'notCurrent'))} >
+        <div className={classNames('day', (this.props.isCurr ? '' : 'notCurrentMonth'))}>
           <header>{this.props.day}</header>
+          {eventList}
+          {remainder}
         </div>
     );
   }
@@ -49,23 +73,20 @@ var EventCalendarRow = React.createClass({
   render: function () {
     var day = null;
     var days = [];
-    for(var i = 0; i < 7; i++) {
+    for (var i = 0; i < 7; i++) {
+      var key = 'k' + i;
       if (this.props.week[0]) {
         day = moment(this.props.week[0].startDate).day(i);
       }
       else {
         day = null;
       }
-      var events = this.props.week.filter(function(event) {
+      var events = this.props.week.filter(function (event) {
         return (i === moment(event.startDate).day());
       });
-      if (events.length > 0) {
-        if (day != null)
-          days.push(<EventDate day={day.date()} />);
-      } else {
-        if (day != null)
-          days.push(<EventDate day={day.date()} />);
-      }
+      if (day != null)
+        days.push(<EventDate events={events} printAll='false' displayLength='3' day={day.date()} key={key}
+                             isCurr={day.month() == this.props.month}/>);
 
     }
     return (
@@ -107,11 +128,10 @@ var EventCalendar = React.createClass({
       var m = moment(event.startDate);
       return (m.month() == component.state.dates.currentMonth && m.year() == component.state.dates.currentYear );
     });
-    console.log(events);
     var weeks = [];
     var start = moment([component.state.dates.currentYear, component.state.dates.currentMonth]).day(0);
     var end = start.clone().day(6);
-    // needs to be a loop
+    // create associative array for weeks of calendar
     for (var i = 0; i <= 5; i++) {
       weeks[i] = events.filter(function (event) {
         var m = moment(event.startDate);
@@ -124,10 +144,10 @@ var EventCalendar = React.createClass({
         break;
       }
     }
-    var eventWeeks = weeks.map(function(week,index) {
+    var eventWeeks = weeks.map(function (week, index) {
       var key = "w" + index;
-      return(
-          <EventCalendarRow key={key} week={week} />
+      return (
+          <EventCalendarRow key={key} week={week} month={component.state.dates.currentMonth}/>
       );
     });
     return (

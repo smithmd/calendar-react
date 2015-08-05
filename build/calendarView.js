@@ -1,16 +1,23 @@
 var Event = React.createClass({displayName: "Event",
   render: function () {
+    var time = formatTime(new Date(this.props.event.startTime));
+    var venue = '';
+    if (this.props.event.venue != null && this.props.event.venue != '') {
+      venue = React.createElement("span", {className: "venue"}, "(", this.props.event.venue, ")");
+    }
     return (
-        React.createElement("span", null
+        React.createElement("div", {className: classNames('event',(this.props.isLast ? 'last' : ''))}, 
+          React.createElement("span", {className: "time"}, time), " - ", React.createElement("span", {className: "title"}, this.props.event.title), " ", venue
         )
     );
   }
 });
 
-var EventList = React.createClass({displayName: "EventList",
+var EventRemainder = React.createClass({displayName: "EventRemainder",
   render: function () {
     return (
-        React.createElement("div", null
+        React.createElement("div", {className: classNames('event', 'remainder', 'last')}, 
+           React.createElement("a", {href: "javascript:void(0)"}, "+ Show ", this.props.remainder, " More")
         )
     );
   }
@@ -18,10 +25,27 @@ var EventList = React.createClass({displayName: "EventList",
 
 var EventDate = React.createClass({displayName: "EventDate",
   render: function () {
-
+    var component = this;
+    var remaining = component.props.events.length - component.props.displayLength;
+    var remainder = null;
+    var eventList = this.props.events.map(function (event, index, events) {
+      var last = false;
+      if (component.props.printAll == 'true') {
+        last = index === (events.length - 1);
+        return (React.createElement(Event, {event: event, isLast: last}));
+      } else if (index < component.props.displayLength) {
+        last = index === (component.props.displayLength - 1) || index === (events.length - 1);
+        return (React.createElement(Event, {event: event, isLast: last}));
+      }
+    });
+    if (component.props.printAll == 'false' && remaining > 0) {
+      remainder = React.createElement(EventRemainder, {remainder: remaining})
+    }
     return (
-        React.createElement("div", {classes: classNames("day", (this.props.isCurr ? '' : 'notCurrent'))}, 
-          React.createElement("header", null, this.props.day)
+        React.createElement("div", {className: classNames('day', (this.props.isCurr ? '' : 'notCurrentMonth'))}, 
+          React.createElement("header", null, this.props.day), 
+          eventList, 
+          remainder
         )
     );
   }
@@ -49,23 +73,20 @@ var EventCalendarRow = React.createClass({displayName: "EventCalendarRow",
   render: function () {
     var day = null;
     var days = [];
-    for(var i = 0; i < 7; i++) {
+    for (var i = 0; i < 7; i++) {
+      var key = 'k' + i;
       if (this.props.week[0]) {
         day = moment(this.props.week[0].startDate).day(i);
       }
       else {
         day = null;
       }
-      var events = this.props.week.filter(function(event) {
+      var events = this.props.week.filter(function (event) {
         return (i === moment(event.startDate).day());
       });
-      if (events.length > 0) {
-        if (day != null)
-          days.push(React.createElement(EventDate, {day: day.date()}));
-      } else {
-        if (day != null)
-          days.push(React.createElement(EventDate, {day: day.date()}));
-      }
+      if (day != null)
+        days.push(React.createElement(EventDate, {events: events, printAll: "false", displayLength: "3", day: day.date(), key: key, 
+                             isCurr: day.month() == this.props.month}));
 
     }
     return (
@@ -107,11 +128,10 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
       var m = moment(event.startDate);
       return (m.month() == component.state.dates.currentMonth && m.year() == component.state.dates.currentYear );
     });
-    console.log(events);
     var weeks = [];
     var start = moment([component.state.dates.currentYear, component.state.dates.currentMonth]).day(0);
     var end = start.clone().day(6);
-    // needs to be a loop
+    // create associative array for weeks of calendar
     for (var i = 0; i <= 5; i++) {
       weeks[i] = events.filter(function (event) {
         var m = moment(event.startDate);
@@ -124,10 +144,10 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
         break;
       }
     }
-    var eventWeeks = weeks.map(function(week,index) {
+    var eventWeeks = weeks.map(function (week, index) {
       var key = "w" + index;
-      return(
-          React.createElement(EventCalendarRow, {key: key, week: week})
+      return (
+          React.createElement(EventCalendarRow, {key: key, week: week, month: component.state.dates.currentMonth})
       );
     });
     return (
