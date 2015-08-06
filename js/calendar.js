@@ -1,7 +1,6 @@
 /**
  * Created by smithmd on 8/5/15.
  */
-
 $(function () {
   var monthHead = $('#currentMonth');
   var subscription = calendarDates.subscribe(function (s) {

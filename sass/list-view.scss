@@ -1,7 +1,7 @@
 $background-light: #f6f6f6;
 $selectedColor: #484949;
-$prevBGColor: #b0bdc4;
-$nextBGColor: #676666;
+$navButtonBGColorDisabled: #b0bdc4;
+$navButtonBGColor: #676666;
 $navBGColor: #d0e2ed;
 $calendarBorder: #d0d0d0;
 $defaultLink: #00e;
@@ -70,7 +70,6 @@ html, body {
   }
 
   #navigation {
-
     background-color: $navBGColor;
     clear: both;
     width: 100%;
@@ -120,19 +119,10 @@ html, body {
             color: white;
             font-size: 1.8em;
 
-            &#prev {
-              background-color: $prevBGColor;
+            &#prev, &#next {
+              background-color: $navButtonBGColor;
               &:hover {
-                background-color: darken($prevBGColor, 10%);
-                color: darken(white, 10%);
-                cursor: pointer;
-              }
-            }
-
-            &#next {
-              background-color: $nextBGColor;
-              &:hover {
-                background-color: darken($nextBGColor, 10%);
+                background-color: darken($navButtonBGColorDisabled, 10%);
                 color: darken(white, 10%);
                 cursor: pointer;
               }
@@ -217,9 +207,9 @@ html, body {
             font-size: 0.8em;
 
             span.today {
-              float:right;
+              float: right;
               text-transform: uppercase;
-              margin-right:1em;
+              margin-right: 1em;
               font-size: 0.9em;
               color: #d47211;
             }
@@ -265,6 +255,31 @@ html, body {
       border: 0;
       margin: 0;
       flex: auto;
+    }
+  }
+
+  header#calendarHeader {
+    span {
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      margin: 0 5px;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      text-align: center;
+      line-height: .5;
+      color: white;
+      font-size: 1.8em;
+
+      &#next, &#prev {
+        background-color: $navButtonBGColor;
+        &:hover {
+          background-color: darken($navButtonBGColor, 10%);
+          color: darken(white, 10%);
+          cursor: pointer;
+        }
+      }
     }
   }
 }

@@ -46,7 +46,6 @@ var Navigation = React.createClass({
     var component = this;
     selectedDate.subscribe(function (s) {
       component.setState({date: moment(s.date)});
-      React.render(<Navigation />, document.getElementById('navigation'));
     });
   },
   render: function () {

@@ -6,7 +6,7 @@ var Event = React.createClass({displayName: "Event",
       venue = React.createElement("span", {className: "venue"}, "(", this.props.event.venue, ")");
     }
     return (
-        React.createElement("div", {className: classNames('event',(this.props.isLast ? 'last' : ''))}, 
+        React.createElement("div", {"data-start-date": this.props.event.startDate, className: classNames('event',(this.props.isLast ? 'last' : ''))}, 
           React.createElement("span", {className: "time"}, time), " - ", React.createElement("span", {className: "title"}, this.props.event.title), " ", venue
         )
     );
@@ -34,7 +34,7 @@ var EventDate = React.createClass({displayName: "EventDate",
       for (var i = 0, end = component.props.displayLength; i < end; i += 1) {
         if (this.props.events[i]) {
           eventList.push(React.createElement(Event, {event: this.props.events[i], 
-                                isLast: i === (end - 1) || this.props.events.length === i, 
+                                isLast: i === (end - 1) || (this.props.events.length-1) === i, 
                                 key: i}));
         }
       }
@@ -82,25 +82,17 @@ var EventCalendarRow = React.createClass({displayName: "EventCalendarRow",
   render: function () {
     var day = null;
     var days = [];
-    for (var i = 0; i < 7;) {
-      var key = 'k' + i;
-      //if (this.props.week[0]) {
-      //  day = moment(this.props.week[0].startDate,'YYYY-MM-DD').day(i);
-      //}
-      //else {
+    for (var i = 0; i < 7; i += 1) {
       day = this.props.startDay.day(i);
-      //}
       var events = this.props.week.filter(function (event) {
         return (i === moment(event.startDate, 'YYYY-MM-DD').day());
       });
-      if (day != null) {
-        var isToday = (moment().startOf('day').diff(day, 'days') === 0);
-        days[i] = (React.createElement(EventDate, {events: events, displayLength: 3, day: day.date(), key: key, 
-                              isCurr: day.month() == this.props.month, 
-                              isToday: isToday, 
-                              printAll: false}));
-      }
-      i += 1;
+      var isToday = (moment().startOf('day').diff(day, 'days') === 0);
+      days[i] = (React.createElement(EventDate, {events: events, displayLength: 3, day: day.date(), key: 'd'+i, 
+                            isCurr: day.month() == this.props.month, 
+                            isToday: isToday, 
+                            printAll: false}));
+
     }
     return (
         React.createElement("div", {className: "calendarRow"}, 
@@ -156,13 +148,12 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
         var m = moment(event.startDate, 'YYYY-MM-DD');
         return (beginningDay <= m && end >= m);
       });
-      console.log(beginningDay);
       eventWeeks[i] = (React.createElement(EventCalendarRow, {key: "w"+i, startDay: beginningDay, week: week, 
                                          month: component.state.dates.currentMonth}));
 
       // move start to beginning of next week and end to end of next week
       beginningDay = beginningDay.clone().day(7);
-      end = end.clone().day(15);
+      end = end.clone().day(13);
       if (beginningDay.month() != this.state.dates.currentMonth) {
         break;
       }
