@@ -259,6 +259,10 @@ html, body {
   }
 
   /* line 262, ../sass/list-view.scss */
+  header#calendarHeader #currentMonth {
+    width: 5em;
+  }
+  /* line 265, ../sass/list-view.scss */
   header#calendarHeader span {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -272,11 +276,11 @@ html, body {
     color: white;
     font-size: 1.8em;
   }
-  /* line 275, ../sass/list-view.scss */
+  /* line 278, ../sass/list-view.scss */
   header#calendarHeader span#next, header#calendarHeader span#prev {
     background-color: #676666;
   }
-  /* line 277, ../sass/list-view.scss */
+  /* line 280, ../sass/list-view.scss */
   header#calendarHeader span#next:hover, header#calendarHeader span#prev:hover {
     background-color: #4d4d4d;
     color: #e6e6e6;
@@ -284,17 +288,17 @@ html, body {
   }
 }
 @media screen {
-  /* line 288, ../sass/list-view.scss */
+  /* line 291, ../sass/list-view.scss */
   #links {
     padding-left: 10px;
   }
 
-  /* line 293, ../sass/list-view.scss */
+  /* line 296, ../sass/list-view.scss */
   #prettyEvents div.bordered {
     width: 100%;
   }
 
-  /* line 298, ../sass/list-view.scss */
+  /* line 301, ../sass/list-view.scss */
   #filterset {
     border: 1px solid #999;
     border-radius: 0 0 5px 5px;
@@ -303,13 +307,13 @@ html, body {
     margin: 10px;
   }
 
-  /* line 306, ../sass/list-view.scss */
+  /* line 309, ../sass/list-view.scss */
   #filterset input[type=text] {
     border: 1px solid #999;
     padding: 2px;
   }
 
-  /* line 311, ../sass/list-view.scss */
+  /* line 314, ../sass/list-view.scss */
   #filterset legend {
     padding: 1px 20px;
     border: 1px solid #999;
@@ -318,29 +322,29 @@ html, body {
   }
 }
 @media print {
-  /* line 320, ../sass/list-view.scss */
+  /* line 323, ../sass/list-view.scss */
   html {
     font-family: Tahoma, Helvetica, Arial, sans-serif;
     font-size: 1.1em;
   }
 
-  /* line 325, ../sass/list-view.scss */
+  /* line 328, ../sass/list-view.scss */
   #prettyEvents div.bordered {
     margin: 0 10px 10px;
     padding: 0 10px 10px;
   }
 
-  /* line 330, ../sass/list-view.scss */
+  /* line 333, ../sass/list-view.scss */
   #prettyEvents span.date {
     font-size: 1.1em;
   }
 
-  /* line 334, ../sass/list-view.scss */
+  /* line 337, ../sass/list-view.scss */
   #filterset, #links {
     display: none;
   }
 
-  /* line 338, ../sass/list-view.scss */
+  /* line 341, ../sass/list-view.scss */
   div.event {
     border-bottom: 1px solid #fff;
     padding-top: 5px;

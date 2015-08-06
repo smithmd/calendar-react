@@ -141,7 +141,10 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
       var m = moment(event.startDate, 'YYYY-MM-DD');
       var show = (m >= beginningDay && m <= endingDay);
       if (component.state.filters.showOnlyDaily === true) {
-        show &= (event.includeOnDaily);
+        show &= event.includeOnDaily;
+      }
+      if (component.state.filters.showOnlyPerformances === true) {
+        show &= event.isPerformance;
       }
       return show;
     });
