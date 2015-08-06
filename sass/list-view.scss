@@ -4,6 +4,7 @@ $prevBGColor: #b0bdc4;
 $nextBGColor: #676666;
 $navBGColor: #d0e2ed;
 $calendarBorder: #d0d0d0;
+$defaultLink: #00e;
 
 html, body {
   border: 0;
@@ -13,7 +14,7 @@ html, body {
 
 @media all {
   html {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   #pageTitle {
@@ -203,13 +204,27 @@ html, body {
 
           &.notCurrentMonth {
             color: #d0d0d0;
+
+            a {
+              color: lighten($defaultLink, 40%);
+            }
           }
 
           header {
             background-color: inherit;
             line-height: 2;
             padding-left: 1em;
+            font-size: 0.8em;
+
+            span.today {
+              float:right;
+              text-transform: uppercase;
+              margin-right:1em;
+              font-size: 0.9em;
+              color: #d47211;
+            }
           }
+
           a {
             display: block;
             margin: .5em auto;
@@ -217,6 +232,11 @@ html, body {
             font-size: .8em;
             width: 90%;
             text-decoration: none;
+            color: $defaultLink;
+          }
+
+          &.today {
+            background-color: #f9fae5;
           }
 
           .event {

@@ -1,4 +1,4 @@
-/* line 8, ../sass/list-view.scss */
+/* line 9, ../sass/list-view.scss */
 html, body {
   border: 0;
   padding: 0;
@@ -6,12 +6,12 @@ html, body {
 }
 
 @media all {
-  /* line 15, ../sass/list-view.scss */
+  /* line 16, ../sass/list-view.scss */
   html {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
-  /* line 19, ../sass/list-view.scss */
+  /* line 20, ../sass/list-view.scss */
   #pageTitle {
     font-weight: bold;
     font-size: 1.3em;
@@ -19,25 +19,25 @@ html, body {
     text-align: center;
   }
 
-  /* line 26, ../sass/list-view.scss */
+  /* line 27, ../sass/list-view.scss */
   #emptyList {
     display: block;
     text-align: center;
     line-height: 3;
   }
 
-  /* line 32, ../sass/list-view.scss */
+  /* line 33, ../sass/list-view.scss */
   header {
     clear: both;
     background-color: #f6f6f6;
   }
-  /* line 37, ../sass/list-view.scss */
+  /* line 38, ../sass/list-view.scss */
   header h1 {
     display: inline-block;
     font-size: 24px;
     margin: 16px;
   }
-  /* line 42, ../sass/list-view.scss */
+  /* line 43, ../sass/list-view.scss */
   header input, header #viewCalendar {
     margin: 16px;
     float: right;
@@ -45,7 +45,7 @@ html, body {
     height: 24px;
     border-radius: 1px;
   }
-  /* line 49, ../sass/list-view.scss */
+  /* line 50, ../sass/list-view.scss */
   header input {
     padding-left: 5px;
     background: white url("../img/calendar.png") 95% 50% no-repeat;
@@ -54,7 +54,7 @@ html, body {
     -moz-box-shadow: inset 3px 3px 5px #f6f6f6;
     box-shadow: inset 3px 3px 5px #f6f6f6;
   }
-  /* line 57, ../sass/list-view.scss */
+  /* line 58, ../sass/list-view.scss */
   header #viewCalendar {
     cursor: pointer;
     display: inline-block;
@@ -68,26 +68,26 @@ html, body {
     border: 1px solid #d42741;
   }
 
-  /* line 71, ../sass/list-view.scss */
+  /* line 72, ../sass/list-view.scss */
   #navigation {
     background-color: #d0e2ed;
     clear: both;
     width: 100%;
     color: #a2afb7;
   }
-  /* line 78, ../sass/list-view.scss */
+  /* line 79, ../sass/list-view.scss */
   #navigation .isToday, #navigation .isSelected {
     color: #484949;
   }
-  /* line 81, ../sass/list-view.scss */
+  /* line 82, ../sass/list-view.scss */
   #navigation .dayOfWeek {
     font-weight: bold;
   }
-  /* line 85, ../sass/list-view.scss */
+  /* line 86, ../sass/list-view.scss */
   #navigation ul {
     margin: 0;
   }
-  /* line 88, ../sass/list-view.scss */
+  /* line 89, ../sass/list-view.scss */
   #navigation ul li {
     line-height: 4;
     text-decoration: none;
@@ -97,17 +97,17 @@ html, body {
     vertical-align: middle;
     text-align: center;
   }
-  /* line 97, ../sass/list-view.scss */
+  /* line 98, ../sass/list-view.scss */
   #navigation ul li:hover {
     color: #484949;
     background-color: #bed7e6;
   }
-  /* line 104, ../sass/list-view.scss */
+  /* line 105, ../sass/list-view.scss */
   #navigation ul li.navPaging:hover {
     background-color: #d0e2ed;
     cursor: default;
   }
-  /* line 109, ../sass/list-view.scss */
+  /* line 110, ../sass/list-view.scss */
   #navigation ul li.navPaging span {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -121,100 +121,113 @@ html, body {
     color: white;
     font-size: 1.8em;
   }
-  /* line 122, ../sass/list-view.scss */
+  /* line 123, ../sass/list-view.scss */
   #navigation ul li.navPaging span#prev {
     background-color: #b0bdc4;
   }
-  /* line 124, ../sass/list-view.scss */
+  /* line 125, ../sass/list-view.scss */
   #navigation ul li.navPaging span#prev:hover {
     background-color: #93a5ae;
     color: #e6e6e6;
     cursor: pointer;
   }
-  /* line 131, ../sass/list-view.scss */
+  /* line 132, ../sass/list-view.scss */
   #navigation ul li.navPaging span#next {
     background-color: #676666;
   }
-  /* line 133, ../sass/list-view.scss */
+  /* line 134, ../sass/list-view.scss */
   #navigation ul li.navPaging span#next:hover {
     background-color: #4d4d4d;
     color: #e6e6e6;
     cursor: pointer;
   }
 
-  /* line 145, ../sass/list-view.scss */
+  /* line 146, ../sass/list-view.scss */
   #prettyEvents {
     clear: left;
   }
-  /* line 149, ../sass/list-view.scss */
+  /* line 150, ../sass/list-view.scss */
   #prettyEvents .day header.date {
     font-weight: bold;
     display: block;
     margin: 0 auto;
     text-align: center;
   }
-  /* line 157, ../sass/list-view.scss */
+  /* line 158, ../sass/list-view.scss */
   #prettyEvents .event {
     line-height: 2;
     border-bottom: 1px solid #fff;
     background-color: #fbfafa;
     display: flex;
   }
-  /* line 163, ../sass/list-view.scss */
+  /* line 164, ../sass/list-view.scss */
   #prettyEvents .event.zebra {
     background-color: #f6f6f6;
   }
-  /* line 167, ../sass/list-view.scss */
+  /* line 168, ../sass/list-view.scss */
   #prettyEvents .event span {
     padding-left: 10px;
     display: inline-block;
   }
-  /* line 172, ../sass/list-view.scss */
+  /* line 173, ../sass/list-view.scss */
   #prettyEvents .event span.time {
     width: 20%;
     background-color: #ebebeb;
     font-weight: bold;
   }
-  /* line 178, ../sass/list-view.scss */
+  /* line 179, ../sass/list-view.scss */
   #prettyEvents .event span.title {
     width: 40%;
   }
-  /* line 182, ../sass/list-view.scss */
+  /* line 183, ../sass/list-view.scss */
   #prettyEvents .event span.venue {
     width: 35%;
   }
 
-  /* line 188, ../sass/list-view.scss */
+  /* line 189, ../sass/list-view.scss */
   #Calendar {
     margin: 2em;
     background-color: white;
   }
-  /* line 192, ../sass/list-view.scss */
+  /* line 193, ../sass/list-view.scss */
   #Calendar div {
     width: 100%;
   }
-  /* line 195, ../sass/list-view.scss */
+  /* line 196, ../sass/list-view.scss */
   #Calendar div .calendarRow {
     display: flex;
     flex-direction: row;
     flex: auto;
   }
-  /* line 200, ../sass/list-view.scss */
+  /* line 201, ../sass/list-view.scss */
   #Calendar div .calendarRow .day {
     border: 1px solid #d0d0d0;
     min-height: 11em;
   }
-  /* line 204, ../sass/list-view.scss */
+  /* line 205, ../sass/list-view.scss */
   #Calendar div .calendarRow .day.notCurrentMonth {
     color: #d0d0d0;
   }
   /* line 208, ../sass/list-view.scss */
+  #Calendar div .calendarRow .day.notCurrentMonth a {
+    color: #bbbbff;
+  }
+  /* line 213, ../sass/list-view.scss */
   #Calendar div .calendarRow .day header {
     background-color: inherit;
     line-height: 2;
     padding-left: 1em;
+    font-size: 0.8em;
   }
-  /* line 213, ../sass/list-view.scss */
+  /* line 219, ../sass/list-view.scss */
+  #Calendar div .calendarRow .day header span.today {
+    float: right;
+    text-transform: uppercase;
+    margin-right: 1em;
+    font-size: 0.9em;
+    color: #d47211;
+  }
+  /* line 228, ../sass/list-view.scss */
   #Calendar div .calendarRow .day a {
     display: block;
     margin: .5em auto;
@@ -222,8 +235,13 @@ html, body {
     font-size: .8em;
     width: 90%;
     text-decoration: none;
+    color: #00e;
   }
-  /* line 222, ../sass/list-view.scss */
+  /* line 238, ../sass/list-view.scss */
+  #Calendar div .calendarRow .day.today {
+    background-color: #f9fae5;
+  }
+  /* line 242, ../sass/list-view.scss */
   #Calendar div .calendarRow .day .event {
     margin: .5em auto;
     padding-bottom: .5em;
@@ -231,15 +249,15 @@ html, body {
     width: 90%;
     border-bottom: 1px dotted #c5c5c5;
   }
-  /* line 229, ../sass/list-view.scss */
+  /* line 249, ../sass/list-view.scss */
   #Calendar div .calendarRow .day .event .time {
     font-weight: bold;
   }
-  /* line 232, ../sass/list-view.scss */
+  /* line 252, ../sass/list-view.scss */
   #Calendar div .calendarRow .day .event.last {
     border: 0;
   }
-  /* line 240, ../sass/list-view.scss */
+  /* line 260, ../sass/list-view.scss */
   #Calendar .dayOfWeek {
     background-color: #d0e2ed;
     font-weight: bold;
@@ -251,17 +269,17 @@ html, body {
   }
 }
 @media screen {
-  /* line 253, ../sass/list-view.scss */
+  /* line 273, ../sass/list-view.scss */
   #links {
     padding-left: 10px;
   }
 
-  /* line 258, ../sass/list-view.scss */
+  /* line 278, ../sass/list-view.scss */
   #prettyEvents div.bordered {
     width: 100%;
   }
 
-  /* line 263, ../sass/list-view.scss */
+  /* line 283, ../sass/list-view.scss */
   #filterset {
     border: 1px solid #999;
     border-radius: 0 0 5px 5px;
@@ -270,13 +288,13 @@ html, body {
     margin: 10px;
   }
 
-  /* line 271, ../sass/list-view.scss */
+  /* line 291, ../sass/list-view.scss */
   #filterset input[type=text] {
     border: 1px solid #999;
     padding: 2px;
   }
 
-  /* line 276, ../sass/list-view.scss */
+  /* line 296, ../sass/list-view.scss */
   #filterset legend {
     padding: 1px 20px;
     border: 1px solid #999;
@@ -285,29 +303,29 @@ html, body {
   }
 }
 @media print {
-  /* line 285, ../sass/list-view.scss */
+  /* line 305, ../sass/list-view.scss */
   html {
     font-family: Tahoma, Helvetica, Arial, sans-serif;
     font-size: 1.1em;
   }
 
-  /* line 290, ../sass/list-view.scss */
+  /* line 310, ../sass/list-view.scss */
   #prettyEvents div.bordered {
     margin: 0 10px 10px;
     padding: 0 10px 10px;
   }
 
-  /* line 295, ../sass/list-view.scss */
+  /* line 315, ../sass/list-view.scss */
   #prettyEvents span.date {
     font-size: 1.1em;
   }
 
-  /* line 299, ../sass/list-view.scss */
+  /* line 319, ../sass/list-view.scss */
   #filterset, #links {
     display: none;
   }
 
-  /* line 303, ../sass/list-view.scss */
+  /* line 323, ../sass/list-view.scss */
   div.event {
     border-bottom: 1px solid #fff;
     padding-top: 5px;

@@ -70,8 +70,6 @@ var EventDateList = React.createClass({
     var component = this;
     selectedDate.subscribe(function (s) {
       component.setState({selDate: s.date});
-      // re-render list of events with new date
-      React.render(<EventDateList url="json/calendar.json"/>, document.getElementById('prettyEvents'));
     });
   },
   render: function () {
