@@ -123,6 +123,9 @@ var EventCalendar = React.createClass({
     calendarDates.subscribe(function (s) {
       component.setState({dates: s});
     });
+    calendarFilters.subscribe(function (s) {
+      component.setState({filters: s});
+    });
   },
   render: function () {
     var component = this;
@@ -133,9 +136,14 @@ var EventCalendar = React.createClass({
     var endingDay = moment([component.state.dates.currentYear, component.state.dates.currentMonth, 31]);
     endingDay.day(6);
 
+    // filter checks all filters to see if data matches and returns true if all are true
     var events = this.state.data.filter(function (event) {
       var m = moment(event.startDate, 'YYYY-MM-DD');
-      return (m >= beginningDay && m <= endingDay);
+      var show = (m >= beginningDay && m <= endingDay);
+      if (component.state.filters.showOnlyDaily === true) {
+        show &= (event.includeOnDaily);
+      }
+      return show;
     });
 
     var eventWeeks = [];

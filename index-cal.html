@@ -22,7 +22,9 @@
       <span id="next" onclick="nextMonth()">&rsaquo;</span>
       <a id="viewCalendar" href="index-list.html">View Printable List</a>
     </header>
-    <div id="navigation">
+    <div id="filters">
+      <input id="dailyFilter" type="checkbox" name="dailyFilter" onchange="dailyFilterClick()" />
+      <label for="dailyFilter">Daily Events</label>
     </div>
     <div id="Calendar"></div>
     <script src="js/data.js"></script>

@@ -14,3 +14,7 @@ var calendarDates = new Rx.BehaviorSubject({
   startDate: null,
   endDate: null
 });
+
+var calendarFilters = new Rx.BehaviorSubject({
+  showOnlyDaily:true
+});
