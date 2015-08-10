@@ -6,7 +6,8 @@ var Event = React.createClass({displayName: "Event",
       venue = React.createElement("span", {className: "venue"}, "(", this.props.event.venue, ")");
     }
     return (
-        React.createElement("div", {"data-start-date": this.props.event.startDate, className: classNames('event',(this.props.isLast ? 'last' : ''))}, 
+        React.createElement("div", {"data-start-date": this.props.event.startDate, 
+             className: classNames('event',(this.props.isLast ? 'last' : ''))}, 
           React.createElement("span", {className: "time"}, time), " - ", React.createElement("span", {className: "title"}, this.props.event.title), " ", venue
         )
     );
@@ -18,7 +19,6 @@ var EventDate = React.createClass({displayName: "EventDate",
     return {printAll: this.props.printAll};
   },
   handleMoreClick: function () {
-    console.log('attempting to re-render: click');
     this.setState({printAll: !this.state.printAll});
   },
   render: function () {
@@ -115,7 +115,7 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
     });
   },
   getInitialState: function () {
-    return {data: [], dates: {}};
+    return {data: [], dates: {}, filters: {}, venues: [], artsAreas: [], divisions: []};
   },
   componentDidMount: function () {
     this.loadEvents();
@@ -125,6 +125,15 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
     });
     calendarFilters.subscribe(function (s) {
       component.setState({filters: s});
+    });
+    venueFilters.subscribe(function (s) {
+      component.setState({venues: s.venues});
+    });
+    artsAreaFilters.subscribe(function (s) {
+      component.setState({artsAreas: s.artsAreas});
+    });
+    divisionFilters.subscribe(function (s) {
+      component.setState({divisions: s.divisions});
     });
   },
   render: function () {
@@ -145,6 +154,39 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
       }
       if (component.state.filters.showOnlyPerformances === true) {
         show &= event.isPerformance;
+      }
+      // venue filter
+      if (component.state.venues.indexOf('Any') < 0 && component.state.venues.length > 0) {
+        var showVenue = false;
+        for (var i = 0; i < component.state.venues.length; i++) {
+          if (event.venue === component.state.venues[i]) {
+            showVenue = true;
+            break;
+          }
+        }
+        show &= showVenue;
+      }
+      // divisions filter
+      if (component.state.divisions.indexOf('Any') < 0 && component.state.divisions.length > 0) {
+        var showDivision = false;
+        for (var i = 0; i < component.state.divisions.length; i++) {
+          if (event.campDivision && ~event.campDivision.indexOf(component.state.divisions[i])) {
+            showDivision = true;
+            break;
+          }
+        }
+        show &= showDivision;
+      }
+      // arts area filter
+      if (component.state.artsAreas.indexOf('Any') < 0 && component.state.artsAreas.length > 0) {
+        var showArtsArea = false;
+        for (var i = 0; i < component.state.artsAreas.length; i++) {
+          if (~event.artsAreas.indexOf(component.state.artsAreas[i])) {
+            showArtsArea = true;
+            break;
+          }
+        }
+        show &= showArtsArea;
       }
       return show;
     });

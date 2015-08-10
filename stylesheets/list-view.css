@@ -1,4 +1,4 @@
-/* line 11, ../sass/list-view.scss */
+/* line 12, ../sass/list-view.scss */
 html, body {
   border: 0;
   padding: 0;
@@ -6,12 +6,12 @@ html, body {
 }
 
 @media all {
-  /* line 18, ../sass/list-view.scss */
+  /* line 19, ../sass/list-view.scss */
   html {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
-  /* line 22, ../sass/list-view.scss */
+  /* line 23, ../sass/list-view.scss */
   #pageTitle {
     font-weight: bold;
     font-size: 1.3em;
@@ -19,25 +19,25 @@ html, body {
     text-align: center;
   }
 
-  /* line 29, ../sass/list-view.scss */
+  /* line 30, ../sass/list-view.scss */
   #emptyList {
     display: block;
     text-align: center;
     line-height: 3;
   }
 
-  /* line 35, ../sass/list-view.scss */
+  /* line 36, ../sass/list-view.scss */
   header {
     clear: both;
     background-color: #f6f6f6;
   }
-  /* line 40, ../sass/list-view.scss */
+  /* line 41, ../sass/list-view.scss */
   header h1 {
     display: inline-block;
     font-size: 24px;
     margin: 16px;
   }
-  /* line 45, ../sass/list-view.scss */
+  /* line 46, ../sass/list-view.scss */
   header input, header #viewCalendar {
     margin: 16px;
     float: right;
@@ -45,7 +45,7 @@ html, body {
     height: 24px;
     border-radius: 1px;
   }
-  /* line 52, ../sass/list-view.scss */
+  /* line 53, ../sass/list-view.scss */
   header input {
     padding-left: 5px;
     background: white url("../img/calendar.png") 95% 50% no-repeat;
@@ -54,7 +54,7 @@ html, body {
     -moz-box-shadow: inset 3px 3px 5px #f6f6f6;
     box-shadow: inset 3px 3px 5px #f6f6f6;
   }
-  /* line 60, ../sass/list-view.scss */
+  /* line 61, ../sass/list-view.scss */
   header #viewCalendar {
     cursor: pointer;
     display: inline-block;
@@ -68,26 +68,26 @@ html, body {
     border: 1px solid #d42741;
   }
 
-  /* line 74, ../sass/list-view.scss */
+  /* line 75, ../sass/list-view.scss */
   #navigation {
     background-color: #d0e2ed;
     clear: both;
     width: 100%;
     color: #a2afb7;
   }
-  /* line 80, ../sass/list-view.scss */
+  /* line 81, ../sass/list-view.scss */
   #navigation .isToday, #navigation .isSelected {
     color: #484949;
   }
-  /* line 83, ../sass/list-view.scss */
+  /* line 84, ../sass/list-view.scss */
   #navigation .dayOfWeek {
     font-weight: bold;
   }
-  /* line 87, ../sass/list-view.scss */
+  /* line 88, ../sass/list-view.scss */
   #navigation ul {
     margin: 0;
   }
-  /* line 90, ../sass/list-view.scss */
+  /* line 91, ../sass/list-view.scss */
   #navigation ul li {
     line-height: 4;
     text-decoration: none;
@@ -97,17 +97,17 @@ html, body {
     vertical-align: middle;
     text-align: center;
   }
-  /* line 99, ../sass/list-view.scss */
+  /* line 100, ../sass/list-view.scss */
   #navigation ul li:hover {
     color: #484949;
     background-color: #bed7e6;
   }
-  /* line 106, ../sass/list-view.scss */
+  /* line 107, ../sass/list-view.scss */
   #navigation ul li.navPaging:hover {
     background-color: #d0e2ed;
     cursor: default;
   }
-  /* line 111, ../sass/list-view.scss */
+  /* line 112, ../sass/list-view.scss */
   #navigation ul li.navPaging span {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -121,95 +121,95 @@ html, body {
     color: white;
     font-size: 1.8em;
   }
-  /* line 124, ../sass/list-view.scss */
+  /* line 125, ../sass/list-view.scss */
   #navigation ul li.navPaging span#prev, #navigation ul li.navPaging span#next {
     background-color: #676666;
   }
-  /* line 126, ../sass/list-view.scss */
+  /* line 127, ../sass/list-view.scss */
   #navigation ul li.navPaging span#prev:hover, #navigation ul li.navPaging span#next:hover {
     background-color: #93a5ae;
     color: #e6e6e6;
     cursor: pointer;
   }
 
-  /* line 138, ../sass/list-view.scss */
+  /* line 139, ../sass/list-view.scss */
   #prettyEvents {
     clear: left;
   }
-  /* line 142, ../sass/list-view.scss */
+  /* line 143, ../sass/list-view.scss */
   #prettyEvents .day header.date {
     font-weight: bold;
     display: block;
     margin: 0 auto;
     text-align: center;
   }
-  /* line 150, ../sass/list-view.scss */
+  /* line 151, ../sass/list-view.scss */
   #prettyEvents .event {
     line-height: 2;
     border-bottom: 1px solid #fff;
     background-color: #fbfafa;
     display: flex;
   }
-  /* line 156, ../sass/list-view.scss */
+  /* line 157, ../sass/list-view.scss */
   #prettyEvents .event.zebra {
     background-color: #f6f6f6;
   }
-  /* line 160, ../sass/list-view.scss */
+  /* line 161, ../sass/list-view.scss */
   #prettyEvents .event span {
     padding-left: 10px;
     display: inline-block;
   }
-  /* line 165, ../sass/list-view.scss */
+  /* line 166, ../sass/list-view.scss */
   #prettyEvents .event span.time {
     width: 20%;
     background-color: #ebebeb;
     font-weight: bold;
   }
-  /* line 171, ../sass/list-view.scss */
+  /* line 172, ../sass/list-view.scss */
   #prettyEvents .event span.title {
     width: 40%;
   }
-  /* line 175, ../sass/list-view.scss */
+  /* line 176, ../sass/list-view.scss */
   #prettyEvents .event span.venue {
     width: 35%;
   }
 
-  /* line 181, ../sass/list-view.scss */
+  /* line 182, ../sass/list-view.scss */
   #Calendar {
     margin: 2em;
     background-color: white;
   }
-  /* line 185, ../sass/list-view.scss */
+  /* line 186, ../sass/list-view.scss */
   #Calendar div {
     width: 100%;
   }
-  /* line 188, ../sass/list-view.scss */
+  /* line 189, ../sass/list-view.scss */
   #Calendar div .calendarRow {
     display: flex;
     flex-direction: row;
     flex: auto;
   }
-  /* line 193, ../sass/list-view.scss */
+  /* line 194, ../sass/list-view.scss */
   #Calendar div .calendarRow .day {
     border: 1px solid #d0d0d0;
     min-height: 11em;
   }
-  /* line 197, ../sass/list-view.scss */
+  /* line 198, ../sass/list-view.scss */
   #Calendar div .calendarRow .day.notCurrentMonth {
     color: #d0d0d0;
   }
-  /* line 200, ../sass/list-view.scss */
+  /* line 201, ../sass/list-view.scss */
   #Calendar div .calendarRow .day.notCurrentMonth a {
     color: #bbbbff;
   }
-  /* line 205, ../sass/list-view.scss */
+  /* line 206, ../sass/list-view.scss */
   #Calendar div .calendarRow .day header {
     background-color: inherit;
     line-height: 2;
     padding-left: 1em;
     font-size: 0.8em;
   }
-  /* line 211, ../sass/list-view.scss */
+  /* line 212, ../sass/list-view.scss */
   #Calendar div .calendarRow .day header span.today {
     float: right;
     text-transform: uppercase;
@@ -217,7 +217,7 @@ html, body {
     font-size: 0.9em;
     color: #d47211;
   }
-  /* line 220, ../sass/list-view.scss */
+  /* line 221, ../sass/list-view.scss */
   #Calendar div .calendarRow .day a {
     display: block;
     margin: .5em auto;
@@ -227,11 +227,11 @@ html, body {
     text-decoration: none;
     color: #00e;
   }
-  /* line 230, ../sass/list-view.scss */
+  /* line 231, ../sass/list-view.scss */
   #Calendar div .calendarRow .day.today {
     background-color: #f9fae5;
   }
-  /* line 234, ../sass/list-view.scss */
+  /* line 235, ../sass/list-view.scss */
   #Calendar div .calendarRow .day .event {
     margin: .5em auto;
     padding-bottom: .5em;
@@ -239,15 +239,15 @@ html, body {
     width: 90%;
     border-bottom: 1px dotted #c5c5c5;
   }
-  /* line 241, ../sass/list-view.scss */
+  /* line 242, ../sass/list-view.scss */
   #Calendar div .calendarRow .day .event .time {
     font-weight: bold;
   }
-  /* line 244, ../sass/list-view.scss */
+  /* line 245, ../sass/list-view.scss */
   #Calendar div .calendarRow .day .event.last {
     border: 0;
   }
-  /* line 252, ../sass/list-view.scss */
+  /* line 253, ../sass/list-view.scss */
   #Calendar .dayOfWeek {
     background-color: #d0e2ed;
     font-weight: bold;
@@ -258,11 +258,11 @@ html, body {
     flex: auto;
   }
 
-  /* line 264, ../sass/list-view.scss */
+  /* line 265, ../sass/list-view.scss */
   header#calendarHeader #currentMonth {
     width: 5em;
   }
-  /* line 267, ../sass/list-view.scss */
+  /* line 268, ../sass/list-view.scss */
   header#calendarHeader span {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -276,32 +276,34 @@ html, body {
     color: white;
     font-size: 1.8em;
   }
-  /* line 280, ../sass/list-view.scss */
+  /* line 281, ../sass/list-view.scss */
   header#calendarHeader span#next, header#calendarHeader span#prev {
     background-color: #676666;
   }
-  /* line 282, ../sass/list-view.scss */
+  /* line 283, ../sass/list-view.scss */
   header#calendarHeader span#next:hover, header#calendarHeader span#prev:hover {
     background-color: #4d4d4d;
     color: #e6e6e6;
     cursor: pointer;
   }
 
-  /* line 291, ../sass/list-view.scss */
+  /* line 292, ../sass/list-view.scss */
   #filters {
-    line-height: 2;
+    line-height: 1.25;
+    margin: 2em;
   }
-  /* line 294, ../sass/list-view.scss */
+  /* line 296, ../sass/list-view.scss */
   #filters #multiselects {
     display: inline;
   }
-  /* line 297, ../sass/list-view.scss */
+  /* line 299, ../sass/list-view.scss */
   #filters #multiselects .pickList {
     min-width: 10em;
     display: inline-block;
     position: relative;
+    margin: 0 1em;
   }
-  /* line 301, ../sass/list-view.scss */
+  /* line 304, ../sass/list-view.scss */
   #filters #multiselects .pickList span {
     min-width: 10em;
     cursor: pointer;
@@ -312,41 +314,48 @@ html, body {
     -moz-box-shadow: inset 2px 2px 2px #f6f6f6;
     box-shadow: inset 2px 2px 2px #f6f6f6;
   }
-  /* line 313, ../sass/list-view.scss */
+  /* line 316, ../sass/list-view.scss */
   #filters #multiselects .pickList ul {
     position: absolute;
     padding: 0;
     min-width: 11em;
-    background-color: #f6f6f6;
+    background-color: #fbfbfb;
     border: 1px solid #dcdcdc;
     margin: 0;
   }
-  /* line 321, ../sass/list-view.scss */
+  /* line 324, ../sass/list-view.scss */
   #filters #multiselects .pickList ul li {
+    padding: .2em;
+    display: flex;
+    flex-direction: row;
     list-style: none;
     cursor: pointer;
   }
-  /* line 324, ../sass/list-view.scss */
+  /* line 330, ../sass/list-view.scss */
   #filters #multiselects .pickList ul li:hover {
     background-color: #f1f2f3;
   }
-  /* line 327, ../sass/list-view.scss */
+  /* line 333, ../sass/list-view.scss */
   #filters #multiselects .pickList ul li label, #filters #multiselects .pickList ul li input {
     cursor: pointer;
   }
+  /* line 336, ../sass/list-view.scss */
+  #filters #multiselects .pickList ul li label {
+    margin-left: 0.3em;
+  }
 }
 @media screen {
-  /* line 339, ../sass/list-view.scss */
+  /* line 347, ../sass/list-view.scss */
   #links {
     padding-left: 10px;
   }
 
-  /* line 344, ../sass/list-view.scss */
+  /* line 352, ../sass/list-view.scss */
   #prettyEvents div.bordered {
     width: 100%;
   }
 
-  /* line 349, ../sass/list-view.scss */
+  /* line 357, ../sass/list-view.scss */
   #filterset {
     border: 1px solid #999;
     border-radius: 0 0 5px 5px;
@@ -355,13 +364,13 @@ html, body {
     margin: 10px;
   }
 
-  /* line 357, ../sass/list-view.scss */
+  /* line 365, ../sass/list-view.scss */
   #filterset input[type=text] {
     border: 1px solid #999;
     padding: 2px;
   }
 
-  /* line 362, ../sass/list-view.scss */
+  /* line 370, ../sass/list-view.scss */
   #filterset legend {
     padding: 1px 20px;
     border: 1px solid #999;
@@ -370,29 +379,29 @@ html, body {
   }
 }
 @media print {
-  /* line 371, ../sass/list-view.scss */
+  /* line 379, ../sass/list-view.scss */
   html {
     font-family: Tahoma, Helvetica, Arial, sans-serif;
     font-size: 1.1em;
   }
 
-  /* line 376, ../sass/list-view.scss */
+  /* line 384, ../sass/list-view.scss */
   #prettyEvents div.bordered {
     margin: 0 10px 10px;
     padding: 0 10px 10px;
   }
 
-  /* line 381, ../sass/list-view.scss */
+  /* line 389, ../sass/list-view.scss */
   #prettyEvents span.date {
     font-size: 1.1em;
   }
 
-  /* line 385, ../sass/list-view.scss */
+  /* line 393, ../sass/list-view.scss */
   #filterset, #links {
     display: none;
   }
 
-  /* line 389, ../sass/list-view.scss */
+  /* line 397, ../sass/list-view.scss */
   div.event {
     border-bottom: 1px solid #fff;
     padding-top: 5px;

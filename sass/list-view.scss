@@ -5,6 +5,7 @@ $navButtonBGColor: #676666;
 $navBGColor: #d0e2ed;
 $input-border: #dcdcdc;
 $input-hover: #f1f2f3;
+$inputBGColor: #fbfbfb;
 $calendarBorder: #d0d0d0;
 $defaultLink: #00e;
 
@@ -289,18 +290,20 @@ html, body {
   }
 
   #filters {
-    line-height: 2;
+    line-height: 1.25;
+    margin: 2em;
 
     #multiselects {
       display: inline;
 
       .pickList {
-        min-width:10em;
-        display:inline-block;
-        position:relative;
+        min-width: 10em;
+        display: inline-block;
+        position: relative;
+        margin: 0 1em;
         span {
           min-width: 10em;
-          cursor:pointer;
+          cursor: pointer;
           display: inline-block;
           border: 1px solid $input-border;
           padding: 0.5em;
@@ -311,23 +314,28 @@ html, body {
         }
 
         ul {
-          position:absolute;
-          padding:0;
+          position: absolute;
+          padding: 0;
           min-width: 11em;
-          background-color: $background-light;
-          border:1px solid $input-border;
-          margin:0;
+          background-color: $inputBGColor;
+          border: 1px solid $input-border;
+          margin: 0;
 
           li {
+            padding: .2em;
+            display: flex;
+            flex-direction: row;
             list-style: none;
             cursor: pointer;
             &:hover {
               background-color: $input-hover;
             }
-            label,input {
+            label, input {
               cursor: pointer;
             }
-
+            label {
+              margin-left: 0.3em;
+            }
           }
         }
       }
