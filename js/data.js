@@ -7,7 +7,7 @@ var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'A
 var venues = ['Corson Auditorium', 'Kresge Auditorium', 'DeRoy Center for Film Studies', 'Dendrinos Chapel and Recital Hall',
   'Fine Arts Building', 'Harvey Theatre', 'Phoenix Theatre', 'Mallory Towsley Center for Arts Leadership Great Room',
   'Upton-Morley Pavilion', 'Interlochen Bowl'];
-var campDivisions = ['Institute', 'High School', 'Intermediate', 'Junior'];
+var campDivisions = ['Any','Junior', 'Intermediate', 'High School', 'Institute' ];
 var artsAreas = ['Visual Arts', 'Theatre', 'Music', 'MPA', 'Dance', 'Creative Writing', 'Comparative Arts'];
 
 var selectedDate = new Rx.BehaviorSubject({date: moment().format('YYYY-MM-DD')});

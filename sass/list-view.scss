@@ -3,6 +3,8 @@ $selectedColor: #484949;
 $navButtonBGColorDisabled: #b0bdc4;
 $navButtonBGColor: #676666;
 $navBGColor: #d0e2ed;
+$input-border: #dcdcdc;
+$input-hover: #f1f2f3;
 $calendarBorder: #d0d0d0;
 $defaultLink: #00e;
 
@@ -50,7 +52,7 @@ html, body {
     input {
       padding-left: 5px;
       background: white url('../img/calendar.png') 95% 50% no-repeat;
-      border: 1px solid #dcdcdc;
+      border: 1px solid $input-border;
       -webkit-box-shadow: inset 3px 3px 5px $background-light;
       -moz-box-shadow: inset 3px 3px 5px $background-light;
       box-shadow: inset 3px 3px 5px $background-light;
@@ -281,6 +283,52 @@ html, body {
           background-color: darken($navButtonBGColor, 10%);
           color: darken(white, 10%);
           cursor: pointer;
+        }
+      }
+    }
+  }
+
+  #filters {
+    line-height: 2;
+
+    #multiselects {
+      display: inline;
+
+      .pickList {
+        min-width:10em;
+        display:inline-block;
+        position:relative;
+        span {
+          min-width: 10em;
+          cursor:pointer;
+          display: inline-block;
+          border: 1px solid $input-border;
+          padding: 0.5em;
+          -webkit-box-shadow: inset 2px 2px 2px $background-light;
+          -moz-box-shadow: inset 2px 2px 2px $background-light;
+          box-shadow: inset 2px 2px 2px $background-light;
+
+        }
+
+        ul {
+          position:absolute;
+          padding:0;
+          min-width: 11em;
+          background-color: $background-light;
+          border:1px solid $input-border;
+          margin:0;
+
+          li {
+            list-style: none;
+            cursor: pointer;
+            &:hover {
+              background-color: $input-hover;
+            }
+            label,input {
+              cursor: pointer;
+            }
+
+          }
         }
       }
     }

@@ -169,6 +169,7 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
         break;
       }
     }
+
     return (
         React.createElement("div", null, 
           React.createElement(EventCalendarHeader, null), 
