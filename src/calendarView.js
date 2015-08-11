@@ -1,6 +1,6 @@
 var Event = React.createClass({
   render: function () {
-    var time = formatTime(new Date(this.props.event.startTime));
+    var time = printStartTime(this.props.event);
     var venue = '';
     if (this.props.event.venue != null && this.props.event.venue != '') {
       venue = <span className='venue'>({this.props.event.venue})</span>;
@@ -146,18 +146,26 @@ var EventCalendar = React.createClass({
     endingDay.day(6);
 
     // filter checks all filters to see if data matches and returns true if all are true
+    // TODO: really wish I could figure out how to pull the date filter out and store the result in state. Might speed the
+    // TODO: rest of the page up during summer/busy months.
     var events = this.state.data.filter(function (event) {
       var m = moment(event.startDate, 'YYYY-MM-DD');
       var show = (m >= beginningDay && m <= endingDay);
+      // return if we know we already don't want this event
       if (show === false) return false;
+
       if (component.state.filters.showOnlyDaily === true) {
-        show &= event.includeOnDaily;
+        show = event.includeOnDaily;
       }
+      // return if we know we already don't want this event
       if (show === false) return false;
+
       if (component.state.filters.showOnlyPerformances === true) {
-        show &= event.isPerformance;
+        show = event.isPerformance;
       }
+      // return if we know we already don't want this event
       if (show === false) return false;
+
       // venue filter
       if (component.state.venues.indexOf('Any') < 0 && component.state.venues.length > 0) {
         var showVenue = false;
@@ -167,9 +175,11 @@ var EventCalendar = React.createClass({
             break;
           }
         }
-        show &= showVenue;
+        show = showVenue;
       }
+      // return if we know we already don't want this event
       if (show === false) return false;
+
       // divisions filter
       if (component.state.divisions.indexOf('Any') < 0 && component.state.divisions.length > 0) {
         var showDivision = false;
@@ -179,9 +189,11 @@ var EventCalendar = React.createClass({
             break;
           }
         }
-        show &= showDivision;
+        show = showDivision;
       }
+      // return if we know we already don't want this event
       if (show === false) return false;
+
       // arts area filter
       if (component.state.artsAreas.indexOf('Any') < 0 && component.state.artsAreas.length > 0) {
         var showArtsArea = false;
@@ -191,7 +203,7 @@ var EventCalendar = React.createClass({
             break;
           }
         }
-        show &= showArtsArea;
+        show = showArtsArea;
       }
       return show;
     });

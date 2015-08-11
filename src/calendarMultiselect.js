@@ -74,9 +74,19 @@ var PickList = React.createClass({
       });
       list = <ul>{checkboxes}</ul>;
     }
+    var title = this.props.title;
+    if (component.state.selected.length > 0) {
+      if (component.state.selected.length === 1) {
+        title = this.props.data[component.state.selected[0]];
+      } else {
+        if (component.state.selected.indexOf(0) < 0) {
+          title = component.state.selected.length + ' ' + title;
+        }
+      }
+    }
     return (
         <div className='pickList'>
-          <span onClick={this.handleMainClick}>{this.props.title}</span>
+          <span onClick={this.handleMainClick}>{title}</span>
           {list}
         </div>
     );
@@ -89,7 +99,7 @@ var MultiSelects = React.createClass({
         <span>
           <PickList data={venues} category='venues' title='Venues' filter={venueFilters} />
           <PickList data={campDivisions} category='divisions' title='Camp Divisions' filter={divisionFilters} />
-          <PickList data={artsAreas} category='artsAreas' title='Arts Area' filter={artsAreaFilters} />
+          <PickList data={artsAreas} category='artsAreas' title='Arts Areas' filter={artsAreaFilters} />
         </span>
     );
   }

@@ -74,9 +74,19 @@ var PickList = React.createClass({displayName: "PickList",
       });
       list = React.createElement("ul", null, checkboxes);
     }
+    var title = this.props.title;
+    if (component.state.selected.length > 0) {
+      if (component.state.selected.length === 1) {
+        title = this.props.data[component.state.selected[0]];
+      } else {
+        if (component.state.selected.indexOf(0) < 0) {
+          title = component.state.selected.length + ' ' + title;
+        }
+      }
+    }
     return (
         React.createElement("div", {className: "pickList"}, 
-          React.createElement("span", {onClick: this.handleMainClick}, this.props.title), 
+          React.createElement("span", {onClick: this.handleMainClick}, title), 
           list
         )
     );
@@ -89,7 +99,7 @@ var MultiSelects = React.createClass({displayName: "MultiSelects",
         React.createElement("span", null, 
           React.createElement(PickList, {data: venues, category: "venues", title: "Venues", filter: venueFilters}), 
           React.createElement(PickList, {data: campDivisions, category: "divisions", title: "Camp Divisions", filter: divisionFilters}), 
-          React.createElement(PickList, {data: artsAreas, category: "artsAreas", title: "Arts Area", filter: artsAreaFilters})
+          React.createElement(PickList, {data: artsAreas, category: "artsAreas", title: "Arts Areas", filter: artsAreaFilters})
         )
     );
   }

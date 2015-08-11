@@ -8,6 +8,7 @@ $input-hover: #f1f2f3;
 $inputBGColor: #fbfbfb;
 $calendarBorder: #d0d0d0;
 $defaultLink: #00e;
+$selectedInput: #1b97ee;
 
 html, body {
   border: 0;
@@ -302,7 +303,10 @@ html, body {
         position: relative;
         margin: 0 1em;
         span {
-          min-width: 10em;
+          width: 10em;
+          white-space: nowrap;
+          overflow: hidden;
+          vertical-align: middle;
           cursor: pointer;
           display: inline-block;
           border: 1px solid $input-border;
@@ -310,7 +314,6 @@ html, body {
           -webkit-box-shadow: inset 2px 2px 2px $background-light;
           -moz-box-shadow: inset 2px 2px 2px $background-light;
           box-shadow: inset 2px 2px 2px $background-light;
-
         }
 
         ul {

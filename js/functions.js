@@ -29,6 +29,10 @@ var printTime = function (event) {
   return (event.allDay === false ? formatTime(new Date(event.startTime)) + '-' + formatTime(new Date(event.endTime)) : 'All Day');
 };
 
+var printStartTime = function (event) {
+  return (event.allDay === false ? formatTime(new Date(event.startTime)) : 'All Day');
+};
+
 var printVenue = function (venue) {
   return (venue !== null ? venue : '');
 };
