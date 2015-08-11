@@ -18,6 +18,9 @@ var EventDate = React.createClass({displayName: "EventDate",
   getInitialState: function () {
     return {printAll: this.props.printAll};
   },
+  componentWillReceiveProps: function () {
+    this.setState({printAll: this.props.printAll});
+  },
   handleMoreClick: function () {
     this.setState({printAll: !this.state.printAll});
   },
