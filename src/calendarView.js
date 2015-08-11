@@ -149,12 +149,15 @@ var EventCalendar = React.createClass({
     var events = this.state.data.filter(function (event) {
       var m = moment(event.startDate, 'YYYY-MM-DD');
       var show = (m >= beginningDay && m <= endingDay);
+      if (show === false) return false;
       if (component.state.filters.showOnlyDaily === true) {
         show &= event.includeOnDaily;
       }
+      if (show === false) return false;
       if (component.state.filters.showOnlyPerformances === true) {
         show &= event.isPerformance;
       }
+      if (show === false) return false;
       // venue filter
       if (component.state.venues.indexOf('Any') < 0 && component.state.venues.length > 0) {
         var showVenue = false;
@@ -166,6 +169,7 @@ var EventCalendar = React.createClass({
         }
         show &= showVenue;
       }
+      if (show === false) return false;
       // divisions filter
       if (component.state.divisions.indexOf('Any') < 0 && component.state.divisions.length > 0) {
         var showDivision = false;
@@ -177,6 +181,7 @@ var EventCalendar = React.createClass({
         }
         show &= showDivision;
       }
+      if (show === false) return false;
       // arts area filter
       if (component.state.artsAreas.indexOf('Any') < 0 && component.state.artsAreas.length > 0) {
         var showArtsArea = false;
