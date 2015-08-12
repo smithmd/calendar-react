@@ -5,7 +5,7 @@ var ListItem = React.createClass({
   render: function () {
     return (
         <li onClick={this.props.updateSelected}>
-          <input type='checkbox' id={this.props.category + this.props.index}
+          <input readOnly='readonly' type='checkbox' id={this.props.category + this.props.index}
                  name={this.props.category + this.props.index}
                  checked={this.props.selected.indexOf(this.props.index) > -1 ? 'checked' : ''}/>
           <label>{this.props.label}</label>
@@ -58,7 +58,7 @@ var PickList = React.createClass({
       tmp.push(this.props.data[arr[it]]);
     }
     var obj = {};
-    obj[this.props.category] = tmp
+    obj[this.props.category] = tmp;
     filter.onNext(obj);
   },
   render: function () {
@@ -68,7 +68,7 @@ var PickList = React.createClass({
     if (!this.state.hidden) {
       var checkboxes = this.props.data.map(function (item, index, data) {
         return (
-            <ListItem category={component.props.category} index={index} label={item} selected={component.state.selected}
+            <ListItem key={index} category={component.props.category} index={index} label={item} selected={component.state.selected}
                       updateSelected={component.handleClickChild.bind(component, index, component.props.filter)} />
         );
       });

@@ -5,7 +5,7 @@ var ListItem = React.createClass({displayName: "ListItem",
   render: function () {
     return (
         React.createElement("li", {onClick: this.props.updateSelected}, 
-          React.createElement("input", {type: "checkbox", id: this.props.category + this.props.index, 
+          React.createElement("input", {readOnly: "readonly", type: "checkbox", id: this.props.category + this.props.index, 
                  name: this.props.category + this.props.index, 
                  checked: this.props.selected.indexOf(this.props.index) > -1 ? 'checked' : ''}), 
           React.createElement("label", null, this.props.label)
@@ -58,7 +58,7 @@ var PickList = React.createClass({displayName: "PickList",
       tmp.push(this.props.data[arr[it]]);
     }
     var obj = {};
-    obj[this.props.category] = tmp
+    obj[this.props.category] = tmp;
     filter.onNext(obj);
   },
   render: function () {
@@ -68,7 +68,7 @@ var PickList = React.createClass({displayName: "PickList",
     if (!this.state.hidden) {
       var checkboxes = this.props.data.map(function (item, index, data) {
         return (
-            React.createElement(ListItem, {category: component.props.category, index: index, label: item, selected: component.state.selected, 
+            React.createElement(ListItem, {key: index, category: component.props.category, index: index, label: item, selected: component.state.selected, 
                       updateSelected: component.handleClickChild.bind(component, index, component.props.filter)})
         );
       });

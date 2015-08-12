@@ -83,14 +83,18 @@ var EventCalendarHeader = React.createClass({displayName: "EventCalendarHeader",
 
 var EventCalendarRow = React.createClass({displayName: "EventCalendarRow",
   render: function () {
+    var d = null;
     var day = null;
     var days = [];
+    var today = moment().startOf('day');
     for (var i = 0; i < 7; i += 1) {
       day = this.props.startDay.day(i);
       var events = this.props.week.filter(function (event) {
-        return (i === moment(event.startDate, 'YYYY-MM-DD').day());
+        d = new Date(event.startDate);
+        d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
+        return (i === d.getDay());
       });
-      var isToday = (moment().startOf('day').diff(day, 'days') === 0);
+      var isToday = (today.diff(day, 'days') === 0);
       days[i] = (React.createElement(EventDate, {events: events, displayLength: 3, day: day.date(), key: 'd'+i, 
                             isCurr: day.month() == this.props.month, 
                             isToday: isToday, 
@@ -120,7 +124,7 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
   getInitialState: function () {
     return {data: [], dates: {}, filters: {}, venues: [], artsAreas: [], divisions: []};
   },
-  componentDidMount: function () {
+  componentWillMount: function () {
     this.loadEvents();
     var component = this;
     calendarDates.subscribe(function (s) {
@@ -139,6 +143,22 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
       component.setState({divisions: s.divisions});
     });
   },
+  componentDidMount: function () {
+  },
+  filterArray: function (str, array) {
+    var show = true;
+    if (array.indexOf('Any') < 0 && array.length > 0) {
+      var display = false;
+      for (var i = 0; i < array.length; i++) {
+        if (str && ~str.indexOf(array[i])) {
+          display = true;
+          break;
+        }
+      }
+      show = display;
+    }
+    return show;
+  },
   render: function () {
     var component = this;
     // filter to only get events from currently selected month and surrounding days
@@ -149,11 +169,12 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
     endingDay.day(6);
 
     // filter checks all filters to see if data matches and returns true if all are true
-    // TODO: really wish I could figure out how to pull the date filter out and store the result in state. Might speed the
-    // TODO: rest of the page up during summer/busy months.
+    var m;
     var events = this.state.data.filter(function (event) {
-      var m = moment(event.startDate, 'YYYY-MM-DD');
-      var show = (m >= beginningDay && m <= endingDay);
+      // check to see if date is in or very near selected month
+      m = new Date(event.startDate);
+      m.setTime(m.getTime() + m.getTimezoneOffset() * 60 * 1000);
+      var show = (m >= beginningDay.toDate() && m <= endingDay.toDate());
       // return if we know we already don't want this event
       if (show === false) return false;
 
@@ -169,45 +190,12 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
       // return if we know we already don't want this event
       if (show === false) return false;
 
-      // venue filter
-      if (component.state.venues.indexOf('Any') < 0 && component.state.venues.length > 0) {
-        var showVenue = false;
-        for (var i = 0; i < component.state.venues.length; i++) {
-          if (event.venue === component.state.venues[i]) {
-            showVenue = true;
-            break;
-          }
-        }
-        show = showVenue;
-      }
-      // return if we know we already don't want this event
-      if (show === false) return false;
+      // return if we find out we don't want to show this event
+      if (component.filterArray(event.campDivision, component.state.divisions) === false) return false;
+      if (component.filterArray(event.venue, component.state.venues) === false) return false;
+      if (component.filterArray(event.artsAreas, component.state.artsAreas) === false) return false;
 
-      // divisions filter
-      if (component.state.divisions.indexOf('Any') < 0 && component.state.divisions.length > 0) {
-        var showDivision = false;
-        for (var i = 0; i < component.state.divisions.length; i++) {
-          if (event.campDivision && ~event.campDivision.indexOf(component.state.divisions[i])) {
-            showDivision = true;
-            break;
-          }
-        }
-        show = showDivision;
-      }
-      // return if we know we already don't want this event
-      if (show === false) return false;
-
-      // arts area filter
-      if (component.state.artsAreas.indexOf('Any') < 0 && component.state.artsAreas.length > 0) {
-        var showArtsArea = false;
-        for (var i = 0; i < component.state.artsAreas.length; i++) {
-          if (~event.artsAreas.indexOf(component.state.artsAreas[i])) {
-            showArtsArea = true;
-            break;
-          }
-        }
-        show = showArtsArea;
-      }
+      // should be true at this point
       return show;
     });
 
@@ -218,7 +206,8 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
     // create associative array for weeks of calendar
     for (var i = 0; i < 6; i += 1) {
       var week = events.filter(function (event) {
-        var m = moment(event.startDate, 'YYYY-MM-DD');
+        m = new Date(event.startDate);
+        m.setTime(m.getTime() + m.getTimezoneOffset() * 60 * 1000);
         return (beginningDay <= m && end >= m);
       });
       eventWeeks[i] = (React.createElement(EventCalendarRow, {key: "w"+i, startDay: beginningDay, week: week, 
@@ -231,7 +220,6 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
         break;
       }
     }
-
     return (
         React.createElement("div", null, 
           React.createElement(EventCalendarHeader, null), 
