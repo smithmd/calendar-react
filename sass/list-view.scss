@@ -9,6 +9,7 @@ $inputBGColor: #fbfbfb;
 $calendarBorder: #d0d0d0;
 $defaultLink: #00e;
 $selectedInput: #1b97ee;
+$selectedCheckboxLabel: #4e9ecd;
 
 html, body {
   border: 0;
@@ -153,6 +154,9 @@ html, body {
       line-height: 2;
       border-bottom: 1px solid #fff;
       background-color: #fbfafa;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
       display: flex;
 
       &.zebra {
@@ -188,6 +192,9 @@ html, body {
       width: 100%;
 
       .calendarRow {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
         display: flex;
         flex-direction: row;
         flex: auto;
@@ -294,6 +301,12 @@ html, body {
     line-height: 1.25;
     margin: 2em;
 
+    input[type=checkbox] {
+      &:checked + label, &:checked + span {
+        color: $selectedCheckboxLabel;
+      }
+    }
+
     #multiselects {
       display: inline;
 
@@ -326,6 +339,9 @@ html, body {
 
           li {
             padding: .2em;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
             display: flex;
             flex-direction: row;
             list-style: none;

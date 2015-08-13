@@ -63,6 +63,17 @@
 
 
 
+<!-- Button -->
+<h2 class="demoHeaders">Button</h2>
+<button id="button">A button element</button>
+<form style="margin-top: 1em;">
+	<div id="radioset">
+		<input type="radio" id="radio1" name="radio"><label for="radio1">Choice 1</label>
+		<input type="radio" id="radio2" name="radio" checked="checked"><label for="radio2">Choice 2</label>
+		<input type="radio" id="radio3" name="radio"><label for="radio3">Choice 3</label>
+	</div>
+</form>
+
 
 
 
@@ -261,6 +272,24 @@
 
 
 
+<!-- Menu -->
+<h2 class="demoHeaders">Menu</h2>
+<ul style="width:100px;" id="menu">
+	<li>Item 1</li>
+	<li>Item 2</li>
+	<li>Item 3
+		<ul>
+			<li>Item 3-1</li>
+			<li>Item 3-2</li>
+			<li>Item 3-3</li>
+			<li>Item 3-4</li>
+			<li>Item 3-5</li>
+		</ul>
+	</li>
+	<li>Item 4</li>
+	<li>Item 5</li>
+</ul>
+
 
 
 
@@ -288,6 +317,9 @@
 
 
 
+$( "#button" ).button();
+$( "#radioset" ).buttonset();
+
 
 
 
@@ -305,6 +337,8 @@ $( "#datepicker" ).datepicker({
 
 
 
+
+$( "#menu" ).menu();
 
 
 

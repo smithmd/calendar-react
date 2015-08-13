@@ -66,9 +66,10 @@ var PickList = React.createClass({displayName: "PickList",
     var list = null;
 
     if (!this.state.hidden) {
-      var checkboxes = this.props.data.map(function (item, index, data) {
+      var checkboxes = this.props.data.map(function (item, index) {
         return (
-            React.createElement(ListItem, {key: index, category: component.props.category, index: index, label: item, selected: component.state.selected, 
+            React.createElement(ListItem, {key: index, index: index, label: item, 
+                      selected: component.state.selected, category: component.props.category, 
                       updateSelected: component.handleClickChild.bind(component, index, component.props.filter)})
         );
       });
