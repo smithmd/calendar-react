@@ -10,6 +10,8 @@ $calendarBorder: #d0d0d0;
 $defaultLink: #00e;
 $selectedInput: #1b97ee;
 $selectedCheckboxLabel: #4e9ecd;
+$selectedCalendarBackground: #c5c3c3;
+$linkButtonColor: #d42741;
 
 html, body {
   border: 0;
@@ -69,8 +71,8 @@ html, body {
       line-height: 2;
       padding: 0 24px;
       color: white;
-      background-color: #d42741;
-      border: 1px solid #d42741;
+      background-color: $linkButtonColor;
+      border: 1px solid $linkButtonColor;
     }
   }
 
@@ -357,6 +359,85 @@ html, body {
             }
           }
         }
+      }
+    }
+
+    button {
+      min-width: 12em;
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: middle;
+      cursor: pointer;
+      display: inline-block;
+      border: 1px solid $input-border;
+      -webkit-box-shadow: inset 2px 2px 2px $background-light;
+      -moz-box-shadow: inset 2px 2px 2px $background-light;
+      box-shadow: inset 2px 2px 2px $background-light;
+      padding: 2px 0 1px;
+      border-radius: 0;
+      background: white;
+      color: inherit;
+      font: inherit;
+      line-height: inherit;
+    }
+  }
+  .comiseo-daterangepicker {
+    background: white;
+    border-radius: 0;
+    .comiseo-daterangepicker-main {
+      background: inherit;
+      .ui-widget-content {
+        background: inherit;
+      }
+      .comiseo-daterangepicker-presets {
+        display: none;
+      }
+      .comiseo-daterangepicker-calendar {
+        border: 0;
+
+        .ui-state-highlight {
+          background: none $selectedCalendarBackground;
+
+          a.ui-state-default {
+            color: white;
+            border: 0;
+            background-color: inherit;
+          }
+        }
+        .ui-datepicker-current-day, .calendarOuterSelection {
+          background: none $linkButtonColor;
+
+          a.ui-state-default {
+            color: white;
+            border: 0;
+            background-color: inherit;
+          }
+        }
+      }
+      .ui-datepicker-header {
+        background: none;
+        border: 0;
+        color: inherit;
+      }
+      .ui-datepicker-calendar {
+        border-left: 1px solid $input-border;
+      }
+      .ui-datepicker-group-first {
+        .ui-datepicker-calendar {
+          border: 0;
+        }
+      }
+    }
+    td {
+      text-align: center;
+      .ui-datepicker-current-day {
+        background-color: $selectedCalendarBackground;
+      }
+      .ui-state-default {
+        border: 0;
+        font-weight: normal;
+        color: inherit;
+        background: inherit;
       }
     }
   }

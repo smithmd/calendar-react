@@ -229,9 +229,11 @@
 
 		// called for each day in the datepicker before it is displayed
 		function beforeShowDay(date) {
+			var classes = ((range.start && (+date === +range.start)) || (range.end && (+range.end === +date)) ? 'calendarOuterSelection' : '')
+					+ ' ' + (range.start && ((+date === +range.start) || (range.end && range.start <= date && date <= range.end)) ? 'ui-state-highlight' : '');
 			var result = [
 					true, // selectable
-					range.start && ((+date === +range.start) || (range.end && range.start <= date && date <= range.end)) ? 'ui-state-highlight' : '' // class to be added
+					classes
 				],
 				userResult = [true, ''];
 

@@ -4,8 +4,8 @@
     <meta charset="UTF-8"/>
     <title>Calendar of Events</title>
     <link href="js/jquery-ui/jquery-ui.min.css" type="text/css" rel="stylesheet"/>
-    <link href="stylesheets/list-view.css" type="text/css" rel="stylesheet"/>
     <link href="stylesheets/jquery.comiseo.daterangepicker.css" type="text/css" rel="stylesheet"/>
+    <link href="stylesheets/list-view.css" type="text/css" rel="stylesheet"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.min.js"></script>
     <script src="js/marmottajax.min.js"></script>
     <script src="js/rx.all.js"></script>
@@ -17,11 +17,13 @@
     <script src="js/jquery-ui/jquery-ui.min.js"></script>
     <script src="js/calendar.js"></script>
     <script src="js/data.js"></script>
-    <script src="js/jquery.comiseo.daterangepicker.min.js"></script>
+    <script src="js/jquery.comiseo.daterangepicker.js"></script>
     <script>
       $(function () {
         // start calendar at beginning of current month
         var start = 1 - moment().date();
+        var range = {start:null, end: null};
+
         $("#datepicker").daterangepicker({
           presetRanges: [],
           datepickerOptions: {
@@ -45,6 +47,7 @@
       <input id="performanceFilter" type="checkbox" name="performanceFilter" onchange="filterClick()"/>
       <label for="performanceFilter">Performances</label>
       <input id="datepicker" name="datepicker" placeholder="Custom Date">
+
       <div id="multiselects"></div>
       <script src="build/calendarMultiselect.js"></script>
     </div>
