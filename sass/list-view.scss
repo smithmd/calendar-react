@@ -273,7 +273,7 @@ html, body {
 
   header#calendarHeader {
     #currentMonth {
-      width: 5em;
+      min-width: 5em;
     }
     span {
       -webkit-border-radius: 3px;
@@ -384,6 +384,17 @@ html, body {
   .comiseo-daterangepicker {
     background: white;
     border-radius: 0;
+    font-family: inherit;
+
+    .comiseo-daterangepicker-buttonpanel {
+      button {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        font-weight: normal;
+        background: $inputBGColor;
+      }
+    }
     .comiseo-daterangepicker-main {
       background: inherit;
       .ui-widget-content {
@@ -421,6 +432,50 @@ html, body {
       }
       .ui-datepicker-calendar {
         border-left: 1px solid $input-border;
+      }
+      .ui-widget-header {
+        .ui-state-hover {
+          background: none;
+          border: 0;
+        }
+      }
+      .ui-datepicker-group {
+        .ui-datepicker-prev {
+          cursor:pointer;
+          .ui-icon {
+            opacity: .9;
+            background: url(../img/sprites.png) 0 -14px;
+          }
+          &.ui-state-disabled {
+            .ui-icon {
+              opacity: .3;
+            }
+          }
+          &.ui-state-hover {
+            .ui-icon {
+              opacity: 1;
+            }
+          }
+        }
+        .ui-datepicker-next {
+          cursor: pointer;
+          .ui-icon {
+            opacity: .9;
+            background: url(../img/sprites.png) 0 -31px;
+          }
+          &.ui-state-disabled {
+            .ui-icon {
+              opacity: .3;
+              background: url(../img/sprites.png) 0 -31px;
+            }
+          }
+          &.ui-state-hover {
+            .ui-icon {
+              opacity: 1;
+              background: url(../img/sprites.png) 0 -31px;
+            }
+          }
+        }
       }
       .ui-datepicker-group-first {
         .ui-datepicker-calendar {

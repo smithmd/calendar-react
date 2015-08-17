@@ -18,21 +18,6 @@
     <script src="js/calendar.js"></script>
     <script src="js/data.js"></script>
     <script src="js/jquery.comiseo.daterangepicker.js"></script>
-    <script>
-      $(function () {
-        // start calendar at beginning of current month
-        var start = 1 - moment().date();
-        var range = {start:null, end: null};
-
-        $("#datepicker").daterangepicker({
-          presetRanges: [],
-          datepickerOptions: {
-            minDate: start,
-            maxDate: null
-          }
-        });
-      });
-    </script>
   </head>
   <body>
     <header id="calendarHeader">

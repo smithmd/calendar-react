@@ -529,6 +529,10 @@
 			triggerButton.reset();
 			calendar.reset();
 			$originalElement.val('');
+			// force onChange callback to happen on clearRange call
+			if (options.onChange) {
+				options.onChange();
+			}
 		}
 
 		// callback - used when the user clicks a preset range

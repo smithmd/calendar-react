@@ -94,9 +94,19 @@ var EventCalendarRow = React.createClass({
         d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
         return (i === d.getDay());
       });
+
+      var isCurr;
+      var dispDay;
+      if (this.props.range.start && this.props.range.end) {
+        isCurr = (this.props.range.start <= day) && (this.props.range.end >= day);
+        dispDay = (day.month() + 1) + '/' + day.date();
+      } else {
+        isCurr = day.month() == this.props.month;
+        dispDay = day.date();
+      }
       var isToday = (today.diff(day, 'days') === 0);
-      days[i] = (<EventDate events={events} displayLength={3} day={day.date()} key={'d'+i}
-                            isCurr={day.month() == this.props.month}
+      days[i] = (<EventDate events={events} displayLength={3} day={dispDay} key={'d'+i}
+                            isCurr={isCurr}
                             isToday={isToday}
                             printAll={false}/>);
 
@@ -122,7 +132,15 @@ var EventCalendar = React.createClass({
     });
   },
   getInitialState: function () {
-    return {data: [], dates: {}, filters: {}, venues: [], artsAreas: [], divisions: []};
+    return {
+      data: [],
+      dates: {},
+      dateRange: {start: null, end: null},
+      filters: {},
+      venues: [],
+      artsAreas: [],
+      divisions: []
+    };
   },
   componentWillMount: function () {
     this.loadEvents();
@@ -141,6 +159,19 @@ var EventCalendar = React.createClass({
     });
     divisionFilters.subscribe(function (s) {
       component.setState({divisions: s.divisions});
+    });
+    calendarDateRange.subscribe(function (s) {
+      component.setState({dateRange: s});
+      if (s.start && s.end) {
+        var beginningDay = moment(s.start).startOf('day');
+        var endingDay = moment(s.end).endOf('day');
+        calendarDates.onNext({
+          startMonth: beginningDay.month(),
+          startYear: beginningDay.year(),
+          endMonth: endingDay.month(),
+          endYear: endingDay.year()
+        });
+      }
     });
   },
   componentDidMount: function () {
@@ -162,19 +193,25 @@ var EventCalendar = React.createClass({
   render: function () {
     var component = this;
     // filter to only get events from currently selected month and surrounding days
-    var beginningDay = moment([component.state.dates.currentYear, component.state.dates.currentMonth]);
+    var beginningDay, endingDay;
+    if (this.state.dateRange && this.state.dateRange.start && this.state.dateRange.end) {
+      beginningDay = moment(this.state.dateRange.start).startOf('day');
+      endingDay = moment(this.state.dateRange.end).endOf('day');
+    } else {
+      beginningDay = moment([component.state.dates.startYear, component.state.dates.startMonth]);
+      // moments are bound to last day of month, so we can assume the 31st will always get us the last day
+      endingDay = moment([component.state.dates.startYear, component.state.dates.startMonth, 31]);
+    }
     beginningDay.day(0);
-    // moments are bound to last day of month, so we can assume the 31st will always get us the last day
-    var endingDay = moment([component.state.dates.currentYear, component.state.dates.currentMonth, 31]);
     endingDay.day(6);
 
     // filter checks all filters to see if data matches and returns true if all are true
-    var m;
+    var d;
     var events = this.state.data.filter(function (event) {
       // check to see if date is in or very near selected month
-      m = new Date(event.startDate);
-      m.setTime(m.getTime() + m.getTimezoneOffset() * 60 * 1000);
-      var show = (m >= beginningDay.toDate() && m <= endingDay.toDate());
+      d = new Date(event.startDate);
+      d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
+      var show = (d >= beginningDay.toDate() && d <= endingDay.toDate());
       // return if we know we already don't want this event
       if (show === false) return false;
 
@@ -200,24 +237,28 @@ var EventCalendar = React.createClass({
     });
 
     var eventWeeks = [];
+    var maxWeeks = endingDay.diff(beginningDay, 'weeks') + 1;
 
     var end = beginningDay.clone();
     end.day(6);
     // create associative array for weeks of calendar
-    for (var i = 0; i < 6; i += 1) {
+    for (var i = 0; i < maxWeeks; i += 1) {
       var week = events.filter(function (event) {
-        m = new Date(event.startDate);
-        m.setTime(m.getTime() + m.getTimezoneOffset() * 60 * 1000);
-        return (beginningDay <= m && end >= m);
+        d = new Date(event.startDate);
+        d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
+        return (beginningDay <= d && end >= d);
       });
       eventWeeks[i] = (<EventCalendarRow key={"w"+i} startDay={beginningDay} week={week}
-                                         month={component.state.dates.currentMonth}/>);
+                                         month={component.state.dates.startMonth}
+                                         range={this.state.dateRange}/>);
 
       // move start to beginning of next week and end to end of next week
       beginningDay = beginningDay.clone().day(7);
       end = end.clone().day(13);
-      if (beginningDay.month() != this.state.dates.currentMonth) {
-        break;
+      if (this.state.dateRange && !this.state.dateRange.end) {
+        if (beginningDay.month() != this.state.dates.startMonth) {
+          break;
+        }
       }
     }
     return (

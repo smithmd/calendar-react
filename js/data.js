@@ -4,20 +4,21 @@
 
 var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-var venues = ['Any','Corson Auditorium', 'Dendrinos Chapel and Recital Hall', 'DeRoy Center for Film Studies',
+var venues = ['Any', 'Corson Auditorium', 'Dendrinos Chapel and Recital Hall', 'DeRoy Center for Film Studies',
   'Fine Arts Building', 'Harvey Theatre', 'Interlochen Bowl', 'Kresge Auditorium', 'Mallory Towsley Center for Arts Leadership Great Room', 'Phoenix Theatre',
   'Upton-Morley Pavilion'];
-var campDivisions = ['Any','Junior', 'Intermediate', 'High School', 'Institute' ];
-var artsAreas = ['Any','Visual Arts', 'Theatre', 'Music', 'MPA', 'Dance', 'Creative Writing', 'Comparative Arts'];
+var campDivisions = ['Any', 'Junior', 'Intermediate', 'High School', 'Institute'];
+var artsAreas = ['Any', 'Comparative Arts', 'Creative Writing', 'Dance', 'MPA', 'Music', 'Theatre', 'Visual Arts'];
 
 var selectedDate = new Rx.BehaviorSubject({date: moment().format('YYYY-MM-DD')});
 // selectedDate.onNext called by click and changes state
 
+// change to startMonth, endMonth, startYear, endYear
 var calendarDates = new Rx.BehaviorSubject({
-  currentMonth: moment().month(),
-  currentYear: moment().year(),
-  startDate: null,
-  endDate: null
+  startMonth: moment().month(),
+  startYear: moment().year(),
+  endMonth: moment().month(),
+  endYear: moment().year()
 });
 
 var calendarFilters = new Rx.BehaviorSubject({
@@ -35,4 +36,9 @@ var divisionFilters = new Rx.BehaviorSubject({
 
 var artsAreaFilters = new Rx.BehaviorSubject({
   artsAreas: []
+});
+
+var calendarDateRange = new Rx.BehaviorSubject({
+  start: null,
+  end: null
 });
