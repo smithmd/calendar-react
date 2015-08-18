@@ -119,18 +119,7 @@ var EventCalendarRow = React.createClass({displayName: "EventCalendarRow",
   }
 });
 
-var EventCalendar = React.createClass({displayName: "EventCalendar",
-  loadEvents: function () {
-    var calendar = this;
-    marmottajax({
-      url: calendar.props.url,
-      json: true
-    }).then(function (result) {
-      calendar.setState({data: result.sort(dateSort)});
-    }).error(function (err) {
-      console.error("Something went wrong", err);
-    });
-  },
+var DesktopCalendar = React.createClass({displayName: "DesktopCalendar",
   getInitialState: function () {
     return {
       data: [],
@@ -139,11 +128,11 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
       filters: {},
       venues: [],
       artsAreas: [],
-      divisions: []
+      divisions: [],
+      viewportSize: window.innerWidth
     };
   },
   componentWillMount: function () {
-    this.loadEvents();
     var component = this;
     calendarDates.subscribe(function (s) {
       component.setState({dates: s});
@@ -174,8 +163,6 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
       }
     });
   },
-  componentDidMount: function () {
-  },
   filterArray: function (str, array) {
     var show = true;
     if (array.indexOf('Any') < 0 && array.length > 0) {
@@ -190,26 +177,10 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
     }
     return show;
   },
-  render: function () {
-    var component = this;
-    // filter to only get events from currently selected month and surrounding days
-    var beginningDay, endingDay;
-    if (this.state.dateRange && this.state.dateRange.start && this.state.dateRange.end) {
-      beginningDay = moment(this.state.dateRange.start).startOf('day');
-      endingDay = moment(this.state.dateRange.end).endOf('day');
-    } else {
-      beginningDay = moment([component.state.dates.startYear, component.state.dates.startMonth]);
-      // moments are bound to last day of month, so we can assume the 31st will always get us the last day
-      endingDay = moment([component.state.dates.startYear, component.state.dates.startMonth, 31]);
-    }
-    beginningDay.day(0);
-    endingDay.day(6);
-
-    // filter checks all filters to see if data matches and returns true if all are true
-    var d;
-    var events = this.state.data.filter(function (event) {
+  filterData: function (component, beginningDay, endingDay) {
+    return function (event) {
       // check to see if date is in or very near selected month
-      d = new Date(event.startDate);
+      var d = new Date(event.startDate);
       d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
       var show = (d >= beginningDay.toDate() && d <= endingDay.toDate());
       // return if we know we already don't want this event
@@ -234,7 +205,32 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
 
       // should be true at this point
       return show;
-    });
+    }
+  },
+  filterWeek: function (beginningDay, end) {
+    return function (event) {
+      var d = new Date(event.startDate);
+      d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
+      return (beginningDay <= d && end >= d);
+    }
+  },
+  render: function () {
+    var component = this;
+    // filter to only get events from currently selected month and surrounding days
+    var beginningDay, endingDay;
+    if (this.state.dateRange && this.state.dateRange.start && this.state.dateRange.end) {
+      beginningDay = moment(this.state.dateRange.start).startOf('day');
+      endingDay = moment(this.state.dateRange.end).endOf('day');
+    } else {
+      beginningDay = moment([component.state.dates.startYear, component.state.dates.startMonth]);
+      // moments are bound to last day of month, so we can assume the 31st will always get us the last day
+      endingDay = moment([component.state.dates.startYear, component.state.dates.startMonth, 31]);
+    }
+    beginningDay.day(0);
+    endingDay.day(6);
+
+    // filter checks all filters to see if data matches and returns true if all are true
+    var events = this.props.data.filter(this.filterData(component, beginningDay, endingDay));
 
     var eventWeeks = [];
     var maxWeeks = endingDay.diff(beginningDay, 'weeks') + 1;
@@ -243,11 +239,7 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
     end.day(6);
     // create associative array for weeks of calendar
     for (var i = 0; i < maxWeeks; i += 1) {
-      var week = events.filter(function (event) {
-        d = new Date(event.startDate);
-        d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
-        return (beginningDay <= d && end >= d);
-      });
+      var week = events.filter(this.filterWeek(beginningDay, end));
       eventWeeks[i] = (React.createElement(EventCalendarRow, {key: "w"+i, startDay: beginningDay, week: week, 
                                          month: component.state.dates.startMonth, 
                                          range: this.state.dateRange}));
@@ -270,7 +262,47 @@ var EventCalendar = React.createClass({displayName: "EventCalendar",
   }
 });
 
+var MobileCalendar = React.createClass({displayName: "MobileCalendar",
+  render: function () {
+    // display calendar
+    // display list, defaulted to today
+    return null;
+  }
+});
+
+var Calendar = React.createClass({displayName: "Calendar",
+  loadEvents: function () {
+    var calendar = this;
+    marmottajax({
+      url: calendar.props.url,
+      json: true
+    }).then(function (result) {
+      calendar.setState({data: result.sort(dateSort)});
+    }).error(function (err) {
+      console.error("Something went wrong", err);
+    });
+  },
+  componentWillMount: function () {
+    this.loadEvents();
+  },
+  getInitialState: function () {
+    return {
+      windowWidth: window.innerWidth,
+      data: []
+    };
+  },
+  render: function () {
+    var ret = null;
+    if (this.state.windowWidth > 480) {
+      ret = (React.createElement(DesktopCalendar, {data: this.state.data}));
+    } else {
+      ret = (React.createElement(MobileCalendar, {data: this.state.data}));
+    }
+    return ret;
+  }
+});
+
 React.render(
-    React.createElement(EventCalendar, {url: "json/calendar.json"}),
+    React.createElement(Calendar, {url: "json/calendar.json"}),
     document.getElementById("Calendar")
 );

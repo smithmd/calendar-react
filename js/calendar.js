@@ -12,13 +12,16 @@ $(function () {
     presetRanges: [],
     datepickerOptions: {
       minDate: start,
-      maxDate: null
+      maxDate: null,
+      numberOfMonths: 2
     },
     onChange: function () {
       range = $('#datepicker').daterangepicker('getRange');
       if (range == null) {
         range = {start: null, end: null};
-        monthHead.html(monthHead.html().substring(0, monthHead.html().indexOf(' -')));
+        if (~monthHead.html().indexOf('-')) {
+          monthHead.html(monthHead.html().substring(0, monthHead.html().indexOf(' -')));
+        }
       }
       calendarDateRange.onNext(range);
     }
