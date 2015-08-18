@@ -14,7 +14,7 @@ var Event = React.createClass({displayName: "Event",
   }
 });
 
-var EventDate = React.createClass({displayName: "EventDate",
+var DesktopDate = React.createClass({displayName: "DesktopDate",
   getInitialState: function () {
     return {printAll: this.props.printAll};
   },
@@ -63,7 +63,7 @@ var EventDate = React.createClass({displayName: "EventDate",
   }
 });
 
-var EventCalendarHeader = React.createClass({displayName: "EventCalendarHeader",
+var DesktopCalendarHeader = React.createClass({displayName: "DesktopCalendarHeader",
   render: function () {
     // create calendar header
     var header = weekdays.map(function (day, index) {
@@ -81,7 +81,7 @@ var EventCalendarHeader = React.createClass({displayName: "EventCalendarHeader",
   }
 });
 
-var EventCalendarRow = React.createClass({displayName: "EventCalendarRow",
+var DesktopCalendarRow = React.createClass({displayName: "DesktopCalendarRow",
   render: function () {
     var d = null;
     var day = null;
@@ -105,10 +105,10 @@ var EventCalendarRow = React.createClass({displayName: "EventCalendarRow",
         dispDay = day.date();
       }
       var isToday = (today.diff(day, 'days') === 0);
-      days[i] = (React.createElement(EventDate, {events: events, displayLength: 3, day: dispDay, key: 'd'+i, 
-                            isCurr: isCurr, 
-                            isToday: isToday, 
-                            printAll: false}));
+      days[i] = (React.createElement(DesktopDate, {events: events, displayLength: 3, day: dispDay, key: 'd'+i, 
+                              isCurr: isCurr, 
+                              isToday: isToday, 
+                              printAll: false}));
 
     }
     return (
@@ -120,47 +120,86 @@ var EventCalendarRow = React.createClass({displayName: "EventCalendarRow",
 });
 
 var DesktopCalendar = React.createClass({displayName: "DesktopCalendar",
-  getInitialState: function () {
-    return {
-      data: [],
-      dates: {},
-      dateRange: {start: null, end: null},
-      filters: {},
-      venues: [],
-      artsAreas: [],
-      divisions: [],
-      viewportSize: window.innerWidth
-    };
+  filterWeek: function (beginningDay, end) {
+    return function (event) {
+      var d = new Date(event.startDate);
+      d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
+      return (beginningDay <= d && end >= d);
+    }
   },
-  componentWillMount: function () {
-    var component = this;
-    calendarDates.subscribe(function (s) {
-      component.setState({dates: s});
-    });
-    calendarFilters.subscribe(function (s) {
-      component.setState({filters: s});
-    });
-    venueFilters.subscribe(function (s) {
-      component.setState({venues: s.venues});
-    });
-    artsAreaFilters.subscribe(function (s) {
-      component.setState({artsAreas: s.artsAreas});
-    });
-    divisionFilters.subscribe(function (s) {
-      component.setState({divisions: s.divisions});
-    });
-    calendarDateRange.subscribe(function (s) {
-      component.setState({dateRange: s});
-      if (s.start && s.end) {
-        var beginningDay = moment(s.start).startOf('day');
-        var endingDay = moment(s.end).endOf('day');
-        calendarDates.onNext({
-          startMonth: beginningDay.month(),
-          startYear: beginningDay.year(),
-          endMonth: endingDay.month(),
-          endYear: endingDay.year()
-        });
+  render: function () {
+    var beginningDay = this.props.beginningDay;
+
+    var eventWeeks = [];
+    var maxWeeks = this.props.endingDay.diff(beginningDay, 'weeks') + 1;
+
+    var end = beginningDay.clone();
+    end.day(6);
+    // create associative array for weeks of calendar
+    for (var i = 0; i < maxWeeks; i += 1) {
+      var week = this.props.events.filter(this.filterWeek(beginningDay, end));
+      eventWeeks[i] = (React.createElement(DesktopCalendarRow, {key: "w"+i, startDay: beginningDay, week: week, 
+                                           month: this.props.dates.startMonth, 
+                                           range: this.props.dateRange}));
+
+      // move start to beginning of next week and end to end of next week
+      beginningDay = beginningDay.clone().day(7);
+      end = end.clone().day(13);
+      if (this.props.dateRange && !this.props.dateRange.end) {
+        if (beginningDay.month() != this.props.dates.startMonth) {
+          break;
+        }
       }
+    }
+    return (
+        React.createElement("div", null, 
+          React.createElement(DesktopCalendarHeader, null), 
+          eventWeeks
+        )
+    );
+  }
+});
+
+var MobileCalendarHeader = React.createClass({displayName: "MobileCalendarHeader",
+  render: function () {
+    // create calendar header
+    var header = weekdays.map(function (day, index) {
+      return (
+          React.createElement("div", {key: index, className: "dayOfWeek"}, 
+            day.substr(0,2)
+          )
+      );
+    });
+    return (
+        React.createElement("div", {className: "calendarRow"}, 
+          header
+        )
+    );
+  }
+});
+
+var MobileCalendar = React.createClass({displayName: "MobileCalendar",
+  render: function () {
+    // display calendar
+    // display list, defaulted to today
+    return (
+        React.createElement("div", null, 
+          React.createElement(MobileCalendarHeader, null)
+        )
+    );
+  }
+});
+
+var Calendar = React.createClass({displayName: "Calendar",
+  loadEvents: function () {
+    var calendar = this;
+    marmottajax({
+      url: calendar.props.url,
+      json: true
+    }).then(function (result) {
+      calendar.setState({data: result.sort(dateSort)});
+    }).error(function (err) {
+      console.error("Something went wrong", err);
     });
   },
   filterArray: function (str, array) {
@@ -207,12 +246,49 @@ var DesktopCalendar = React.createClass({displayName: "DesktopCalendar",
       return show;
     }
   },
-  filterWeek: function (beginningDay, end) {
-    return function (event) {
-      var d = new Date(event.startDate);
-      d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
-      return (beginningDay <= d && end >= d);
-    }
+  componentWillMount: function () {
+    this.loadEvents();
+    var component = this;
+    calendarDates.subscribe(function (s) {
+      component.setState({dates: s});
+    });
+    calendarFilters.subscribe(function (s) {
+      component.setState({filters: s});
+    });
+    venueFilters.subscribe(function (s) {
+      component.setState({venues: s.venues});
+    });
+    artsAreaFilters.subscribe(function (s) {
+      component.setState({artsAreas: s.artsAreas});
+    });
+    divisionFilters.subscribe(function (s) {
+      component.setState({divisions: s.divisions});
+    });
+    calendarDateRange.subscribe(function (s) {
+      component.setState({dateRange: s});
+      if (s.start && s.end) {
+        var beginningDay = moment(s.start).startOf('day');
+        var endingDay = moment(s.end).endOf('day');
+        calendarDates.onNext({
+          startMonth: beginningDay.month(),
+          startYear: beginningDay.year(),
+          endMonth: endingDay.month(),
+          endYear: endingDay.year()
+        });
+      }
+    });
+  },
+  getInitialState: function () {
+    return {
+      windowWidth: window.innerWidth,
+      data: [],
+      dates: {},
+      dateRange: {start: null, end: null},
+      filters: {},
+      venues: [],
+      artsAreas: [],
+      divisions: []
+    };
   },
   render: function () {
     var component = this;
@@ -230,73 +306,14 @@ var DesktopCalendar = React.createClass({displayName: "DesktopCalendar",
     endingDay.day(6);
 
     // filter checks all filters to see if data matches and returns true if all are true
-    var events = this.props.data.filter(this.filterData(component, beginningDay, endingDay));
+    var events = this.state.data.filter(this.filterData(component, beginningDay, endingDay));
 
-    var eventWeeks = [];
-    var maxWeeks = endingDay.diff(beginningDay, 'weeks') + 1;
 
-    var end = beginningDay.clone();
-    end.day(6);
-    // create associative array for weeks of calendar
-    for (var i = 0; i < maxWeeks; i += 1) {
-      var week = events.filter(this.filterWeek(beginningDay, end));
-      eventWeeks[i] = (React.createElement(EventCalendarRow, {key: "w"+i, startDay: beginningDay, week: week, 
-                                         month: component.state.dates.startMonth, 
-                                         range: this.state.dateRange}));
-
-      // move start to beginning of next week and end to end of next week
-      beginningDay = beginningDay.clone().day(7);
-      end = end.clone().day(13);
-      if (this.state.dateRange && !this.state.dateRange.end) {
-        if (beginningDay.month() != this.state.dates.startMonth) {
-          break;
-        }
-      }
-    }
-    return (
-        React.createElement("div", null, 
-          React.createElement(EventCalendarHeader, null), 
-          eventWeeks
-        )
-    );
-  }
-});
-
-var MobileCalendar = React.createClass({displayName: "MobileCalendar",
-  render: function () {
-    // display calendar
-    // display list, defaulted to today
-    return null;
-  }
-});
-
-var Calendar = React.createClass({displayName: "Calendar",
-  loadEvents: function () {
-    var calendar = this;
-    marmottajax({
-      url: calendar.props.url,
-      json: true
-    }).then(function (result) {
-      calendar.setState({data: result.sort(dateSort)});
-    }).error(function (err) {
-      console.error("Something went wrong", err);
-    });
-  },
-  componentWillMount: function () {
-    this.loadEvents();
-  },
-  getInitialState: function () {
-    return {
-      windowWidth: window.innerWidth,
-      data: []
-    };
-  },
-  render: function () {
     var ret = null;
     if (this.state.windowWidth > 480) {
-      ret = (React.createElement(DesktopCalendar, {data: this.state.data}));
+      ret = (React.createElement(DesktopCalendar, {events: events, beginningDay: beginningDay, endingDay: endingDay, dates: this.state.dates, dateRange: this.state.dateRange}));
     } else {
-      ret = (React.createElement(MobileCalendar, {data: this.state.data}));
+      ret = (React.createElement(MobileCalendar, {events: events, beginningDay: beginningDay, endingDay: endingDay}));
     }
     return ret;
   }
