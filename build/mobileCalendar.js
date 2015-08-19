@@ -1,6 +1,45 @@
 /**
  * Created by smithmd on 8/19/15.
  */
+var MobileEvents = React.createClass({displayName: "MobileEvents",
+  getInitialState: function () {
+    return {selected: moment().format('YYYY-MM-DD')};
+  },
+  componentDidMount: function () {
+    var component = this;
+    selectedDate.subscribe(function (s) {
+      component.setState({selected: s.date});
+    });
+  },
+  render: function () {
+    var component = this;
+    var events = this.props.events.filter(function (event) {
+      return event.startDate === component.state.selected;
+    });
+    var list = events.map(function (event, index) {
+      var time = printTimePhone(event);
+      var meridiem = (!event.allDay ? getMeridiem(new Date(event.startTime)) : '');
+      var description = event.title + (event.venue ? ' (' + printVenue(event.venue) + ')' : '');
+      var zebra = (index % 2 ? '' : 'zebra');
+      return (
+          React.createElement("div", {key: index, className: zebra}, 
+            React.createElement("span", {className: "time"}, time, 
+              React.createElement("span", {className: "meridiem"}, 
+                meridiem
+              )
+            ), 
+            React.createElement("span", {className: "description"}, description)
+          )
+      );
+    });
+    return (
+        React.createElement("div", {id: "eventList"}, 
+          list
+        )
+    );
+  }
+});
+
 var MobileDate = React.createClass({displayName: "MobileDate",
   handleClick: function () {
     selectedDate.onNext({date: this.props.moment.format('YYYY-MM-DD')});
@@ -85,45 +124,6 @@ var MobileCalendarRow = React.createClass({displayName: "MobileCalendarRow",
     return (
         React.createElement("div", {className: "calendarRow"}, 
           days
-        )
-    );
-  }
-});
-
-var MobileEvents = React.createClass({displayName: "MobileEvents",
-  getInitialState: function () {
-    return {selected: moment().format('YYYY-MM-DD')};
-  },
-  componentDidMount: function () {
-    var component = this;
-    selectedDate.subscribe(function (s) {
-      component.setState({selected: s.date});
-    });
-  },
-  render: function () {
-    var component = this;
-    var events = this.props.events.filter(function (event) {
-      return event.startDate === component.state.selected;
-    });
-    var list = events.map(function (event, index) {
-      var time = formatTimePhone(new Date(event.startTime));
-      var meridiem = getMeridiem(new Date(event.startTime));
-      var description = event.title + ' (' + printVenue(event.venue) + ')';
-      var zebra = (index % 2 ? '' : 'zebra');
-      return (
-          React.createElement("div", {key: index, className: zebra}, 
-            React.createElement("span", {className: "time"}, time, 
-              React.createElement("span", {className: "meridiem"}, 
-                meridiem
-              )
-            ), 
-            React.createElement("span", {className: "description"}, description)
-          )
-      );
-    });
-    return (
-        React.createElement("div", {id: "eventList"}, 
-          list
         )
     );
   }

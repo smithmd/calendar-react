@@ -24,28 +24,38 @@ var getMeridiem = function (d) {
 };
 
 var formatTime = function (d) {
-  var h = d.getHours();
-  var m = d.getMinutes();
-  if (m < 10) {
-    m = "0" + m;
+  var hour = d.getHours();
+  if(hour > 12) {
+    hour = hour - 12;
   }
-  return h + ':' + m + getMeridiem(d);
+  var min = d.getMinutes();
+  if (min < 10) {
+    min = "0" + min;
+  }
+  return hour + ':' + min + getMeridiem(d);
 };
 
 var formatTimePhone = function (d) {
-  var h = d.getHours();
-  var m = d.getMinutes();
-  if (m < 10) {
-    m = "0" + m;
+  var hour = d.getHours();
+  if(hour > 12) {
+    hour = hour - 12;
   }
-  if (h < 10) {
-    h = "0" + h;
+  var min = d.getMinutes();
+  if (min < 10) {
+    min = "0" + min;
   }
-  return h + ':' + m;
+  if (hour < 10) {
+    hour = "0" + hour;
+  }
+  return hour + ':' + min;
 };
 
 var printTime = function (event) {
   return (event.allDay === false ? formatTime(new Date(event.startTime)) + '-' + formatTime(new Date(event.endTime)) : 'All Day');
+};
+
+var printTimePhone = function (event) {
+  return (event.allDay === false ? formatTimePhone(new Date(event.startTime)) : 'All Day');
 };
 
 var printStartTime = function (event) {
