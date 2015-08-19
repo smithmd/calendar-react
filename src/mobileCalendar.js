@@ -2,13 +2,20 @@
  * Created by smithmd on 8/19/15.
  */
 var MobileDate = React.createClass({
+  handleClick: function () {
+    selectedDate.onNext({date: this.props.moment.format('YYYY-MM-DD')});
+  },
   render: function () {
-    // display or show dot for events
-    var displayDot = (this.props.events.length > 0);
+    var dot = (this.props.displayDot ? <div className="indicator"></div> : <div></div>);
+    var selectedClass = (this.props.isSelected ? ' selected' : '');
+    var currentMonthClass = (this.props.isCurr ? '' : ' notCurrentMonth');
+    var classes = 'day' + selectedClass + currentMonthClass;
     return (
         <div
-            className={classNames('day', (this.props.isCurr ? null : 'notCurrentMonth'), (this.props.isToday ? 'today' : null))}>
+            className={classes}
+            onClick={this.handleClick}>
           <header>{this.props.day}</header>
+          {dot}
         </div>
     );
   }
@@ -32,6 +39,15 @@ var MobileCalendarHeader = React.createClass({
 });
 
 var MobileCalendarRow = React.createClass({
+  getInitialState: function () {
+    return {selected: moment().format('YYYY-MM-DD')};
+  },
+  componentDidMount: function () {
+    var component = this;
+    selectedDate.subscribe(function (s) {
+      component.setState({selected: s.date});
+    });
+  },
   render: function () {
     var d = null;
     var day = null;
@@ -54,12 +70,60 @@ var MobileCalendarRow = React.createClass({
         isCurr = day.month() == this.props.month;
         dispDay = day.date();
       }
-      days[i] = (<MobileDate events={events} displayLength={3} day={dispDay} key={'d'+i}
-                             isCurr={isCurr}/>);
+      var isToday = (today.diff(day, 'days') === 0);
+      var isSelected = false;
+      if (this.state.selected) {
+        isSelected = this.state.selected === day.format('YYYY-MM-DD');
+      }
+
+      // display or show dot for events
+      var displayDot = (events.length > 0);
+      days[i] = (<MobileDate displayDot={displayDot} day={dispDay} key={'d'+i}
+                             isToday={isToday} isCurr={isCurr} isSelected={isSelected}
+                             moment={day.clone()}/>);
     }
     return (
         <div className="calendarRow">
           {days}
+        </div>
+    );
+  }
+});
+
+var MobileEvents = React.createClass({
+  getInitialState: function () {
+    return {selected: moment().format('YYYY-MM-DD')};
+  },
+  componentDidMount: function () {
+    var component = this;
+    selectedDate.subscribe(function (s) {
+      component.setState({selected: s.date});
+    });
+  },
+  render: function () {
+    var component = this;
+    var events = this.props.events.filter(function (event) {
+      return event.startDate === component.state.selected;
+    });
+    var list = events.map(function (event, index) {
+      var time = formatTimePhone(new Date(event.startTime));
+      var meridiem = getMeridiem(new Date(event.startTime));
+      var description = event.title + ' (' + printVenue(event.venue) + ')';
+      var zebra = (index % 2 ? '' : 'zebra');
+      return (
+          <div key={index} className={zebra}>
+            <span className="time">{time}
+              <span className="meridiem">
+                {meridiem}
+              </span>
+            </span>
+            <span className="description">{description}</span>
+          </div>
+      );
+    });
+    return (
+        <div id='eventList'>
+          {list}
         </div>
     );
   }
@@ -87,8 +151,8 @@ var MobileCalendar = React.createClass({
     for (var i = 0; i < maxWeeks; i += 1) {
       var week = this.props.events.filter(this.filterWeek(beginningDay, end));
       eventWeeks[i] = (<MobileCalendarRow key={"w"+i} startDay={beginningDay} week={week}
-                                           month={this.props.dates.startMonth}
-                                           range={this.props.dateRange}/>);
+                                          month={this.props.dates.startMonth}
+                                          range={this.props.dateRange}/>);
 
       // move start to beginning of next week and end to end of next week
       beginningDay = beginningDay.clone().day(7);
@@ -101,8 +165,11 @@ var MobileCalendar = React.createClass({
     }
     return (
         <div>
-          <MobileCalendarHeader />
-          {eventWeeks}
+          <div id="calendarHolder">
+            <MobileCalendarHeader />
+            {eventWeeks}
+          </div>
+          <MobileEvents events={this.props.events}/>
         </div>
     );
   }

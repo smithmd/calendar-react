@@ -98,6 +98,15 @@ var Calendar = React.createClass({displayName: "Calendar",
       divisions: []
     };
   },
+  handleResize: function () {
+    this.setState({windowWidth: window.innerWidth});
+  },
+  componentDidMount: function() {
+    window.addEventListener('resize', debounce(this.handleResize,100));
+  },
+  componentWillUnmount: function() {
+    window.removeEventListener('resize', debounce(this.handleResize,100));
+  },
   render: function () {
     var component = this;
     // filter to only get events from currently selected month and surrounding days

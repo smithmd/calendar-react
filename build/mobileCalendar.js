@@ -2,13 +2,20 @@
  * Created by smithmd on 8/19/15.
  */
 var MobileDate = React.createClass({displayName: "MobileDate",
+  handleClick: function () {
+    selectedDate.onNext({date: this.props.moment.format('YYYY-MM-DD')});
+  },
   render: function () {
-    // display or show dot for events
-    var displayDot = (this.props.events.length > 0);
+    var dot = (this.props.displayDot ? React.createElement("div", {className: "indicator"}) : React.createElement("div", null));
+    var selectedClass = (this.props.isSelected ? ' selected' : '');
+    var currentMonthClass = (this.props.isCurr ? '' : ' notCurrentMonth');
+    var classes = 'day' + selectedClass + currentMonthClass;
     return (
         React.createElement("div", {
-            className: classNames('day', (this.props.isCurr ? null : 'notCurrentMonth'), (this.props.isToday ? 'today' : null))}, 
-          React.createElement("header", null, this.props.day)
+            className: classes, 
+            onClick: this.handleClick}, 
+          React.createElement("header", null, this.props.day), 
+          dot
         )
     );
   }
@@ -32,6 +39,15 @@ var MobileCalendarHeader = React.createClass({displayName: "MobileCalendarHeader
 });
 
 var MobileCalendarRow = React.createClass({displayName: "MobileCalendarRow",
+  getInitialState: function () {
+    return {selected: moment().format('YYYY-MM-DD')};
+  },
+  componentDidMount: function () {
+    var component = this;
+    selectedDate.subscribe(function (s) {
+      component.setState({selected: s.date});
+    });
+  },
   render: function () {
     var d = null;
     var day = null;
@@ -54,12 +70,60 @@ var MobileCalendarRow = React.createClass({displayName: "MobileCalendarRow",
         isCurr = day.month() == this.props.month;
         dispDay = day.date();
       }
-      days[i] = (React.createElement(MobileDate, {events: events, displayLength: 3, day: dispDay, key: 'd'+i, 
-                             isCurr: isCurr}));
+      var isToday = (today.diff(day, 'days') === 0);
+      var isSelected = false;
+      if (this.state.selected) {
+        isSelected = this.state.selected === day.format('YYYY-MM-DD');
+      }
+
+      // display or show dot for events
+      var displayDot = (events.length > 0);
+      days[i] = (React.createElement(MobileDate, {displayDot: displayDot, day: dispDay, key: 'd'+i, 
+                             isToday: isToday, isCurr: isCurr, isSelected: isSelected, 
+                             moment: day.clone()}));
     }
     return (
         React.createElement("div", {className: "calendarRow"}, 
           days
+        )
+    );
+  }
+});
+
+var MobileEvents = React.createClass({displayName: "MobileEvents",
+  getInitialState: function () {
+    return {selected: moment().format('YYYY-MM-DD')};
+  },
+  componentDidMount: function () {
+    var component = this;
+    selectedDate.subscribe(function (s) {
+      component.setState({selected: s.date});
+    });
+  },
+  render: function () {
+    var component = this;
+    var events = this.props.events.filter(function (event) {
+      return event.startDate === component.state.selected;
+    });
+    var list = events.map(function (event, index) {
+      var time = formatTimePhone(new Date(event.startTime));
+      var meridiem = getMeridiem(new Date(event.startTime));
+      var description = event.title + ' (' + printVenue(event.venue) + ')';
+      var zebra = (index % 2 ? '' : 'zebra');
+      return (
+          React.createElement("div", {key: index, className: zebra}, 
+            React.createElement("span", {className: "time"}, time, 
+              React.createElement("span", {className: "meridiem"}, 
+                meridiem
+              )
+            ), 
+            React.createElement("span", {className: "description"}, description)
+          )
+      );
+    });
+    return (
+        React.createElement("div", {id: "eventList"}, 
+          list
         )
     );
   }
@@ -87,8 +151,8 @@ var MobileCalendar = React.createClass({displayName: "MobileCalendar",
     for (var i = 0; i < maxWeeks; i += 1) {
       var week = this.props.events.filter(this.filterWeek(beginningDay, end));
       eventWeeks[i] = (React.createElement(MobileCalendarRow, {key: "w"+i, startDay: beginningDay, week: week, 
-                                           month: this.props.dates.startMonth, 
-                                           range: this.props.dateRange}));
+                                          month: this.props.dates.startMonth, 
+                                          range: this.props.dateRange}));
 
       // move start to beginning of next week and end to end of next week
       beginningDay = beginningDay.clone().day(7);
@@ -101,8 +165,11 @@ var MobileCalendar = React.createClass({displayName: "MobileCalendar",
     }
     return (
         React.createElement("div", null, 
-          React.createElement(MobileCalendarHeader, null), 
-          eventWeeks
+          React.createElement("div", {id: "calendarHolder"}, 
+            React.createElement(MobileCalendarHeader, null), 
+            eventWeeks
+          ), 
+          React.createElement(MobileEvents, {events: this.props.events})
         )
     );
   }

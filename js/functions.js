@@ -8,7 +8,8 @@ var printDate = function (d) {
   return weekdays[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ' ' + d.getFullYear();
 };
 
-var formatTime = function (d) {
+var getMeridiem = function (d) {
+
   var meridiem = "am";
   var h = d.getHours();
   if (h > 12) {
@@ -18,11 +19,29 @@ var formatTime = function (d) {
   if (h == 12) {
     meridiem = "pm";
   }
+
+  return meridiem;
+};
+
+var formatTime = function (d) {
+  var h = d.getHours();
   var m = d.getMinutes();
   if (m < 10) {
     m = "0" + m;
   }
-  return h + ':' + m + meridiem;
+  return h + ':' + m + getMeridiem(d);
+};
+
+var formatTimePhone = function (d) {
+  var h = d.getHours();
+  var m = d.getMinutes();
+  if (m < 10) {
+    m = "0" + m;
+  }
+  if (h < 10) {
+    h = "0" + h;
+  }
+  return h + ':' + m;
 };
 
 var printTime = function (event) {
