@@ -40,6 +40,16 @@ $(function () {
     document.getElementById('dailyFilter').checked = s.showOnlyDaily;
     document.getElementById('performanceFilter').checked = s.showOnlyPerformances;
   });
+  if (window.innerWidth < 801) {
+    $("#filters").mmenu(
+        {
+          // options
+        },
+        {
+          // configuration
+        }
+    );
+  }
 });
 var prevMonth = function () {
   $('#datepicker').daterangepicker('clearRange');

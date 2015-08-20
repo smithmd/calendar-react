@@ -101,11 +101,13 @@ var Calendar = React.createClass({displayName: "Calendar",
   handleResize: function () {
     this.setState({windowWidth: window.innerWidth});
   },
-  componentDidMount: function() {
-    window.addEventListener('resize', debounce(this.handleResize,100));
+  componentDidMount: function () {
+    // debounce prevents the function from running every 20ms, instead run 100ms after last resize event
+    window.addEventListener('resize', debounce(this.handleResize, 100));
   },
-  componentWillUnmount: function() {
-    window.removeEventListener('resize', debounce(this.handleResize,100));
+  componentWillUnmount: function () {
+    // debounce prevents the function from running every 20ms, instead run 100ms after last resize event
+    window.removeEventListener('resize', debounce);
   },
   render: function () {
     var component = this;
