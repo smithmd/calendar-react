@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="UTF-8"/>
     <title>Calendar of Events</title>
     <link href="js/jquery-ui/jquery-ui.min.css" type="text/css" rel="stylesheet"/>
     <link href="stylesheets/jquery.comiseo.daterangepicker.css" type="text/css" rel="stylesheet"/>
-    <link href="js/mmenu/css/jquery.mmenu.css" type="text/css" rel="stylesheet"/>
+    <link href="js/mmenu/css/jquery.mmenu.all.css" type="text/css" rel="stylesheet"/>
     <link href="stylesheets/list-view.css" type="text/css" rel="stylesheet"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
     <script src="js/marmottajax.min.js"></script>
@@ -16,7 +16,7 @@
     <script src="node_modules/react-onclickoutside/index.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="js/jquery-ui/jquery-ui.min.js"></script>
-    <script src="js/mmenu/js/jquery.mmenu.min.js"></script>
+    <script src="js/mmenu/js/jquery.mmenu.min.all.js"></script>
     <script src="js/calendar.js"></script>
     <script src="js/data.js"></script>
     <script src="js/jquery.comiseo.daterangepicker.js"></script>
@@ -30,16 +30,8 @@
         <a id="viewCalendar" href="index-list.html">View Printable List</a>
         <a id="open-menu" href="#filters">Filters</a>
       </header>
-      <nav id="filters">
-        <input id="dailyFilter" type="checkbox" name="dailyFilter" onchange="filterClick()"/>
-        <label for="dailyFilter">Daily Events</label>
-        <input id="performanceFilter" type="checkbox" name="performanceFilter" onchange="filterClick()"/>
-        <label for="performanceFilter">Performances</label>
-        <input id="datepicker" name="datepicker" placeholder="Custom Date">
-
-        <div id="multiselects"></div>
-        <script src="build/calendarMultiselect.js"></script>
-      </nav>
+      <nav id="filters"></nav>
+      <script src="build/calendarMultiselect.js"></script>
       <div id="Calendar"></div>
       <script src="build/desktopCalendar.js"></script>
       <script src="build/mobileCalendar.js"></script>

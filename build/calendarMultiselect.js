@@ -86,7 +86,7 @@ var PickList = React.createClass({displayName: "PickList",
       }
     }
     return (
-        React.createElement("div", {className: "pickList"}, 
+        React.createElement("li", {className: "pickList"}, 
           React.createElement("span", {onClick: this.handleMainClick}, title), 
           list
         )
@@ -94,10 +94,27 @@ var PickList = React.createClass({displayName: "PickList",
   }
 });
 
-var MultiSelects = React.createClass({displayName: "MultiSelects",
+var FilterList = React.createClass({displayName: "FilterList",
   render: function () {
     return (
-        React.createElement("span", null, 
+        React.createElement("ul", null, 
+          React.createElement("li", null, 
+            React.createElement("span", null, 
+              React.createElement("input", {id: "dailyFilter", type: "checkbox", name: "dailyFilter", onchange: "filterClick()"}), 
+              React.createElement("label", {htmlFor: "dailyFilter"}, "Daily Events")
+            )
+          ), 
+          React.createElement("li", null, 
+            React.createElement("span", null, 
+              React.createElement("input", {id: "performanceFilter", type: "checkbox", name: "performanceFilter", onchange: "filterClick()"}), 
+              React.createElement("label", {htmlFor: "performanceFilter"}, "Performances")
+            )
+          ), 
+          React.createElement("li", null, 
+            React.createElement("span", null, 
+              React.createElement("input", {id: "datepicker", name: "datepicker", placeholder: "Custom Date"})
+            )
+          ), 
           React.createElement(PickList, {data: venues, category: "venues", title: "Venues", filter: venueFilters}), 
           React.createElement(PickList, {data: campDivisions, category: "divisions", title: "Camp Divisions", filter: divisionFilters}), 
           React.createElement(PickList, {data: artsAreas, category: "artsAreas", title: "Arts Areas", filter: artsAreaFilters})
@@ -106,4 +123,4 @@ var MultiSelects = React.createClass({displayName: "MultiSelects",
   }
 });
 
-React.render(React.createElement(MultiSelects, null), document.getElementById('multiselects'));
+React.render(React.createElement(FilterList, null), document.getElementById('filters'));

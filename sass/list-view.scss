@@ -24,6 +24,8 @@ html, body {
   border: 0;
   padding: 0;
   margin: 0;
+  background-color:white;
+  min-height: 100%;
 }
 
 @media all {
@@ -556,6 +558,7 @@ html, body {
           flex-direction: row;
           flex: auto;
           align-items: center;
+          vertical-align: middle;
 
           .day {
             text-align: center;
@@ -694,63 +697,55 @@ html, body {
   }
 
   #filters {
-    line-height: 1.25;
-    margin: 2em;
+    ul {
+      li {
+        line-height: 1.5;
+      }
+    }
 
     input[type=checkbox] {
       &:checked + label, &:checked + span {
         color: $selectedCheckboxLabel;
       }
     }
+    .pickList {
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-box-shadow: inset 2px 2px 2px $background-light;
+        -moz-box-shadow: inset 2px 2px 2px $background-light;
+        box-shadow: inset 2px 2px 2px $background-light;
+        z-index: 0;
+      }
 
-    #multiselects {
-      display: inline;
+      ul {
+        position: absolute;
+        z-index: 10;
+        padding: 0;
+        min-width: 11em;
+        background-color: $inputBGColor;
+        border: 1px solid $input-border;
 
-      .pickList {
-        min-width: 10em;
-        display: inline-block;
-        position: relative;
-        margin: 0 1em;
-        span {
-          width: 10em;
-          white-space: nowrap;
-          overflow: hidden;
-          vertical-align: middle;
+        li {
+          padding: .2em;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          flex-direction: row;
+          list-style: none;
           cursor: pointer;
-          display: inline-block;
-          border: 1px solid $input-border;
-          padding: 0.5em;
-          -webkit-box-shadow: inset 2px 2px 2px $background-light;
-          -moz-box-shadow: inset 2px 2px 2px $background-light;
-          box-shadow: inset 2px 2px 2px $background-light;
-        }
-
-        ul {
-          position: absolute;
-          padding: 0;
-          min-width: 11em;
-          background-color: $inputBGColor;
-          border: 1px solid $input-border;
-          margin: 0;
-
-          li {
-            padding: .2em;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex;
-            flex-direction: row;
-            list-style: none;
+          vertical-align: middle;
+          &:hover {
+            background-color: $input-hover;
+          }
+          label, input {
             cursor: pointer;
-            &:hover {
-              background-color: $input-hover;
-            }
-            label, input {
-              cursor: pointer;
-            }
-            label {
-              margin-left: 0.3em;
-            }
+          }
+          label {
+            margin-left: 0.3em;
           }
         }
       }
@@ -833,48 +828,46 @@ html, body {
           border: 0;
         }
       }
-      .ui-datepicker-group {
-        .ui-datepicker-prev {
-          cursor: pointer;
+      .ui-datepicker-prev {
+        cursor: pointer;
+        .ui-icon {
+          opacity: .9;
+          background: url(../img/sprites.png) 0 -14px;
+        }
+        &.ui-state-disabled {
           .ui-icon {
-            opacity: .9;
-            background: url(../img/sprites.png) 0 -14px;
-          }
-          &.ui-state-disabled {
-            .ui-icon {
-              opacity: .3;
-            }
-          }
-          &.ui-state-hover {
-            .ui-icon {
-              opacity: 1;
-            }
+            opacity: .3;
           }
         }
-        .ui-datepicker-next {
-          cursor: pointer;
+        &.ui-state-hover {
           .ui-icon {
-            opacity: .9;
-            background: url(../img/sprites.png) 0 -31px;
-          }
-          &.ui-state-disabled {
-            .ui-icon {
-              opacity: .3;
-              background: url(../img/sprites.png) 0 -31px;
-            }
-          }
-          &.ui-state-hover {
-            .ui-icon {
-              opacity: 1;
-              background: url(../img/sprites.png) 0 -31px;
-            }
+            opacity: 1;
           }
         }
       }
-      .ui-datepicker-group-first {
-        .ui-datepicker-calendar {
-          border: 0;
+      .ui-datepicker-next {
+        cursor: pointer;
+        .ui-icon {
+          opacity: .9;
+          background: url(../img/sprites.png) 0 -31px;
         }
+        &.ui-state-disabled {
+          .ui-icon {
+            opacity: .3;
+            background: url(../img/sprites.png) 0 -31px;
+          }
+        }
+        &.ui-state-hover {
+          .ui-icon {
+            opacity: 1;
+            background: url(../img/sprites.png) 0 -31px;
+          }
+        }
+      }
+
+      .ui-datepicker-calendar {
+        border: 0;
+        padding:0;
       }
     }
     td {

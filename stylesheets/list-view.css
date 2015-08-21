@@ -4,15 +4,17 @@ html, body {
   border: 0;
   padding: 0;
   margin: 0;
+  background-color: white;
+  min-height: 100%;
 }
 
 @media all {
-  /* line 30, ../sass/list-view.scss */
+  /* line 32, ../sass/list-view.scss */
   html {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
-  /* line 34, ../sass/list-view.scss */
+  /* line 36, ../sass/list-view.scss */
   #pageTitle {
     font-weight: bold;
     font-size: 1.3em;
@@ -20,25 +22,25 @@ html, body {
     text-align: center;
   }
 
-  /* line 41, ../sass/list-view.scss */
+  /* line 43, ../sass/list-view.scss */
   #emptyList {
     display: block;
     text-align: center;
     line-height: 3;
   }
 
-  /* line 47, ../sass/list-view.scss */
+  /* line 49, ../sass/list-view.scss */
   header {
     clear: both;
     background-color: #f6f6f6;
   }
-  /* line 52, ../sass/list-view.scss */
+  /* line 54, ../sass/list-view.scss */
   header h1 {
     display: inline-block;
     font-size: 24px;
     margin: 16px;
   }
-  /* line 57, ../sass/list-view.scss */
+  /* line 59, ../sass/list-view.scss */
   header input, header #viewCalendar {
     margin: 16px;
     float: right;
@@ -46,7 +48,7 @@ html, body {
     height: 24px;
     border-radius: 1px;
   }
-  /* line 64, ../sass/list-view.scss */
+  /* line 66, ../sass/list-view.scss */
   header input {
     padding-left: 5px;
     background: white url("../img/calendar.png") 95% 50% no-repeat;
@@ -55,7 +57,7 @@ html, body {
     -moz-box-shadow: inset 3px 3px 5px #f6f6f6;
     box-shadow: inset 3px 3px 5px #f6f6f6;
   }
-  /* line 72, ../sass/list-view.scss */
+  /* line 74, ../sass/list-view.scss */
   header #viewCalendar {
     cursor: pointer;
     display: inline-block;
@@ -69,26 +71,26 @@ html, body {
     border: 1px solid #d42741;
   }
 
-  /* line 86, ../sass/list-view.scss */
+  /* line 88, ../sass/list-view.scss */
   #navigation {
     background-color: #d0e2ed;
     clear: both;
     width: 100%;
     color: #a2afb7;
   }
-  /* line 92, ../sass/list-view.scss */
+  /* line 94, ../sass/list-view.scss */
   #navigation .isToday, #navigation .isSelected {
     color: #484949;
   }
-  /* line 95, ../sass/list-view.scss */
+  /* line 97, ../sass/list-view.scss */
   #navigation .dayOfWeek {
     font-weight: bold;
   }
-  /* line 99, ../sass/list-view.scss */
+  /* line 101, ../sass/list-view.scss */
   #navigation ul {
     margin: 0;
   }
-  /* line 102, ../sass/list-view.scss */
+  /* line 104, ../sass/list-view.scss */
   #navigation ul li {
     line-height: 4;
     text-decoration: none;
@@ -98,17 +100,17 @@ html, body {
     vertical-align: middle;
     text-align: center;
   }
-  /* line 111, ../sass/list-view.scss */
+  /* line 113, ../sass/list-view.scss */
   #navigation ul li:hover {
     color: #484949;
     background-color: #bed7e6;
   }
-  /* line 118, ../sass/list-view.scss */
+  /* line 120, ../sass/list-view.scss */
   #navigation ul li.navPaging:hover {
     background-color: #d0e2ed;
     cursor: default;
   }
-  /* line 123, ../sass/list-view.scss */
+  /* line 125, ../sass/list-view.scss */
   #navigation ul li.navPaging span {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -122,29 +124,29 @@ html, body {
     color: white;
     font-size: 1.8em;
   }
-  /* line 136, ../sass/list-view.scss */
+  /* line 138, ../sass/list-view.scss */
   #navigation ul li.navPaging span#prev, #navigation ul li.navPaging span#next {
     background-color: #676666;
   }
-  /* line 138, ../sass/list-view.scss */
+  /* line 140, ../sass/list-view.scss */
   #navigation ul li.navPaging span#prev:hover, #navigation ul li.navPaging span#next:hover {
     background-color: #93a5ae;
     color: #e6e6e6;
     cursor: pointer;
   }
 
-  /* line 150, ../sass/list-view.scss */
+  /* line 152, ../sass/list-view.scss */
   #prettyEvents {
     clear: left;
   }
-  /* line 154, ../sass/list-view.scss */
+  /* line 156, ../sass/list-view.scss */
   #prettyEvents .day header.date {
     font-weight: bold;
     display: block;
     margin: 0 auto;
     text-align: center;
   }
-  /* line 162, ../sass/list-view.scss */
+  /* line 164, ../sass/list-view.scss */
   #prettyEvents .event {
     line-height: 2;
     border-bottom: 1px solid #fff;
@@ -154,42 +156,42 @@ html, body {
     display: -webkit-flex;
     display: flex;
   }
-  /* line 171, ../sass/list-view.scss */
+  /* line 173, ../sass/list-view.scss */
   #prettyEvents .event.zebra {
     background-color: #f6f6f6;
   }
-  /* line 175, ../sass/list-view.scss */
+  /* line 177, ../sass/list-view.scss */
   #prettyEvents .event span {
     padding-left: 10px;
     display: inline-block;
   }
-  /* line 180, ../sass/list-view.scss */
+  /* line 182, ../sass/list-view.scss */
   #prettyEvents .event span.time {
     width: 20%;
     background-color: #ebebeb;
     font-weight: bold;
   }
-  /* line 186, ../sass/list-view.scss */
+  /* line 188, ../sass/list-view.scss */
   #prettyEvents .event span.title {
     width: 40%;
   }
-  /* line 190, ../sass/list-view.scss */
+  /* line 192, ../sass/list-view.scss */
   #prettyEvents .event span.venue {
     width: 35%;
   }
 }
 @media screen {
-  /* line 198, ../sass/list-view.scss */
+  /* line 200, ../sass/list-view.scss */
   #links {
     padding-left: 10px;
   }
 
-  /* line 203, ../sass/list-view.scss */
+  /* line 205, ../sass/list-view.scss */
   #prettyEvents div.bordered {
     width: 100%;
   }
 
-  /* line 208, ../sass/list-view.scss */
+  /* line 210, ../sass/list-view.scss */
   #filterset {
     border: 1px solid #999;
     border-radius: 0 0 5px 5px;
@@ -198,13 +200,13 @@ html, body {
     margin: 10px;
   }
 
-  /* line 216, ../sass/list-view.scss */
+  /* line 218, ../sass/list-view.scss */
   #filterset input[type=text] {
     border: 1px solid #999;
     padding: 2px;
   }
 
-  /* line 221, ../sass/list-view.scss */
+  /* line 223, ../sass/list-view.scss */
   #filterset legend {
     padding: 1px 20px;
     border: 1px solid #999;
@@ -213,16 +215,16 @@ html, body {
   }
 }
 @media screen and (min-width: 801px) {
-  /* line 230, ../sass/list-view.scss */
+  /* line 232, ../sass/list-view.scss */
   #Calendar {
     margin: 2em;
     background-color: white;
   }
-  /* line 234, ../sass/list-view.scss */
+  /* line 236, ../sass/list-view.scss */
   #Calendar div {
     width: 100%;
   }
-  /* line 237, ../sass/list-view.scss */
+  /* line 239, ../sass/list-view.scss */
   #Calendar div .calendarRow {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -231,27 +233,27 @@ html, body {
     flex-direction: row;
     flex: auto;
   }
-  /* line 245, ../sass/list-view.scss */
+  /* line 247, ../sass/list-view.scss */
   #Calendar div .calendarRow .day {
     border: 1px solid #d0d0d0;
     min-height: 11em;
   }
-  /* line 249, ../sass/list-view.scss */
+  /* line 251, ../sass/list-view.scss */
   #Calendar div .calendarRow .day.notCurrentMonth {
     color: #d0d0d0;
   }
-  /* line 252, ../sass/list-view.scss */
+  /* line 254, ../sass/list-view.scss */
   #Calendar div .calendarRow .day.notCurrentMonth a {
     color: #bbbbff;
   }
-  /* line 257, ../sass/list-view.scss */
+  /* line 259, ../sass/list-view.scss */
   #Calendar div .calendarRow .day header {
     background-color: inherit;
     line-height: 2;
     padding-left: 1em;
     font-size: 0.8em;
   }
-  /* line 263, ../sass/list-view.scss */
+  /* line 265, ../sass/list-view.scss */
   #Calendar div .calendarRow .day header span.today {
     float: right;
     text-transform: uppercase;
@@ -259,7 +261,7 @@ html, body {
     font-size: 0.9em;
     color: #d47211;
   }
-  /* line 272, ../sass/list-view.scss */
+  /* line 274, ../sass/list-view.scss */
   #Calendar div .calendarRow .day a {
     display: block;
     margin: .5em auto;
@@ -269,11 +271,11 @@ html, body {
     text-decoration: none;
     color: #00e;
   }
-  /* line 282, ../sass/list-view.scss */
+  /* line 284, ../sass/list-view.scss */
   #Calendar div .calendarRow .day.today {
     background-color: #f9fae5;
   }
-  /* line 286, ../sass/list-view.scss */
+  /* line 288, ../sass/list-view.scss */
   #Calendar div .calendarRow .day .event {
     margin: .5em auto;
     padding-bottom: .5em;
@@ -281,15 +283,15 @@ html, body {
     width: 90%;
     border-bottom: 1px dotted #c5c5c5;
   }
-  /* line 293, ../sass/list-view.scss */
+  /* line 295, ../sass/list-view.scss */
   #Calendar div .calendarRow .day .event .time {
     font-weight: bold;
   }
-  /* line 296, ../sass/list-view.scss */
+  /* line 298, ../sass/list-view.scss */
   #Calendar div .calendarRow .day .event.last {
     border: 0;
   }
-  /* line 304, ../sass/list-view.scss */
+  /* line 306, ../sass/list-view.scss */
   #Calendar .dayOfWeek {
     background-color: #d0e2ed;
     font-weight: bold;
@@ -300,11 +302,11 @@ html, body {
     flex: auto;
   }
 
-  /* line 316, ../sass/list-view.scss */
+  /* line 318, ../sass/list-view.scss */
   header#calendarHeader #currentMonth {
     min-width: 5em;
   }
-  /* line 319, ../sass/list-view.scss */
+  /* line 321, ../sass/list-view.scss */
   header#calendarHeader span {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -318,38 +320,38 @@ html, body {
     color: white;
     font-size: 1.8em;
   }
-  /* line 332, ../sass/list-view.scss */
+  /* line 334, ../sass/list-view.scss */
   header#calendarHeader span#next, header#calendarHeader span#prev {
     background-color: #676666;
   }
-  /* line 334, ../sass/list-view.scss */
+  /* line 336, ../sass/list-view.scss */
   header#calendarHeader span#next:hover, header#calendarHeader span#prev:hover {
     background-color: #4d4d4d;
     color: #e6e6e6;
     cursor: pointer;
   }
 
-  /* line 343, ../sass/list-view.scss */
+  /* line 345, ../sass/list-view.scss */
   #filters {
     line-height: 1.25;
     margin: 2em;
   }
-  /* line 348, ../sass/list-view.scss */
+  /* line 350, ../sass/list-view.scss */
   #filters input[type=checkbox]:checked + label, #filters input[type=checkbox]:checked + span {
     color: #4e9ecd;
   }
-  /* line 353, ../sass/list-view.scss */
+  /* line 355, ../sass/list-view.scss */
   #filters #multiselects {
     display: inline;
   }
-  /* line 356, ../sass/list-view.scss */
+  /* line 358, ../sass/list-view.scss */
   #filters #multiselects .pickList {
     min-width: 10em;
     display: inline-block;
     position: relative;
     margin: 0 1em;
   }
-  /* line 361, ../sass/list-view.scss */
+  /* line 363, ../sass/list-view.scss */
   #filters #multiselects .pickList span {
     width: 10em;
     white-space: nowrap;
@@ -363,7 +365,7 @@ html, body {
     -moz-box-shadow: inset 2px 2px 2px #f6f6f6;
     box-shadow: inset 2px 2px 2px #f6f6f6;
   }
-  /* line 375, ../sass/list-view.scss */
+  /* line 377, ../sass/list-view.scss */
   #filters #multiselects .pickList ul {
     position: absolute;
     padding: 0;
@@ -372,7 +374,7 @@ html, body {
     border: 1px solid #dcdcdc;
     margin: 0;
   }
-  /* line 383, ../sass/list-view.scss */
+  /* line 385, ../sass/list-view.scss */
   #filters #multiselects .pickList ul li {
     padding: .2em;
     display: -webkit-box;
@@ -383,19 +385,19 @@ html, body {
     list-style: none;
     cursor: pointer;
   }
-  /* line 392, ../sass/list-view.scss */
+  /* line 394, ../sass/list-view.scss */
   #filters #multiselects .pickList ul li:hover {
     background-color: #f1f2f3;
   }
-  /* line 395, ../sass/list-view.scss */
+  /* line 397, ../sass/list-view.scss */
   #filters #multiselects .pickList ul li label, #filters #multiselects .pickList ul li input {
     cursor: pointer;
   }
-  /* line 398, ../sass/list-view.scss */
+  /* line 400, ../sass/list-view.scss */
   #filters #multiselects .pickList ul li label {
     margin-left: 0.3em;
   }
-  /* line 406, ../sass/list-view.scss */
+  /* line 408, ../sass/list-view.scss */
   #filters button {
     min-width: 12em;
     white-space: nowrap;
@@ -415,13 +417,13 @@ html, body {
     line-height: inherit;
   }
 
-  /* line 425, ../sass/list-view.scss */
+  /* line 427, ../sass/list-view.scss */
   .comiseo-daterangepicker {
     background: white;
     border-radius: 0;
     font-family: inherit;
   }
-  /* line 431, ../sass/list-view.scss */
+  /* line 433, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-buttonpanel button {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -429,106 +431,106 @@ html, body {
     font-weight: normal;
     background: #fbfbfb;
   }
-  /* line 439, ../sass/list-view.scss */
+  /* line 441, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main {
     background: inherit;
   }
-  /* line 441, ../sass/list-view.scss */
+  /* line 443, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-widget-content {
     background: inherit;
   }
-  /* line 444, ../sass/list-view.scss */
+  /* line 446, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-presets {
     display: none;
   }
-  /* line 447, ../sass/list-view.scss */
+  /* line 449, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar {
     border: 0;
   }
-  /* line 450, ../sass/list-view.scss */
+  /* line 452, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-state-highlight {
     background: none #c5c3c3;
   }
-  /* line 453, ../sass/list-view.scss */
+  /* line 455, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-state-highlight a.ui-state-default {
     color: white;
     border: 0;
     background-color: inherit;
   }
-  /* line 459, ../sass/list-view.scss */
+  /* line 461, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-datepicker-current-day, .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .calendarOuterSelection {
     background: none #d42741;
   }
-  /* line 462, ../sass/list-view.scss */
+  /* line 464, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-datepicker-current-day a.ui-state-default, .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .calendarOuterSelection a.ui-state-default {
     color: white;
     border: 0;
     background-color: inherit;
   }
-  /* line 469, ../sass/list-view.scss */
+  /* line 471, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-header {
     background: none;
     border: 0;
     color: inherit;
   }
-  /* line 474, ../sass/list-view.scss */
+  /* line 476, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-calendar {
     border-left: 1px solid #dcdcdc;
   }
-  /* line 478, ../sass/list-view.scss */
+  /* line 480, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-widget-header .ui-state-hover {
     background: none;
     border: 0;
   }
-  /* line 484, ../sass/list-view.scss */
+  /* line 486, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev {
     cursor: pointer;
   }
-  /* line 486, ../sass/list-view.scss */
+  /* line 488, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev .ui-icon {
     opacity: .9;
     background: url(../img/sprites.png) 0 -14px;
   }
-  /* line 491, ../sass/list-view.scss */
+  /* line 493, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev.ui-state-disabled .ui-icon {
     opacity: .3;
   }
-  /* line 496, ../sass/list-view.scss */
+  /* line 498, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev.ui-state-hover .ui-icon {
     opacity: 1;
   }
-  /* line 501, ../sass/list-view.scss */
+  /* line 503, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next {
     cursor: pointer;
   }
-  /* line 503, ../sass/list-view.scss */
+  /* line 505, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next .ui-icon {
     opacity: .9;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 508, ../sass/list-view.scss */
+  /* line 510, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next.ui-state-disabled .ui-icon {
     opacity: .3;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 514, ../sass/list-view.scss */
+  /* line 516, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next.ui-state-hover .ui-icon {
     opacity: 1;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 522, ../sass/list-view.scss */
+  /* line 524, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group-first .ui-datepicker-calendar {
     border: 0;
   }
-  /* line 527, ../sass/list-view.scss */
+  /* line 529, ../sass/list-view.scss */
   .comiseo-daterangepicker td {
     text-align: center;
   }
-  /* line 529, ../sass/list-view.scss */
+  /* line 531, ../sass/list-view.scss */
   .comiseo-daterangepicker td .ui-datepicker-current-day {
     background-color: #c5c3c3;
   }
-  /* line 532, ../sass/list-view.scss */
+  /* line 534, ../sass/list-view.scss */
   .comiseo-daterangepicker td .ui-state-default {
     border: 0;
     font-weight: normal;
@@ -537,19 +539,19 @@ html, body {
   }
 }
 @media screen and (max-width: 800px) {
-  /* line 543, ../sass/list-view.scss */
+  /* line 545, ../sass/list-view.scss */
   #Calendar {
     background-color: white;
   }
-  /* line 546, ../sass/list-view.scss */
+  /* line 548, ../sass/list-view.scss */
   #Calendar div {
     width: 100%;
   }
-  /* line 549, ../sass/list-view.scss */
+  /* line 551, ../sass/list-view.scss */
   #Calendar div #calendarHolder {
     margin: .5em;
   }
-  /* line 551, ../sass/list-view.scss */
+  /* line 553, ../sass/list-view.scss */
   #Calendar div #calendarHolder .calendarRow {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -558,8 +560,9 @@ html, body {
     flex-direction: row;
     flex: auto;
     align-items: center;
+    vertical-align: middle;
   }
-  /* line 560, ../sass/list-view.scss */
+  /* line 563, ../sass/list-view.scss */
   #Calendar div #calendarHolder .calendarRow .day {
     text-align: center;
     font-weight: bold;
@@ -567,11 +570,11 @@ html, body {
     align-items: center;
     color: #65707a;
   }
-  /* line 567, ../sass/list-view.scss */
+  /* line 570, ../sass/list-view.scss */
   #Calendar div #calendarHolder .calendarRow .day.notCurrentMonth {
     color: #adb2b6;
   }
-  /* line 573, ../sass/list-view.scss */
+  /* line 576, ../sass/list-view.scss */
   #Calendar div #calendarHolder .calendarRow .day.selected header {
     color: white;
     -webkit-border-radius: 50%;
@@ -583,23 +586,23 @@ html, body {
     width: 3em;
     margin: 0 auto;
   }
-  /* line 585, ../sass/list-view.scss */
+  /* line 588, ../sass/list-view.scss */
   #Calendar div #calendarHolder .calendarRow .day.selected .indicator {
     background-color: #618092;
   }
-  /* line 590, ../sass/list-view.scss */
+  /* line 593, ../sass/list-view.scss */
   #Calendar div #calendarHolder .calendarRow .day header {
     line-height: 3;
     background: none;
   }
-  /* line 594, ../sass/list-view.scss */
+  /* line 597, ../sass/list-view.scss */
   #Calendar div #calendarHolder .calendarRow .day div {
     width: 5px;
     height: 5px;
     top: -10px;
     position: relative;
   }
-  /* line 601, ../sass/list-view.scss */
+  /* line 604, ../sass/list-view.scss */
   #Calendar div #calendarHolder .calendarRow .day .indicator {
     background-color: #51cfd4;
     -webkit-border-radius: 50%;
@@ -607,11 +610,11 @@ html, body {
     border-radius: 50%;
     margin: 0 auto;
   }
-  /* line 609, ../sass/list-view.scss */
+  /* line 612, ../sass/list-view.scss */
   #Calendar div #calendarHolder .calendarRow .day.today {
     background-color: #f9fae5;
   }
-  /* line 617, ../sass/list-view.scss */
+  /* line 620, ../sass/list-view.scss */
   #Calendar div #eventList div {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -622,25 +625,25 @@ html, body {
     align-items: center;
     background-color: #f6f6f6;
   }
-  /* line 626, ../sass/list-view.scss */
+  /* line 629, ../sass/list-view.scss */
   #Calendar div #eventList div.zebra {
     background-color: #ecebeb;
   }
-  /* line 629, ../sass/list-view.scss */
+  /* line 632, ../sass/list-view.scss */
   #Calendar div #eventList div span {
     margin: 1em;
   }
-  /* line 631, ../sass/list-view.scss */
+  /* line 634, ../sass/list-view.scss */
   #Calendar div #eventList div span.time {
     min-width: 5em;
     max-width: 5em;
     color: #3e3e3e;
   }
-  /* line 635, ../sass/list-view.scss */
+  /* line 638, ../sass/list-view.scss */
   #Calendar div #eventList div span.time span {
     margin: 0;
   }
-  /* line 638, ../sass/list-view.scss */
+  /* line 641, ../sass/list-view.scss */
   #Calendar div #eventList div span.time .meridiem {
     padding-left: 0.6em;
     align-items: center;
@@ -650,11 +653,11 @@ html, body {
     position: relative;
     top: -.05em;
   }
-  /* line 648, ../sass/list-view.scss */
+  /* line 651, ../sass/list-view.scss */
   #Calendar div #eventList div span.description {
     color: #65707a;
   }
-  /* line 656, ../sass/list-view.scss */
+  /* line 659, ../sass/list-view.scss */
   #Calendar .dayOfWeek {
     color: #65707a;
     font-size: 0.8em;
@@ -666,11 +669,11 @@ html, body {
     align-items: center;
   }
 
-  /* line 669, ../sass/list-view.scss */
+  /* line 672, ../sass/list-view.scss */
   header#calendarHeader #currentMonth {
     min-width: 5em;
   }
-  /* line 672, ../sass/list-view.scss */
+  /* line 675, ../sass/list-view.scss */
   header#calendarHeader span {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -684,62 +687,47 @@ html, body {
     color: white;
     font-size: 1.8em;
   }
-  /* line 685, ../sass/list-view.scss */
+  /* line 688, ../sass/list-view.scss */
   header#calendarHeader span#next, header#calendarHeader span#prev {
     background-color: #676666;
   }
-  /* line 687, ../sass/list-view.scss */
+  /* line 690, ../sass/list-view.scss */
   header#calendarHeader span#next:hover, header#calendarHeader span#prev:hover {
     background-color: #4d4d4d;
     color: #e6e6e6;
     cursor: pointer;
   }
 
-  /* line 696, ../sass/list-view.scss */
-  #filters {
-    line-height: 1.25;
-    margin: 2em;
-  }
   /* line 701, ../sass/list-view.scss */
+  #filters ul li {
+    line-height: 1.5;
+  }
+  /* line 707, ../sass/list-view.scss */
   #filters input[type=checkbox]:checked + label, #filters input[type=checkbox]:checked + span {
     color: #4e9ecd;
   }
-  /* line 706, ../sass/list-view.scss */
-  #filters #multiselects {
-    display: inline;
-  }
-  /* line 709, ../sass/list-view.scss */
-  #filters #multiselects .pickList {
-    min-width: 10em;
-    display: inline-block;
-    position: relative;
-    margin: 0 1em;
-  }
-  /* line 714, ../sass/list-view.scss */
-  #filters #multiselects .pickList span {
-    width: 10em;
+  /* line 712, ../sass/list-view.scss */
+  #filters .pickList span {
     white-space: nowrap;
     overflow: hidden;
     vertical-align: middle;
     cursor: pointer;
-    display: inline-block;
-    border: 1px solid #dcdcdc;
-    padding: 0.5em;
     -webkit-box-shadow: inset 2px 2px 2px #f6f6f6;
     -moz-box-shadow: inset 2px 2px 2px #f6f6f6;
     box-shadow: inset 2px 2px 2px #f6f6f6;
+    z-index: 0;
   }
-  /* line 728, ../sass/list-view.scss */
-  #filters #multiselects .pickList ul {
+  /* line 723, ../sass/list-view.scss */
+  #filters .pickList ul {
     position: absolute;
+    z-index: 10;
     padding: 0;
     min-width: 11em;
     background-color: #fbfbfb;
     border: 1px solid #dcdcdc;
-    margin: 0;
   }
-  /* line 736, ../sass/list-view.scss */
-  #filters #multiselects .pickList ul li {
+  /* line 731, ../sass/list-view.scss */
+  #filters .pickList ul li {
     padding: .2em;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -748,20 +736,21 @@ html, body {
     flex-direction: row;
     list-style: none;
     cursor: pointer;
+    vertical-align: middle;
   }
-  /* line 745, ../sass/list-view.scss */
-  #filters #multiselects .pickList ul li:hover {
+  /* line 741, ../sass/list-view.scss */
+  #filters .pickList ul li:hover {
     background-color: #f1f2f3;
   }
-  /* line 748, ../sass/list-view.scss */
-  #filters #multiselects .pickList ul li label, #filters #multiselects .pickList ul li input {
+  /* line 744, ../sass/list-view.scss */
+  #filters .pickList ul li label, #filters .pickList ul li input {
     cursor: pointer;
   }
-  /* line 751, ../sass/list-view.scss */
-  #filters #multiselects .pickList ul li label {
+  /* line 747, ../sass/list-view.scss */
+  #filters .pickList ul li label {
     margin-left: 0.3em;
   }
-  /* line 759, ../sass/list-view.scss */
+  /* line 754, ../sass/list-view.scss */
   #filters button {
     min-width: 12em;
     white-space: nowrap;
@@ -781,13 +770,13 @@ html, body {
     line-height: inherit;
   }
 
-  /* line 778, ../sass/list-view.scss */
+  /* line 773, ../sass/list-view.scss */
   .comiseo-daterangepicker {
     background: white;
     border-radius: 0;
     font-family: inherit;
   }
-  /* line 784, ../sass/list-view.scss */
+  /* line 779, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-buttonpanel button {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -795,106 +784,107 @@ html, body {
     font-weight: normal;
     background: #fbfbfb;
   }
-  /* line 792, ../sass/list-view.scss */
+  /* line 787, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main {
     background: inherit;
   }
-  /* line 794, ../sass/list-view.scss */
+  /* line 789, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-widget-content {
     background: inherit;
   }
-  /* line 797, ../sass/list-view.scss */
+  /* line 792, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-presets {
     display: none;
   }
-  /* line 800, ../sass/list-view.scss */
+  /* line 795, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar {
     border: 0;
   }
-  /* line 803, ../sass/list-view.scss */
+  /* line 798, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-state-highlight {
     background: none #c5c3c3;
   }
-  /* line 806, ../sass/list-view.scss */
+  /* line 801, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-state-highlight a.ui-state-default {
     color: white;
     border: 0;
     background-color: inherit;
   }
-  /* line 812, ../sass/list-view.scss */
+  /* line 807, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-datepicker-current-day, .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .calendarOuterSelection {
     background: none #d42741;
   }
-  /* line 815, ../sass/list-view.scss */
+  /* line 810, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-datepicker-current-day a.ui-state-default, .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .calendarOuterSelection a.ui-state-default {
     color: white;
     border: 0;
     background-color: inherit;
   }
-  /* line 822, ../sass/list-view.scss */
+  /* line 817, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-header {
     background: none;
     border: 0;
     color: inherit;
   }
-  /* line 827, ../sass/list-view.scss */
+  /* line 822, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-calendar {
     border-left: 1px solid #dcdcdc;
   }
-  /* line 831, ../sass/list-view.scss */
+  /* line 826, ../sass/list-view.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-widget-header .ui-state-hover {
     background: none;
     border: 0;
   }
-  /* line 837, ../sass/list-view.scss */
-  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev {
+  /* line 831, ../sass/list-view.scss */
+  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-prev {
     cursor: pointer;
   }
-  /* line 839, ../sass/list-view.scss */
-  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev .ui-icon {
+  /* line 833, ../sass/list-view.scss */
+  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-prev .ui-icon {
     opacity: .9;
     background: url(../img/sprites.png) 0 -14px;
   }
-  /* line 844, ../sass/list-view.scss */
-  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev.ui-state-disabled .ui-icon {
+  /* line 838, ../sass/list-view.scss */
+  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-prev.ui-state-disabled .ui-icon {
     opacity: .3;
   }
-  /* line 849, ../sass/list-view.scss */
-  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev.ui-state-hover .ui-icon {
+  /* line 843, ../sass/list-view.scss */
+  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-prev.ui-state-hover .ui-icon {
     opacity: 1;
   }
-  /* line 854, ../sass/list-view.scss */
-  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next {
+  /* line 848, ../sass/list-view.scss */
+  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-next {
     cursor: pointer;
   }
-  /* line 856, ../sass/list-view.scss */
-  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next .ui-icon {
+  /* line 850, ../sass/list-view.scss */
+  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-next .ui-icon {
     opacity: .9;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 861, ../sass/list-view.scss */
-  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next.ui-state-disabled .ui-icon {
+  /* line 855, ../sass/list-view.scss */
+  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-next.ui-state-disabled .ui-icon {
     opacity: .3;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 867, ../sass/list-view.scss */
-  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next.ui-state-hover .ui-icon {
+  /* line 861, ../sass/list-view.scss */
+  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-next.ui-state-hover .ui-icon {
     opacity: 1;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 875, ../sass/list-view.scss */
-  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group-first .ui-datepicker-calendar {
+  /* line 868, ../sass/list-view.scss */
+  .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-calendar {
     border: 0;
+    padding: 0;
   }
-  /* line 880, ../sass/list-view.scss */
+  /* line 873, ../sass/list-view.scss */
   .comiseo-daterangepicker td {
     text-align: center;
   }
-  /* line 882, ../sass/list-view.scss */
+  /* line 875, ../sass/list-view.scss */
   .comiseo-daterangepicker td .ui-datepicker-current-day {
     background-color: #c5c3c3;
   }
-  /* line 885, ../sass/list-view.scss */
+  /* line 878, ../sass/list-view.scss */
   .comiseo-daterangepicker td .ui-state-default {
     border: 0;
     font-weight: normal;
@@ -903,29 +893,29 @@ html, body {
   }
 }
 @media print {
-  /* line 897, ../sass/list-view.scss */
+  /* line 890, ../sass/list-view.scss */
   html {
     font-family: Tahoma, Helvetica, Arial, sans-serif;
     font-size: 1.1em;
   }
 
-  /* line 902, ../sass/list-view.scss */
+  /* line 895, ../sass/list-view.scss */
   #prettyEvents div.bordered {
     margin: 0 10px 10px;
     padding: 0 10px 10px;
   }
 
-  /* line 907, ../sass/list-view.scss */
+  /* line 900, ../sass/list-view.scss */
   #prettyEvents span.date {
     font-size: 1.1em;
   }
 
-  /* line 911, ../sass/list-view.scss */
+  /* line 904, ../sass/list-view.scss */
   #filterset, #links {
     display: none;
   }
 
-  /* line 915, ../sass/list-view.scss */
+  /* line 908, ../sass/list-view.scss */
   div.event {
     border-bottom: 1px solid #fff;
     padding-top: 5px;

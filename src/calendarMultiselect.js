@@ -70,7 +70,7 @@ var PickList = React.createClass({
         return (
             <ListItem key={index} index={index} label={item}
                       selected={component.state.selected} category={component.props.category}
-                      updateSelected={component.handleClickChild.bind(component, index, component.props.filter)} />
+                      updateSelected={component.handleClickChild.bind(component, index, component.props.filter)}/>
         );
       });
       list = <ul>{checkboxes}</ul>;
@@ -86,24 +86,41 @@ var PickList = React.createClass({
       }
     }
     return (
-        <div className='pickList'>
+        <li className='pickList'>
           <span onClick={this.handleMainClick}>{title}</span>
           {list}
-        </div>
+        </li>
     );
   }
 });
 
-var MultiSelects = React.createClass({
+var FilterList = React.createClass({
   render: function () {
     return (
-        <span>
-          <PickList data={venues} category='venues' title='Venues' filter={venueFilters} />
-          <PickList data={campDivisions} category='divisions' title='Camp Divisions' filter={divisionFilters} />
-          <PickList data={artsAreas} category='artsAreas' title='Arts Areas' filter={artsAreaFilters} />
-        </span>
+        <ul>
+          <li>
+            <span>
+              <input id="dailyFilter" type="checkbox" name="dailyFilter" onchange="filterClick()"/>
+              <label htmlFor="dailyFilter">Daily Events</label>
+            </span>
+          </li>
+          <li>
+            <span>
+              <input id="performanceFilter" type="checkbox" name="performanceFilter" onchange="filterClick()"/>
+              <label htmlFor="performanceFilter">Performances</label>
+            </span>
+          </li>
+          <li>
+            <span>
+              <input id="datepicker" name="datepicker" placeholder="Custom Date"/>
+            </span>
+          </li>
+          <PickList data={venues} category='venues' title='Venues' filter={venueFilters}/>
+          <PickList data={campDivisions} category='divisions' title='Camp Divisions' filter={divisionFilters}/>
+          <PickList data={artsAreas} category='artsAreas' title='Arts Areas' filter={artsAreaFilters}/>
+        </ul>
     );
   }
 });
 
-React.render(<MultiSelects />, document.getElementById('multiselects'));
+React.render(<FilterList />, document.getElementById('filters'));

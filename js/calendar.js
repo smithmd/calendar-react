@@ -41,9 +41,17 @@ $(function () {
     document.getElementById('performanceFilter').checked = s.showOnlyPerformances;
   });
   if (window.innerWidth < 801) {
-    $("#filters").mmenu(
-        {
+    $("#filters").mmenu({
           // options
+          navbar: {
+            title: 'Filters'
+          },
+          offCanvas: {
+            position: 'right'
+          },
+          "extensions": [
+            "pageshadow"
+          ]
         },
         {
           // configuration
