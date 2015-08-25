@@ -24,6 +24,12 @@ var PickList = React.createClass({
       selected: []
     };
   },
+  componentWillMount: function () {
+    var component = this;
+    this.props.filt.subscribe(function (s) {
+      component.setState({selected: s[component.props.category + 'Index']});
+    });
+  },
   handleClickOutside: function () {
     this.setState({hidden: true});
   },
@@ -51,7 +57,7 @@ var PickList = React.createClass({
         arr.push(i);
       }
     }
-    this.setState({selected: arr});
+    //this.setState({selected: arr});
 
     var tmp = [];
     for (var it = 0; it < arr.length; it++) {
@@ -59,6 +65,7 @@ var PickList = React.createClass({
     }
     var obj = {};
     obj[this.props.category] = tmp;
+    obj[this.props.category + 'Index'] = arr;
     filter.onNext(obj);
   },
   render: function () {
@@ -68,9 +75,9 @@ var PickList = React.createClass({
     if (!this.state.hidden) {
       var checkboxes = this.props.data.map(function (item, index) {
         return (
-            <ListItem key={index} index={index} label={item}
+            <ListItem key={'li'+index} index={index} label={item}
                       selected={component.state.selected} category={component.props.category}
-                      updateSelected={component.handleClickChild.bind(component, index, component.props.filter)}/>
+                      updateSelected={component.handleClickChild.bind(component, index, component.props.filt)}/>
         );
       });
       list = <ul>{checkboxes}</ul>;
@@ -87,7 +94,10 @@ var PickList = React.createClass({
     }
     return (
         <li className='pickList'>
-          <span onClick={this.handleMainClick}>{title}</span>
+          <span onClick={this.handleMainClick}>
+            {title}
+            <div className='bg-img'></div>
+          </span>
           {list}
         </li>
     );
@@ -95,32 +105,38 @@ var PickList = React.createClass({
 });
 
 var FilterList = React.createClass({
+  filterClick: function () {
+    dailyFilter.onNext(document.getElementById(this.props.prefix + 'dailyFilter').checked);
+    performanceFilter.onNext(document.getElementById(this.props.prefix + 'performanceFilter').checked);
+  },
   render: function () {
     return (
-        <ul>
+        <ul className='filterList'>
           <li>
-            <span>
-              <input id="dailyFilter" type="checkbox" name="dailyFilter" onchange="filterClick()"/>
-              <label htmlFor="dailyFilter">Daily Events</label>
+            <span onClick={this.filterClick}>
+              <input id={this.props.prefix + "dailyFilter"} type="checkbox" name="dailyFilter"/>
+              <label htmlFor={this.props.prefix + "dailyFilter"}>Daily Events</label>
+            </span>
+          </li>
+          <li>
+            <span onClick={this.filterClick}>
+              <input id={this.props.prefix + "performanceFilter"} type="checkbox" name="performanceFilter" />
+              <label htmlFor={this.props.prefix + "performanceFilter"}>Performances</label>
             </span>
           </li>
           <li>
             <span>
-              <input id="performanceFilter" type="checkbox" name="performanceFilter" onchange="filterClick()"/>
-              <label htmlFor="performanceFilter">Performances</label>
+              <input id={this.props.prefix + "datepicker"} name={this.props.prefix + "datepicker"} placeholder="Custom Date"/>
             </span>
           </li>
-          <li>
-            <span>
-              <input id="datepicker" name="datepicker" placeholder="Custom Date"/>
-            </span>
-          </li>
-          <PickList data={venues} category='venues' title='Venues' filter={venueFilters}/>
-          <PickList data={campDivisions} category='divisions' title='Camp Divisions' filter={divisionFilters}/>
-          <PickList data={artsAreas} category='artsAreas' title='Arts Areas' filter={artsAreaFilters}/>
+          <PickList data={venues} category='venues' title='Venues' filt={venueFilters}/>
+          <PickList data={campDivisions} category='divisions' title='Camp Divisions' filt={divisionFilters}/>
+          <PickList data={artsAreas} category='artsAreas' title='Arts Areas' filt={artsAreaFilters}/>
         </ul>
     );
   }
 });
 
-React.render(<FilterList />, document.getElementById('filters'));
+React.render(<FilterList prefix='dsk-'/>, document.getElementById('filters'));
+
+React.render(<FilterList prefix='mob-'/>, document.getElementById('filters-mobile'));

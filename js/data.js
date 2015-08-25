@@ -21,21 +21,23 @@ var calendarDates = new Rx.BehaviorSubject({
   endYear: moment().year()
 });
 
-var calendarFilters = new Rx.BehaviorSubject({
-  showOnlyDaily: true,
-  showOnlyPerformances: false
-});
+var dailyFilter = new Rx.BehaviorSubject(true);
+
+var performanceFilter = new Rx.BehaviorSubject(false);
 
 var venueFilters = new Rx.BehaviorSubject({
-  venues: []
+  venues: [],
+  venuesIndex: []
 });
 
 var divisionFilters = new Rx.BehaviorSubject({
-  divisions: []
+  divisions: [],
+  divisionsIndex: []
 });
 
 var artsAreaFilters = new Rx.BehaviorSubject({
-  artsAreas: []
+  artsAreas: [],
+  artsAreasIndex: []
 });
 
 var calendarDateRange = new Rx.BehaviorSubject({

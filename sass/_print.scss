@@ -1,0 +1,25 @@
+@media print {
+  html {
+    font-family: Tahoma, Helvetica, Arial, sans-serif;
+    font-size: 1.1em;
+  }
+
+  #prettyEvents div.bordered {
+    margin: 0 10px 10px;
+    padding: 0 10px 10px;
+  }
+
+  #prettyEvents span.date {
+    font-size: 1.1em;
+  }
+
+  #filterset, #links {
+    display: none;
+  }
+
+  div.event {
+    border-bottom: 1px solid #fff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}

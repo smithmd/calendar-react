@@ -1,0 +1,353 @@
+@media screen and (min-width: 801px) and (max-width: 1075px) {
+
+  #Calendar {
+    clear: left;
+    margin: 2em;
+    background-color: white;
+
+    div {
+      width: 100%;
+
+      .calendarRow {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: row;
+        flex: auto;
+
+        .day {
+          border: 1px solid #d0d0d0;
+          min-height: 11em;
+
+          &.notCurrentMonth {
+            color: #d0d0d0;
+
+            a {
+              color: lighten($defaultLink, 40%);
+            }
+          }
+
+          header {
+            background-color: inherit;
+            line-height: 2;
+            padding-left: 1em;
+            font-size: 0.8em;
+
+            span.today {
+              float: right;
+              text-transform: uppercase;
+              margin-right: 1em;
+              font-size: 0.9em;
+              color: #d47211;
+            }
+          }
+
+          a {
+            display: block;
+            margin: .5em auto;
+            padding-bottom: .5em;
+            font-size: .8em;
+            width: 90%;
+            text-decoration: none;
+            color: $defaultLink;
+          }
+
+          &.today {
+            background-color: #f9fae5;
+          }
+
+          .event {
+            margin: .5em auto;
+            padding-bottom: .5em;
+            font-size: .8em;
+            width: 90%;
+            border-bottom: 1px dotted #c5c5c5;
+
+            .time {
+              font-weight: bold;
+            }
+            &.last {
+              border: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .dayOfWeek {
+      background-color: $navBGColor;
+      font-weight: bold;
+      text-align: center;
+      line-height: 3;
+      border: 0;
+      margin: 0;
+      flex: auto;
+    }
+  }
+
+  header#calendarHeader {
+    header {
+      display: none;
+    }
+    span {
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      margin: 0 5px;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      text-align: center;
+      line-height: .5;
+      color: white;
+      font-size: 1.8em;
+
+      &#next, &#prev {
+        background-color: $navButtonBGColor;
+        &:hover {
+          background-color: darken($navButtonBGColor, 10%);
+          color: darken(white, 10%);
+          cursor: pointer;
+        }
+      }
+    }
+    #currentMonth {
+      min-width: 5em;
+    }
+    #open-menu {
+      display: none;
+    }
+  }
+
+  /* hide filter drawer on tablet */
+  #mm-filters,
+  #filters-mobile {
+    display: none !important;
+  }
+
+  #filters {
+    margin: 1em;
+    line-height: 1.25;
+
+    .filterList {
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+      & > li {
+        list-style: none;
+        display: inline-block;
+        margin-right: 10px;
+      }
+    }
+
+    input[type=checkbox] {
+      &:checked + label, &:checked + span {
+        color: $selectedCheckboxLabel;
+      }
+    }
+
+    .pickList {
+      min-width: 8em;
+      display: inline-block;
+      position: relative;
+      span {
+        width: 8em;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+        cursor: pointer;
+        display: inline-block;
+        border: 1px solid $input-border;
+        padding: 0.5em;
+        -webkit-box-shadow: inset 2px 2px 2px $background-light;
+        -moz-box-shadow: inset 2px 2px 2px $background-light;
+        box-shadow: inset 2px 2px 2px $background-light;
+
+        div.bg-img {
+          height: 17px;
+          width: 17px;
+          display: inline-block;
+          background: -69px -17px white url(../js/jquery-ui/images/ui-icons_ef8c08_256x240.png);
+          position: absolute;
+          right: 4px;
+          top: 14px;
+          box-shadow: -10px 0 5px white, 3px 0 0 white;
+        }
+        span {
+          overflow: hidden;
+          display: inline;
+          border: 0;
+          padding: 0;
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;
+        }
+      }
+
+      ul {
+        position: absolute;
+        padding: 0;
+        min-width: 11em;
+        background-color: $inputBGColor;
+        border: 1px solid $input-border;
+        margin: 0;
+
+        li {
+          float: none;
+          padding: .2em;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          flex-direction: row;
+          list-style: none;
+          cursor: pointer;
+          &:hover {
+            background-color: $input-hover;
+          }
+          label, input {
+            cursor: pointer;
+          }
+          label {
+            margin-left: 0.3em;
+          }
+        }
+      }
+    }
+
+    button {
+      min-width: 8em;
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: middle;
+      cursor: pointer;
+      display: inline-block;
+      border: 1px solid $input-border;
+      -webkit-box-shadow: inset 2px 2px 2px $background-light;
+      -moz-box-shadow: inset 2px 2px 2px $background-light;
+      box-shadow: inset 2px 2px 2px $background-light;
+      padding: 2px 0 1px;
+      border-radius: 0;
+      background: white;
+      color: inherit;
+      font: inherit;
+      line-height: inherit;
+    }
+  }
+  .comiseo-daterangepicker {
+    background: white;
+    border-radius: 0;
+    font-family: inherit;
+
+    .comiseo-daterangepicker-buttonpanel {
+      button {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        font-weight: normal;
+        background: $inputBGColor;
+      }
+    }
+    .comiseo-daterangepicker-main {
+      background: inherit;
+      .ui-widget-content {
+        background: inherit;
+      }
+      .comiseo-daterangepicker-presets {
+        display: none;
+      }
+      .comiseo-daterangepicker-calendar {
+        border: 0;
+
+        .ui-state-highlight {
+          background: none $selectedCalendarBackground;
+
+          a.ui-state-default {
+            color: white;
+            border: 0;
+            background-color: inherit;
+          }
+        }
+        .ui-datepicker-current-day, .calendarOuterSelection {
+          background: none $linkButtonColor;
+
+          a.ui-state-default {
+            color: white;
+            border: 0;
+            background-color: inherit;
+          }
+        }
+      }
+      .ui-datepicker-header {
+        background: none;
+        border: 0;
+        color: inherit;
+      }
+      .ui-datepicker-calendar {
+        border-left: 1px solid $input-border;
+      }
+      .ui-widget-header {
+        .ui-state-hover {
+          background: none;
+          border: 0;
+        }
+      }
+      .ui-datepicker-group {
+        .ui-datepicker-prev {
+          cursor: pointer;
+          .ui-icon {
+            opacity: .9;
+            background: url(../img/sprites.png) 0 -14px;
+          }
+          &.ui-state-disabled {
+            .ui-icon {
+              opacity: .3;
+            }
+          }
+          &.ui-state-hover {
+            .ui-icon {
+              opacity: 1;
+            }
+          }
+        }
+        .ui-datepicker-next {
+          cursor: pointer;
+          .ui-icon {
+            opacity: .9;
+            background: url(../img/sprites.png) 0 -31px;
+          }
+          &.ui-state-disabled {
+            .ui-icon {
+              opacity: .3;
+              background: url(../img/sprites.png) 0 -31px;
+            }
+          }
+          &.ui-state-hover {
+            .ui-icon {
+              opacity: 1;
+              background: url(../img/sprites.png) 0 -31px;
+            }
+          }
+        }
+      }
+      .ui-datepicker-group-first {
+        .ui-datepicker-calendar {
+          border: 0;
+        }
+      }
+    }
+    td {
+      text-align: center;
+      .ui-datepicker-current-day {
+        background-color: $selectedCalendarBackground;
+      }
+      .ui-state-default {
+        border: 0;
+        font-weight: normal;
+        color: inherit;
+        background: inherit;
+      }
+    }
+  }
+}

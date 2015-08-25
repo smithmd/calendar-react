@@ -1,0 +1,397 @@
+@media screen and (max-width: 800px) {
+  #Calendar {
+    background-color: white;
+
+    div {
+      width: 100%;
+
+      #calendarHolder {
+        margin: .5em;
+        .calendarRow {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          flex-direction: row;
+          flex: auto;
+          align-items: center;
+          vertical-align: middle;
+
+          .day {
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            align-items: center;
+            color: $dark-text;
+
+            &.notCurrentMonth {
+              color: $light-text;
+            }
+
+            &.selected {
+
+              header {
+                color: white;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+                background-color: $selectedBackgroundCircle;
+                background-clip: padding-box;
+                height: 3em;
+                width: 3em;
+                margin: 0 auto;
+              }
+
+              .indicator {
+                background-color: #618092;
+              }
+            }
+
+            header {
+              line-height: 3;
+              background: none;
+            }
+            div {
+              width: 5px;
+              height: 5px;
+              top: -10px;
+              position: relative;
+            }
+
+            .indicator {
+              background-color: $eventIndicatorColor;
+              -webkit-border-radius: 50%;
+              -moz-border-radius: 50%;
+              border-radius: 50%;
+              margin: 0 auto;
+            }
+
+            &.today {
+              background-color: #f9fae5;
+            }
+          }
+        }
+      }
+
+      #eventList {
+        div {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          flex-direction: row;
+          flex: auto;
+          align-items: center;
+          background-color: $background-light;
+          &.zebra {
+            background-color: $zebraStripe;
+          }
+          span {
+            margin: 1em;
+            &.time {
+              min-width: 5em;
+              max-width: 5em;
+              color: #3e3e3e;
+              span {
+                margin: 0;
+              }
+              .meridiem {
+                padding-left: 0.6em;
+                align-items: center;
+                text-transform: uppercase;
+                font-size: 0.7em;
+                color: #606366;
+                position: relative;
+                top: -.05em;
+              }
+            }
+            &.description {
+              color: $dark-text;
+            }
+          }
+        }
+      }
+    }
+
+    .dayOfWeek {
+      color: $dark-text;
+      font-size: 0.8em;
+      text-align: center;
+      line-height: 3;
+      border: 0;
+      margin: 0;
+      flex: auto;
+      align-items: center;
+    }
+  }
+
+  header#calendarHeader {
+    width: 100%;
+    #currentMonth {
+      min-width: 5em;
+    }
+    & > span {
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      margin: 0 5px;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      text-align: center;
+      line-height: .5;
+      color: white;
+      font-size: 1.8em;
+
+      &#next, &#prev {
+        background-color: $navButtonBGColor;
+        &:hover {
+          background-color: darken($navButtonBGColor, 10%);
+          color: darken(white, 10%);
+          cursor: pointer;
+        }
+      }
+    }
+    #viewCalendar {
+      display: none;
+    }
+    #open-menu, #viewPrintable {
+      margin: 11px 16px;
+    }
+    #open-menu {
+      position: relative;
+      top: 6px;
+    }
+    header {
+      color: white;
+      line-height: 3;
+      background-color: black;
+
+      span#logo {
+        margin-left: 16px;
+      }
+    }
+  }
+
+  #filters {
+    display: none !important;
+  }
+  #filters-mobile {
+
+    &.mm-menu {
+      background: white;
+    }
+
+    ul {
+      li {
+        line-height: 1.5;
+      }
+    }
+
+    input[type=checkbox] {
+      &:checked + label, &:checked + span {
+        color: $selectedCheckboxLabel;
+      }
+    }
+    ul {
+      li {
+        span {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          flex-direction: row;
+          label, input {
+            cursor: pointer;
+          }
+          label {
+            order: 1;
+          }
+          input {
+            order: 2;
+            margin-left: auto;
+          }
+        }
+      }
+    }
+    .pickList {
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+        cursor: pointer;
+      }
+
+      ul {
+        min-width: 11em;
+        padding-left: 30px;
+
+        li {
+          padding: .2em;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          flex-direction: row;
+          list-style: none;
+          cursor: pointer;
+          vertical-align: middle;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          &:hover {
+            background-color: $input-hover;
+          }
+
+          label, input {
+            cursor: pointer;
+          }
+          label {
+            order: 1;
+          }
+          input {
+            order: 2;
+            margin-left: auto;
+          }
+        }
+      }
+    }
+
+    button {
+      min-width: 12em;
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: middle;
+      display: inline-block;
+      border-radius: 0;
+      background: white;
+      color: inherit;
+      line-height: inherit;
+      background: none !important;
+      border: none;
+      padding: 0 !important;
+      font: inherit;
+      cursor: pointer;
+
+      &.ui-button {
+        position: static;
+      }
+
+      span.ui-button-text {
+        padding: 0;
+      }
+    }
+  }
+  .comiseo-daterangepicker {
+    background: white;
+    border-radius: 0;
+    font-family: inherit;
+
+    .comiseo-daterangepicker-buttonpanel {
+      button {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        font-weight: normal;
+        background: $inputBGColor;
+      }
+    }
+    .comiseo-daterangepicker-main {
+      background: inherit;
+      .ui-widget-content {
+        background: inherit;
+      }
+      .comiseo-daterangepicker-presets {
+        display: none;
+      }
+      .comiseo-daterangepicker-calendar {
+        border: 0;
+
+        .ui-state-highlight {
+          background: none $selectedCalendarBackground;
+
+          a.ui-state-default {
+            color: white;
+            border: 0;
+            background-color: inherit;
+          }
+        }
+        .ui-datepicker-current-day, .calendarOuterSelection {
+          background: none $linkButtonColor;
+
+          a.ui-state-default {
+            color: white;
+            border: 0;
+            background-color: inherit;
+          }
+        }
+      }
+      .ui-datepicker-header {
+        background: none;
+        border: 0;
+        color: inherit;
+      }
+      .ui-datepicker-calendar {
+        border-left: 1px solid $input-border;
+      }
+      .ui-widget-header {
+        .ui-state-hover {
+          background: none;
+          border: 0;
+        }
+      }
+      .ui-datepicker-prev {
+        cursor: pointer;
+        .ui-icon {
+          opacity: .9;
+          background: url(../img/sprites.png) 0 -14px;
+        }
+        &.ui-state-disabled {
+          .ui-icon {
+            opacity: .3;
+          }
+        }
+        &.ui-state-hover {
+          .ui-icon {
+            opacity: 1;
+          }
+        }
+      }
+      .ui-datepicker-next {
+        cursor: pointer;
+        .ui-icon {
+          opacity: .9;
+          background: url(../img/sprites.png) 0 -31px;
+        }
+        &.ui-state-disabled {
+          .ui-icon {
+            opacity: .3;
+            background: url(../img/sprites.png) 0 -31px;
+          }
+        }
+        &.ui-state-hover {
+          .ui-icon {
+            opacity: 1;
+            background: url(../img/sprites.png) 0 -31px;
+          }
+        }
+      }
+
+      .ui-datepicker-calendar {
+        border: 0;
+        padding: 0;
+      }
+    }
+    td {
+      text-align: center;
+      .ui-datepicker-current-day {
+        background-color: $selectedCalendarBackground;
+      }
+      .ui-state-default {
+        border: 0;
+        font-weight: normal;
+        color: inherit;
+        background: inherit;
+      }
+    }
+  }
+
+}

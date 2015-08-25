@@ -33,13 +33,13 @@ var Calendar = React.createClass({
       // return if we know we already don't want this event
       if (show === false) return false;
 
-      if (component.state.filters.showOnlyDaily === true) {
+      if (component.state.dailyFilter === true) {
         show = event.includeOnDaily;
       }
       // return if we know we already don't want this event
       if (show === false) return false;
 
-      if (component.state.filters.showOnlyPerformances === true) {
+      if (component.state.performanceFilter === true) {
         show = event.isPerformance;
       }
       // return if we know we already don't want this event
@@ -60,8 +60,11 @@ var Calendar = React.createClass({
     calendarDates.subscribe(function (s) {
       component.setState({dates: s});
     });
-    calendarFilters.subscribe(function (s) {
-      component.setState({filters: s});
+    dailyFilter.subscribe(function (s) {
+      component.setState({dailyFilter: s});
+    });
+    performanceFilter.subscribe(function (s) {
+      component.setState({performanceFilter:s});
     });
     venueFilters.subscribe(function (s) {
       component.setState({venues: s.venues});
@@ -92,7 +95,8 @@ var Calendar = React.createClass({
       data: [],
       dates: {},
       dateRange: {start: null, end: null},
-      filters: {},
+      dailyFilter: false,
+      performanceFilter: false,
       venues: [],
       artsAreas: [],
       divisions: []
