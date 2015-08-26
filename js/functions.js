@@ -85,3 +85,7 @@ function debounce(func, wait, immediate) {
 		if (callNow) func.apply(context, args);
 	};
 }
+
+function mod(n, m) {
+        return ((n % m) + m) % m;
+}

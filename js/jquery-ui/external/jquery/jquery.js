@@ -2392,7 +2392,7 @@ for ( i in { submit: true, reset: true } ) {
 
 // Easy API for creating new setFilters
 function setFilters() {}
-setFilters.prototype = Expr.dailyFilter = Expr.pseudos;
+setFilters.prototype = Expr.filters = Expr.pseudos;
 Expr.setFilters = new setFilters();
 
 function tokenize( selector, parseOnly ) {
@@ -7412,16 +7412,16 @@ jQuery(function() {
 
 });
 
-if ( jQuery.expr && jQuery.expr.dailyFilter ) {
-	jQuery.expr.dailyFilter.hidden = function( elem ) {
+if ( jQuery.expr && jQuery.expr.filters ) {
+	jQuery.expr.filters.hidden = function( elem ) {
 		// Support: Opera <= 12.12
 		// Opera reports offsetWidths and offsetHeights less than zero on some elements
 		return elem.offsetWidth <= 0 && elem.offsetHeight <= 0 ||
 			(!jQuery.support.reliableHiddenOffsets && ((elem.style && elem.style.display) || jQuery.css( elem, "display" )) === "none");
 	};
 
-	jQuery.expr.dailyFilter.visible = function( elem ) {
-		return !jQuery.expr.dailyFilter.hidden( elem );
+	jQuery.expr.filters.visible = function( elem ) {
+		return !jQuery.expr.filters.hidden( elem );
 	};
 }
 
@@ -9536,8 +9536,8 @@ jQuery.fx.speeds = {
 // Back Compat <1.8 extension point
 jQuery.fx.step = {};
 
-if ( jQuery.expr && jQuery.expr.dailyFilter ) {
-	jQuery.expr.dailyFilter.animated = function( elem ) {
+if ( jQuery.expr && jQuery.expr.filters ) {
+	jQuery.expr.filters.animated = function( elem ) {
 		return jQuery.grep(jQuery.timers, function( fn ) {
 			return elem === fn.elem;
 		}).length;

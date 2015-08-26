@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8"/>
     <title>Calendar of Events</title>
+    <link href="js/jquery-ui/jquery-ui.min.css" type="text/css" rel="stylesheet"/>
+    <link href="stylesheets/list-view.css" type="text/css" rel="stylesheet"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
     <script src="js/marmottajax.min.js"></script>
     <script src="js/rx.all.js"></script>
@@ -11,17 +13,16 @@
     <script src="node_modules/classnames/index.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="js/jquery-ui/jquery-ui.min.js"></script>
-    <link href="js/jquery-ui/jquery-ui.min.css" type="text/css" rel="stylesheet"/>
-    <link href="stylesheets/list-view.css" type="text/css" rel="stylesheet"/>
     <script>
       $(function () {
-        var datePick = $('#datepicker');
+        var datePick = $('#datepick');
         datePick.val('');
         datePick.datepicker();
         datePick.change(function () {
           var d = $.datepicker.parseDate('mm/dd/yy', datePick.val());
           selectedDate.onNext({date: $.datepicker.formatDate('yy-mm-dd',d)});
         });
+
         var subscription = selectedDate.subscribe(function (s) {
           var d = $.datepicker.parseDate('yy-mm-dd', s.date);
           datePick.val($.datepicker.formatDate('mm/dd/yy',d));
@@ -33,7 +34,7 @@
     <header>
       <h1>ICA Daily Schedule</h1>
       <a id="viewCalendar" href="index-cal.html">View Calendar</a>
-      <input id="datepicker" placeholder="Custom Date"/>
+      <input id="datepick" placeholder="Custom Date"/>
     </header>
     <div id="navigation">
     </div>

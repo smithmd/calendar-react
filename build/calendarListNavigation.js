@@ -3,17 +3,25 @@
  */
 
 var NavigationPaging = React.createClass({displayName: "NavigationPaging",
-  handleClick: function (date,toPrev) {
+  handleClick: function (date, toPrev) {
 
     var m = moment(date);
     var newDate = m.clone();
     if (toPrev) {
-      newDate.subtract(m.day() + 7, 'days');
+      if (this.props.pageDays === 7) {
+        newDate.subtract(m.day() + 7, 'days');
+      } else {
+        newDate.subtract(this.props.pageDays, 'days');
+      }
     } else {
-      newDate.add(7 - m.day(),'days');
+      if (this.props.pageDays === 7) {
+        newDate.add(7 - m.day(), 'days');
+      } else {
+        newDate.add(this.props.pageDays, 'days');
+      }
     }
     console.log("o: " + m.format('YYYY-MM-DD') + " n:" + newDate.format('YYYY-MM-DD'));
-    selectedDate.onNext({date:newDate.format('YYYY-MM-DD')});
+    selectedDate.onNext({date: newDate.format('YYYY-MM-DD')});
   },
   render: function () {
     return (
@@ -26,12 +34,13 @@ var NavigationPaging = React.createClass({displayName: "NavigationPaging",
 });
 var NavigationDay = React.createClass({displayName: "NavigationDay",
   handleClick: function (date) {
-    selectedDate.onNext({date:date.format('YYYY-MM-DD')});
+    selectedDate.onNext({date: date.format('YYYY-MM-DD')});
   },
   render: function () {
-    var boundClick = this.handleClick.bind(this,this.props.date);
+    var boundClick = this.handleClick.bind(this, this.props.date);
     return (
-        React.createElement("li", {className: classNames({isSelected: this.props.isSelected}), "data-day": this.props.date.format('YYYY/MM/DD'), onClick: boundClick}, 
+        React.createElement("li", {className: classNames({isSelected: this.props.isSelected}), "data-day": this.props.date.format('YYYY/MM/DD'), 
+            onClick: boundClick}, 
           React.createElement("span", {className: classNames('dayOfWeek')}, this.props.date.format('ddd'), " "), 
           React.createElement("span", {className: "navDate"}, this.props.date.format('MM/DD'))
         )
@@ -40,20 +49,51 @@ var NavigationDay = React.createClass({displayName: "NavigationDay",
 });
 var Navigation = React.createClass({displayName: "Navigation",
   getInitialState: function () {
-    return {date: moment()};
+    return {
+      date: moment(),
+      originalDate: moment(),
+      windowWidth: window.innerWidth
+    };
+  },
+  handleResize: function () {
+    this.setState({windowWidth: window.innerWidth});
   },
   componentDidMount: function () {
     var component = this;
     selectedDate.subscribe(function (s) {
       component.setState({date: moment(s.date)});
     });
+    // debounce prevents the function from running every 20ms, instead run 100ms after last resize event
+    window.addEventListener('resize', debounce(this.handleResize, 100));
+  },
+  componentWillUnmount: function () {
+    // debounce prevents the function from running every 20ms, instead run 100ms after last resize event
+    window.removeEventListener('resize', debounce);
   },
   render: function () {
     var date = this.state.date;
     var dayInt = date.day();
     var days = [];
-    for (var i = 0; i < 7; i++) {
-      var d = date.clone().add(i - dayInt, 'days');
+    var pageDays = 7;
+    if (this.state.windowWidth < 801) {
+      pageDays = 3;
+    }
+    console.log('date: ' + date.format('YYYY-MM-DD') + ' | orig: ' + this.state.originalDate.format('YYYY-MM-DD'));
+    for (var i = 0; i < pageDays; i++) {
+      var d;
+      if (pageDays === 7) {
+        d = date.clone().add(i - dayInt, 'days');
+      } else {
+        var diffDays = date.startOf('day').diff(this.state.originalDate.startOf('day'), 'days');
+        console.log('i: ' + i + ' | diffDays: ' + diffDays + ' | pageDays: ' + pageDays);
+        if (diffDays >= 0) {
+          console.log('d%p: ' + (diffDays % pageDays) + ' | i-d%p: ' + (i - (diffDays % pageDays)));
+          d = date.clone().add(i - (diffDays % pageDays), 'days');
+        } else {
+          console.log('d%p: ' + (diffDays % pageDays) + ' | i-d%p: ' + (i + (diffDays % pageDays)));
+          d = date.clone().add(i - mod(diffDays,pageDays), 'days');
+        }
+      }
       var isSelected = date.isSame(d, 'day');
       days.push(
           React.createElement(NavigationDay, {day: i, date: d, key: 'm'+d.format('YYYY/MM/DD'), isSelected: isSelected})
@@ -62,7 +102,7 @@ var Navigation = React.createClass({displayName: "Navigation",
     return (
         React.createElement("ul", null, 
           days, 
-          React.createElement(NavigationPaging, {date: this.state.date})
+          React.createElement(NavigationPaging, {pageDays: pageDays, date: this.state.date})
         )
     );
   }

@@ -228,6 +228,36 @@ html, body {
   }
 }
 
+@media screen and (max-width:800px) {
+  #navigation {
+    background-color: $navBGColor;
+    clear: both;
+    width: 100%;
+    color: #a2afb7;
+
+    .isToday, .isSelected {
+      color: $selectedColor;
+    }
+    .dayOfWeek {
+      font-weight: bold;
+    }
+
+    ul {
+      margin: 0;
+
+      li {
+        line-height: 4;
+        text-decoration: none;
+        display: inline-block;
+        width: 25%;
+        cursor: pointer;
+        vertical-align: middle;
+        text-align: center;
+      }
+    }
+  }
+}
+
 @import 'desktop';
 @import 'tablet';
 @import 'mobile';
