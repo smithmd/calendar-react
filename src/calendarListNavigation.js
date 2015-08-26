@@ -20,7 +20,6 @@ var NavigationPaging = React.createClass({
         newDate.add(this.props.pageDays, 'days');
       }
     }
-    console.log("o: " + m.format('YYYY-MM-DD') + " n:" + newDate.format('YYYY-MM-DD'));
     selectedDate.onNext({date: newDate.format('YYYY-MM-DD')});
   },
   render: function () {
@@ -78,19 +77,15 @@ var Navigation = React.createClass({
     if (this.state.windowWidth < 801) {
       pageDays = 3;
     }
-    console.log('date: ' + date.format('YYYY-MM-DD') + ' | orig: ' + this.state.originalDate.format('YYYY-MM-DD'));
     for (var i = 0; i < pageDays; i++) {
       var d;
       if (pageDays === 7) {
         d = date.clone().add(i - dayInt, 'days');
       } else {
         var diffDays = date.startOf('day').diff(this.state.originalDate.startOf('day'), 'days');
-        console.log('i: ' + i + ' | diffDays: ' + diffDays + ' | pageDays: ' + pageDays);
         if (diffDays >= 0) {
-          console.log('d%p: ' + (diffDays % pageDays) + ' | i-d%p: ' + (i - (diffDays % pageDays)));
           d = date.clone().add(i - (diffDays % pageDays), 'days');
         } else {
-          console.log('d%p: ' + (diffDays % pageDays) + ' | i-d%p: ' + (i + (diffDays % pageDays)));
           d = date.clone().add(i - mod(diffDays,pageDays), 'days');
         }
       }
