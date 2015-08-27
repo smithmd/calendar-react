@@ -228,7 +228,7 @@ html, body {
   }
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width: 800px) {
   #navigation {
     background-color: $navBGColor;
     clear: both;
@@ -244,6 +244,7 @@ html, body {
 
     ul {
       margin: 0;
+      padding-left:20px;
 
       li {
         line-height: 4;
@@ -253,6 +254,31 @@ html, body {
         cursor: pointer;
         vertical-align: middle;
         text-align: center;
+      }
+    }
+  }
+  #prettyEvents {
+    .event {
+      span.time {
+        width: 35%;
+        vertical-align: middle;
+        align-content: center;
+      }
+      span.title {
+        width: 60%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #navigation {
+    font-size:0.8em;
+  }
+  #prettyEvents {
+    .event {
+      span.time {
+        font-size: 0.8em;
       }
     }
   }

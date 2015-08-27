@@ -233,8 +233,9 @@ html, body {
   /* line 245, ../sass/list-view.scss */
   #navigation ul {
     margin: 0;
+    padding-left: 20px;
   }
-  /* line 248, ../sass/list-view.scss */
+  /* line 249, ../sass/list-view.scss */
   #navigation ul li {
     line-height: 4;
     text-decoration: none;
@@ -243,6 +244,28 @@ html, body {
     cursor: pointer;
     vertical-align: middle;
     text-align: center;
+  }
+
+  /* line 262, ../sass/list-view.scss */
+  #prettyEvents .event span.time {
+    width: 35%;
+    vertical-align: middle;
+    align-content: center;
+  }
+  /* line 267, ../sass/list-view.scss */
+  #prettyEvents .event span.title {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 400px) {
+  /* line 275, ../sass/list-view.scss */
+  #navigation {
+    font-size: 0.8em;
+  }
+
+  /* line 280, ../sass/list-view.scss */
+  #prettyEvents .event span.time {
+    font-size: 0.8em;
   }
 }
 @media screen and (min-width: 1076px) {

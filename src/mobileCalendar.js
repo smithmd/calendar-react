@@ -32,6 +32,9 @@ var MobileEvents = React.createClass({
           </div>
       );
     });
+    if (list.length === 0) {
+      list = <span id='emptyList'>There are no events on this date.</span>;
+    }
     return (
         <div id='eventList'>
           {list}

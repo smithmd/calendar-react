@@ -25,7 +25,7 @@ var getMeridiem = function (d) {
 
 var formatTime = function (d) {
   var hour = d.getHours();
-  if(hour > 12) {
+  if (hour > 12) {
     hour = hour - 12;
   }
   var min = d.getMinutes();
@@ -37,7 +37,7 @@ var formatTime = function (d) {
 
 var formatTimePhone = function (d) {
   var hour = d.getHours();
-  if(hour > 12) {
+  if (hour > 12) {
     hour = hour - 12;
   }
   var min = d.getMinutes();
@@ -72,20 +72,20 @@ var printVenue = function (venue) {
 // N milliseconds. If `immediate` is passed, trigger the function on the
 // leading edge, instead of the trailing.
 function debounce(func, wait, immediate) {
-	var timeout;
-	return function() {
-		var context = this, args = arguments;
-		var later = function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		};
-		var callNow = immediate && !timeout;
-		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
-	};
+  var timeout;
+  return function () {
+    var context = this, args = arguments;
+    var later = function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
 }
 
 function mod(n, m) {
-        return ((n % m) + m) % m;
+  return ((n % m) + m) % m;
 }
