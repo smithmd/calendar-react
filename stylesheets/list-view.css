@@ -1421,26 +1421,33 @@ html, body {
     font-size: 1.1em;
   }
 
-  /* line 7, ../sass/_print.scss */
+  /* line 8, ../sass/_print.scss */
   #prettyEvents div.bordered {
     margin: 0 10px 10px;
     padding: 0 10px 10px;
   }
-
-  /* line 12, ../sass/_print.scss */
+  /* line 13, ../sass/_print.scss */
+  #prettyEvents div.event {
+    border-bottom: 1px solid #aaa;
+    margin: 5px 0;
+    padding: 5px 0;
+  }
+  /* line 17, ../sass/_print.scss */
+  #prettyEvents div.event span {
+    font-size: 10pt;
+  }
+  /* line 21, ../sass/_print.scss */
   #prettyEvents span.date {
     font-size: 1.1em;
   }
 
-  /* line 16, ../sass/_print.scss */
+  /* line 26, ../sass/_print.scss */
   #filterset, #links {
     display: none;
   }
 
-  /* line 20, ../sass/_print.scss */
-  div.event {
-    border-bottom: 1px solid #fff;
-    padding-top: 5px;
-    padding-bottom: 5px;
+  /* line 30, ../sass/_print.scss */
+  #navigation, header #viewCalendar, #datepick {
+    display: none;
   }
 }
