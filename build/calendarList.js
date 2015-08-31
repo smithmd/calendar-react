@@ -64,47 +64,46 @@ var EventDate = React.createClass({displayName: "EventDate",
 });
 // rendering for complete list of events
 var EventDateList = React.createClass({displayName: "EventDateList",
-      loadEvents: function () {
-        var list = this;
-        marmottajax({
-          url: list.props.url,
-          json: true
-        }).then(function (result) {
-          list.setState({data: result.sort(dateSort)});
-        }).error(function (err) {
-          console.error("Something went wrong", err);
-        });
-      },
-      getInitialState: function () {
-        return {
-          data: [],
-          selDate: '',
-          narrow: window.matchMedia("screen and (max-width:800px)").matches
-        };
-      },
-      componentDidMount: function () {
-        this.loadEvents();
-        var component = this;
-        selectedDate.subscribe(function (s) {
-          component.setState({selDate: s.date});
-        });
+  loadEvents: function () {
+    var list = this;
+    marmottajax({
+      url: list.props.url,
+      json: true
+    }).then(function (result) {
+      list.setState({data: result.sort(dateSort)});
+    }).error(function (err) {
+      console.error("Something went wrong", err);
+    });
+  },
+  getInitialState: function () {
+    return {
+      data: [],
+      selDate: '',
+      narrow: window.matchMedia("screen and (max-width:800px)").matches
+    };
+  },
+  componentDidMount: function () {
+    this.loadEvents();
+    var component = this;
+    selectedDate.subscribe(function (s) {
+      component.setState({selDate: s.date});
+    });
 
-        var mm = window.matchMedia("screen and (max-width:800px)");
-        mm.addListener(function (e) {
-          component.setState({narrow: e.matches});
-        });
-      },
-      render: function () {
-        var edl = this;
-        var events = this.state.data.filter(function (event) {
-          return edl.state.selDate == event.startDate;
-        });
-        return (
-            React.createElement(EventDate, {key: edl.state.selDate, date: edl.state.selDate, events: events, narrow: this.state.narrow})
-        );
-      }
-    })
-    ;
+    var mql = window.matchMedia("screen and (max-width:800px)");
+    mql.addListener(function (e) {
+      component.setState({narrow: e.matches});
+    });
+  },
+  render: function () {
+    var edl = this;
+    var events = this.state.data.filter(function (event) {
+      return edl.state.selDate == event.startDate;
+    });
+    return (
+        React.createElement(EventDate, {key: edl.state.selDate, date: edl.state.selDate, events: events, narrow: this.state.narrow})
+    );
+  }
+});
 
 React.render(
     React.createElement(EventDateList, {url: "json/calendar.json"}),

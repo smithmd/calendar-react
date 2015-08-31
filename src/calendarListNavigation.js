@@ -60,8 +60,8 @@ var Navigation = React.createClass({
       component.setState({date: moment(s.date)});
     });
 
-    var mm = window.matchMedia("screen and (max-width:800px)");
-    mm.addListener(function (e) {
+    var mql = window.matchMedia("screen and (max-width:800px)");
+    mql.addListener(function (e) {
       component.setState({narrow: e.matches});
     });
   },
