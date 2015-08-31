@@ -104,8 +104,8 @@ var EventDateList = React.createClass({
     );
   }
 });
-
+// url=json/calendar.json for local development
 React.render(
-    <EventDateList url="json/calendar.json"/>,
+    <EventDateList url="/publicapi/services/apexrest/events/calendar/all"/>,
     document.getElementById('prettyEvents')
 );

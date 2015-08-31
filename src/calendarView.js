@@ -124,7 +124,6 @@ var Calendar = React.createClass({
     beginningDay.day(0);
     endingDay.day(6);
 
-
     // filter checks all filters to see if data matches and returns true if all are true
     var events = this.state.data.filter(this.filterData(component, beginningDay, endingDay));
     var ret = null;
@@ -140,6 +139,6 @@ var Calendar = React.createClass({
 });
 
 React.render(
-    <Calendar url="json/calendar.json"/>,
+    <Calendar url="/publicapi/services/apexrest/events/calendar/all"/>,
     document.getElementById("Calendar")
 );
