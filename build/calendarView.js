@@ -91,7 +91,7 @@ var Calendar = React.createClass({displayName: "Calendar",
   },
   getInitialState: function () {
     return {
-      windowWidth: window.screen.width,
+      narrow: window.matchMedia("screen and (max-width:800px").matches,
       data: [],
       dates: {},
       dateRange: {start: null, end: null},
@@ -102,16 +102,12 @@ var Calendar = React.createClass({displayName: "Calendar",
       divisions: []
     };
   },
-  handleResize: function () {
-    this.setState({windowWidth: window.screen.width});
-  },
   componentDidMount: function () {
-    // debounce prevents the function from running every 20ms, instead run 100ms after last resize event
-    window.addEventListener('resize', debounce(this.handleResize, 100));
-  },
-  componentWillUnmount: function () {
-    // debounce prevents the function from running every 20ms, instead run 100ms after last resize event
-    window.removeEventListener('resize', debounce);
+    var component = this;
+    var mm = window.matchMedia("screen and (max-width:800px)");
+    mm.addListener(function (e) {
+      component.setState({narrow: e.matches});
+    });
   },
   render: function () {
     var component = this;
@@ -132,7 +128,7 @@ var Calendar = React.createClass({displayName: "Calendar",
     var events = this.state.data.filter(this.filterData(component, beginningDay, endingDay));
 
     var ret = null;
-    if (this.state.windowWidth > 800) {
+    if (!this.state.narrow) {
       ret = (React.createElement(DesktopCalendar, {events: events, beginningDay: beginningDay, endingDay: endingDay, dates: this.state.dates, 
                               dateRange: this.state.dateRange}));
     } else {

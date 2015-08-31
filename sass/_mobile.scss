@@ -130,7 +130,7 @@
     width: 100%;
     #currentMonth {
       min-width: 5em;
-      font-size:4vw;
+      font-size: 4vw;
       position: relative;
     }
     & > span {
@@ -167,7 +167,7 @@
     }
     #open-menu {
       position: relative;
-      top:1vw;
+      top: 1vw;
     }
     header {
       color: white;
@@ -220,9 +220,11 @@
             cursor: pointer;
           }
           label {
+            -webkit-order: 1;
             order: 1;
           }
           input {
+            -webkit-order: 2;
             order: 2;
             margin-left: auto;
           }
@@ -260,9 +262,11 @@
             cursor: pointer;
           }
           label {
+            -webkit-order: 1;
             order: 1;
           }
           input {
+            -webkit-order: 2;
             order: 2;
             margin-left: auto;
           }

@@ -51,30 +51,26 @@ var Navigation = React.createClass({displayName: "Navigation",
     return {
       date: moment(),
       originalDate: moment(),
-      windowWidth: window.screen.width
+      narrow: window.matchMedia("screen and (max-width:800px)").matches
     };
-  },
-  handleResize: function () {
-    this.setState({windowWidth: window.screen.width});
   },
   componentDidMount: function () {
     var component = this;
     selectedDate.subscribe(function (s) {
       component.setState({date: moment(s.date)});
     });
-    // debounce prevents the function from running every 20ms, instead run 100ms after last resize event
-    window.addEventListener('resize', debounce(this.handleResize, 100));
-  },
-  componentWillUnmount: function () {
-    // debounce prevents the function from running every 20ms, instead run 100ms after last resize event
-    window.removeEventListener('resize', debounce);
+
+    var mm = window.matchMedia("screen and (max-width:800px)");
+    mm.addListener(function (e) {
+      component.setState({narrow: e.matches});
+    });
   },
   render: function () {
     var date = this.state.date;
     var dayInt = date.day();
     var days = [];
     var pageDays = 7;
-    if (this.state.windowWidth < 801) {
+    if (this.state.narrow) {
       pageDays = 3;
     }
     for (var i = 0; i < pageDays; i++) {
@@ -86,7 +82,7 @@ var Navigation = React.createClass({displayName: "Navigation",
         if (diffDays >= 0) {
           d = date.clone().add(i - (diffDays % pageDays), 'days');
         } else {
-          d = date.clone().add(i - mod(diffDays,pageDays), 'days');
+          d = date.clone().add(i - mod(diffDays, pageDays), 'days');
         }
       }
       var isSelected = date.isSame(d, 'day');

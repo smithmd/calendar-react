@@ -79,11 +79,8 @@ var EventDateList = React.createClass({displayName: "EventDateList",
         return {
           data: [],
           selDate: '',
-          windowWidth: window.screen.width
+          narrow: window.matchMedia("screen and (max-width:800px)").matches
         };
-      },
-      handleResize: function () {
-        this.setState({windowWidth: window.screen.width});
       },
       componentDidMount: function () {
         this.loadEvents();
@@ -91,21 +88,19 @@ var EventDateList = React.createClass({displayName: "EventDateList",
         selectedDate.subscribe(function (s) {
           component.setState({selDate: s.date});
         });
-        // debounce prevents the function from running every 20ms, instead run 100ms after last resize event
-        window.addEventListener('resize', debounce(this.handleResize, 100));
-      },
-      componentWillUnmount: function () {
-        // debounce prevents the function from running every 20ms, instead run 100ms after last resize event
-        window.removeEventListener('resize', debounce);
+
+        var mm = window.matchMedia("screen and (max-width:800px)");
+        mm.addListener(function (e) {
+          component.setState({narrow: e.matches});
+        });
       },
       render: function () {
         var edl = this;
         var events = this.state.data.filter(function (event) {
           return edl.state.selDate == event.startDate;
         });
-        var narrow = this.state.windowWidth < 801;
         return (
-            React.createElement(EventDate, {key: edl.state.selDate, date: edl.state.selDate, events: events, narrow: narrow})
+            React.createElement(EventDate, {key: edl.state.selDate, date: edl.state.selDate, events: events, narrow: this.state.narrow})
         );
       }
     })
