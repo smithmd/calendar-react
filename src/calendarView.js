@@ -91,7 +91,7 @@ var Calendar = React.createClass({
   },
   getInitialState: function () {
     return {
-      narrow: window.matchMedia("screen and (max-width:800px").matches,
+      narrow: window.matchMedia("screen and (max-width:800px)").matches,
       data: [],
       dates: {},
       dateRange: {start: null, end: null},
@@ -124,9 +124,9 @@ var Calendar = React.createClass({
     beginningDay.day(0);
     endingDay.day(6);
 
+
     // filter checks all filters to see if data matches and returns true if all are true
     var events = this.state.data.filter(this.filterData(component, beginningDay, endingDay));
-
     var ret = null;
     if (!this.state.narrow) {
       ret = (<DesktopCalendar events={events} beginningDay={beginningDay} endingDay={endingDay} dates={this.state.dates}
