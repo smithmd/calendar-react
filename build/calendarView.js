@@ -91,7 +91,7 @@ var Calendar = React.createClass({displayName: "Calendar",
   },
   getInitialState: function () {
     return {
-      windowWidth: window.innerWidth,
+      windowWidth: window.screen.width,
       data: [],
       dates: {},
       dateRange: {start: null, end: null},
@@ -103,7 +103,7 @@ var Calendar = React.createClass({displayName: "Calendar",
     };
   },
   handleResize: function () {
-    this.setState({windowWidth: window.innerWidth});
+    this.setState({windowWidth: window.screen.width});
   },
   componentDidMount: function () {
     // debounce prevents the function from running every 20ms, instead run 100ms after last resize event

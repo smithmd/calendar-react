@@ -2,12 +2,13 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Calendar of Events</title>
     <link href="js/jquery-ui/jquery-ui.min.css" type="text/css" rel="stylesheet"/>
     <link href="stylesheets/jquery.comiseo.daterangepicker.css" type="text/css" rel="stylesheet"/>
     <link href="js/mmenu/css/jquery.mmenu.all.css" type="text/css" rel="stylesheet"/>
     <link href="stylesheets/list-view.css" type="text/css" rel="stylesheet"/>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.min.js"></script>
     <script src="js/marmottajax.min.js"></script>
     <script src="js/rx.all.js"></script>
     <script src="js/moment.min.js"></script>
@@ -25,11 +26,12 @@
     <div>
       <header id="calendarHeader">
         <header id="innerHeader">
-          <span id="logo">Interlochen</span>
+          <span id="innerLogo"></span>
           <span id="headerLinks">
             <a id="viewPrintable" href="index-list.html">Printable Version</a>
           </span>
         </header>
+        <span id="outerLogo"></span>
         <h1 id="currentMonth">ICA Daily Schedule</h1>
         <span id="prev" onclick="prevMonth()">&lsaquo;</span>
         <span id="next" onclick="nextMonth()">&rsaquo;</span>

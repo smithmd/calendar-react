@@ -47,20 +47,17 @@ html, body {
   }
 
   header {
-    $elementHeight: 24px;
     clear: both;
     background-color: $background-light;
 
     h1 {
       display: inline-block;
-      font-size: $elementHeight;
       margin: 16px;
     }
     input, #viewCalendar, #viewPrintable, #open-menu {
       margin: 16px;
       float: right;
       vertical-align: middle;
-      height: $elementHeight;
       border-radius: 1px;
     }
     input {

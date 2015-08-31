@@ -51,11 +51,11 @@ var Navigation = React.createClass({
     return {
       date: moment(),
       originalDate: moment(),
-      windowWidth: window.innerWidth
+      windowWidth: window.screen.width
     };
   },
   handleResize: function () {
-    this.setState({windowWidth: window.innerWidth});
+    this.setState({windowWidth: window.screen.width});
   },
   componentDidMount: function () {
     var component = this;

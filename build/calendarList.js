@@ -79,11 +79,11 @@ var EventDateList = React.createClass({displayName: "EventDateList",
         return {
           data: [],
           selDate: '',
-          windowWidth: window.innerWidth
+          windowWidth: window.screen.width
         };
       },
       handleResize: function () {
-        this.setState({windowWidth: window.innerWidth});
+        this.setState({windowWidth: window.screen.width});
       },
       componentDidMount: function () {
         this.loadEvents();
