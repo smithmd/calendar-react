@@ -54,7 +54,7 @@ html, body {
       display: inline-block;
       margin: 16px;
     }
-    input, #viewCalendar, #viewPrintable, #open-menu {
+    input, #viewCalendar, .linkButton, #open-menu {
       margin: 16px;
       float: right;
       vertical-align: middle;
@@ -68,7 +68,7 @@ html, body {
       -moz-box-shadow: inset 3px 3px 5px $background-light;
       box-shadow: inset 3px 3px 5px $background-light;
     }
-    #viewCalendar, #viewPrintable, #open-menu {
+    #viewCalendar, .linkButton, #open-menu {
       cursor: pointer;
       display: inline-block;
       text-decoration: none;

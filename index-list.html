@@ -21,20 +21,28 @@
         datePick.datepicker();
         datePick.change(function () {
           var d = $.datepicker.parseDate('mm/dd/yy', datePick.val());
-          selectedDate.onNext({date: $.datepicker.formatDate('yy-mm-dd',d)});
+          selectedDate.onNext({date: $.datepicker.formatDate('yy-mm-dd', d)});
         });
 
         var subscription = selectedDate.subscribe(function (s) {
           var d = $.datepicker.parseDate('yy-mm-dd', s.date);
-          datePick.val($.datepicker.formatDate('mm/dd/yy',d));
+          datePick.val($.datepicker.formatDate('mm/dd/yy', d));
         });
       });
     </script>
   </head>
   <body>
-    <header>
-      <h1>ICA Daily Schedule</h1>
-      <a id="viewCalendar" href="index-cal.html">View Calendar</a>
+    <header id="listHeader">
+      <header id="innerHeader">
+        <span id="innerLogo"></span>
+          <span id="headerLinks">
+            <a id="viewCalendarInner" class="linkButton" href="index-cal.html">View Calendar</a>
+          </span>
+      </header>
+      <span id="outerLogo"></span>
+
+      <h1>Daily Schedule</h1>
+      <a id="viewCalendarOuter" class="linkButton" href="index-cal.html">View Calendar</a>
       <input id="datepick" placeholder="Custom Date"/>
     </header>
     <div id="navigation">

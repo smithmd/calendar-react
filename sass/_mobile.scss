@@ -156,13 +156,10 @@
       }
     }
 
-    #outerLogo {
+    #outerLogo, #viewPrintableOuter {
       display: none;
     }
-    #viewCalendar {
-      display: none;
-    }
-    #open-menu, #viewPrintable {
+    #open-menu, .linkButton {
       margin: 3vw 2vw 0 0;
     }
     #open-menu {
@@ -413,4 +410,31 @@
     }
   }
 
+  #listHeader {
+    #outerLogo, #viewCalendarOuter {
+      display: none;
+    }
+    header {
+      overflow: auto;
+      color: white;
+      line-height: 3;
+      background-color: black;
+
+      span#innerLogo {
+        top: 10px;
+        position: relative;
+        margin-left: 16px;
+        background: url(../img/logo-white.png) no-repeat;
+        height: 7vw;
+        width: 20vw;
+        display: inline-block;
+        -webkit-background-size: contain;
+        background-size: contain;
+      }
+    }
+
+    h1 {
+      font-size: 1em;
+    }
+  }
 }

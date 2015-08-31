@@ -360,4 +360,21 @@
       }
     }
   }
+
+  #listHeader {
+    #innerHeader {
+      display: none;
+    }
+    #outerLogo {
+      top: 10px;
+      position: relative;
+      margin-left: 16px;
+      background: url(../img/ICA-color-logo.png) no-repeat;
+      height: 40px;
+      width: 125px;
+      display: inline-block;
+      -webkit-background-size: contain;
+      background-size: contain;
+    }
+  }
 }
