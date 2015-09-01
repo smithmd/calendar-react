@@ -1487,7 +1487,7 @@ html, body {
   }
 
   /* line 414, ../sass/_mobile.scss */
-  #listHeader #outerLogo, #listHeader #viewCalendarOuter {
+  #listHeader #outerLogo, #listHeader #viewCalendarOuter, #listHeader #viewPrintableOuter {
     display: none;
   }
   /* line 417, ../sass/_mobile.scss */
