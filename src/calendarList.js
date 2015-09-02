@@ -9,7 +9,10 @@ var Event = React.createClass({
     var titleTag;
     var venueTag;
     if (this.props.narrow) {
-      var shortTitle = this.props.event.title + ' (' + venue + ')';
+      var shortTitle = this.props.event.title;
+      if (this.props.event.venue) {
+        shortTitle += ' (' + venue + ')';
+      }
       titleTag = <span className="title">{shortTitle}</span>;
       venueTag = null;
     } else {
@@ -106,6 +109,6 @@ var EventDateList = React.createClass({
 });
 // url=json/calendar.json for local development
 React.render(
-    <EventDateList url="/publicapi/services/apexrest/events/calendar/all"/>,
+    <EventDateList url="json/calendar.json"/>,
     document.getElementById('prettyEvents')
 );
