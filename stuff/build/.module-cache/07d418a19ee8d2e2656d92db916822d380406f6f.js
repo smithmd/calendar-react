@@ -19,10 +19,19 @@ var DesktopEvent = React.createClass({displayName: "DesktopEvent",
 
 var DesktopDate = React.createClass({displayName: "DesktopDate",
   getInitialState: function () {
-    return {printAll: this.props.printAll};
+    return {
+      printAll: this.props.printAll,
+      expandAll: false
+    };
   },
-  componentWillReceiveProps: function (newProps) {
-    this.setState({printAll: newProps.printAll});
+  componentWillMount: function () {
+    var component = this;
+    expandAll.subscribe(function (s) {
+      component.setState({expandAll: s});
+    });
+  },
+  componentWillReceiveProps: function () {
+    this.setState({printAll: this.props.printAll});
   },
   handleMoreClick: function () {
     this.setState({printAll: !this.state.printAll});
@@ -46,12 +55,16 @@ var DesktopDate = React.createClass({displayName: "DesktopDate",
       }
     }
 
-    // display show or hide more link
-    var remaining = component.props.events.length - component.props.displayLength;
-    if (component.state.printAll === false && remaining > 0) {
-      remainder = React.createElement("a", {href: "javascript:void(0)", onClick: this.handleMoreClick}, "+ Show ", remaining, " More")
-    } else if (remaining > 0) {
-      remainder = React.createElement("a", {href: "javascript:void(0)", onClick: this.handleMoreClick}, "- Hide ", remaining)
+    if (this.state.expandAll) {
+
+    } else {
+      // display show or hide more link
+      var remaining = component.props.events.length - component.props.displayLength;
+      if (component.state.printAll === false && remaining > 0) {
+        remainder = React.createElement("a", {href: "javascript:void(0)", onClick: this.handleMoreClick}, "+ Show ", remaining, " More")
+      } else if (remaining > 0) {
+        remainder = React.createElement("a", {href: "javascript:void(0)", onClick: this.handleMoreClick}, "- Hide ", remaining)
+      }
     }
     return (
         React.createElement("div", {
@@ -85,20 +98,9 @@ var DesktopCalendarHeader = React.createClass({displayName: "DesktopCalendarHead
 });
 
 var DesktopCalendarRow = React.createClass({displayName: "DesktopCalendarRow",
-  getInitialState: function () {
-    return {
-      expandAll: false
-    };
-  },
-  componentWillMount: function () {
-    var component = this;
-    expandAll.subscribe(function (s) {
-      component.setState({expandAll: s});
-    });
-  },
   render: function () {
-    var printAll = this.state.expandAll;
-    var d = null, day = null;
+    var d = null;
+    var day = null;
     var days = [];
     var today = moment().startOf('day');
     for (var i = 0; i < 7; i += 1) {
@@ -119,9 +121,10 @@ var DesktopCalendarRow = React.createClass({displayName: "DesktopCalendarRow",
         dispDay = day.date();
       }
       var isToday = (today.diff(day, 'days') === 0);
-
       days[i] = (React.createElement(DesktopDate, {events: events, displayLength: 3, day: dispDay, key: 'd'+i, 
-                              isCurr: isCurr, isToday: isToday, printAll: printAll}));
+                              isCurr: isCurr, 
+                              isToday: isToday, 
+                              printAll: false}));
 
     }
     return (

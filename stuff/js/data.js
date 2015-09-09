@@ -8,7 +8,7 @@ var venues = ['Any', 'Corson Auditorium', 'Dendrinos Chapel and Recital Hall', '
   'Fine Arts Building', 'Harvey Theatre', 'Interlochen Bowl', 'Kresge Auditorium', 'Mallory Towsley Center for Arts Leadership Great Room', 'Phoenix Theatre',
   'Upton-Morley Pavilion'];
 var campDivisions = ['Any', 'Junior', 'Intermediate', 'High School', 'Institute'];
-var artsAreas = ['Any', 'Comparative Arts', 'Creative Writing', 'Dance', 'MPA', 'Music', 'Theatre', 'Visual Arts'];
+var artsAreas = ['Any', 'Comparative Arts', 'Creative Writing', 'Dance', 'MPA', 'Music', 'Student Life', 'Theatre', 'Visual Arts'];
 
 var selectedDate = new Rx.BehaviorSubject({date: moment().format('YYYY-MM-DD')});
 // selectedDate.onNext called by click and changes state
@@ -24,6 +24,8 @@ var calendarDates = new Rx.BehaviorSubject({
 var dailyFilter = new Rx.BehaviorSubject(true);
 
 var performanceFilter = new Rx.BehaviorSubject(false);
+
+var expandAll = new Rx.BehaviorSubject(false);
 
 var venueFilters = new Rx.BehaviorSubject({
   venues: [],

@@ -109,6 +109,7 @@ var FilterList = React.createClass({displayName: "FilterList",
     dailyFilter.onNext(document.getElementById(this.props.prefix + 'dailyFilter').checked);
     performanceFilter.onNext(document.getElementById(this.props.prefix + 'performanceFilter').checked);
     expandAll.onNext(document.getElementById(this.props.prefix + 'expand').checked);
+    console.log('inclick: expandAll: ' + document.getElementById(this.props.prefix + 'expand').checked);
 
   },
   render: function () {

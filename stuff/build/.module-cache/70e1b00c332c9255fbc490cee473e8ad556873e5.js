@@ -21,8 +21,8 @@ var DesktopDate = React.createClass({displayName: "DesktopDate",
   getInitialState: function () {
     return {printAll: this.props.printAll};
   },
-  componentWillReceiveProps: function (newProps) {
-    this.setState({printAll: newProps.printAll});
+  componentWillReceiveProps: function () {
+    this.setState({printAll: this.props.printAll});
   },
   handleMoreClick: function () {
     this.setState({printAll: !this.state.printAll});
@@ -40,8 +40,8 @@ var DesktopDate = React.createClass({displayName: "DesktopDate",
       for (var i = 0, end = component.props.displayLength; i < end; i += 1) {
         if (this.props.events[i]) {
           eventList.push(React.createElement(DesktopEvent, {event: this.props.events[i], 
-                                       isLast: i === (end - 1) || (this.props.events.length-1) === i, 
-                                       key: i}));
+                                isLast: i === (end - 1) || (this.props.events.length-1) === i, 
+                                key: i}));
         }
       }
     }
@@ -85,20 +85,9 @@ var DesktopCalendarHeader = React.createClass({displayName: "DesktopCalendarHead
 });
 
 var DesktopCalendarRow = React.createClass({displayName: "DesktopCalendarRow",
-  getInitialState: function () {
-    return {
-      expandAll: false
-    };
-  },
-  componentWillMount: function () {
-    var component = this;
-    expandAll.subscribe(function (s) {
-      component.setState({expandAll: s});
-    });
-  },
   render: function () {
-    var printAll = this.state.expandAll;
-    var d = null, day = null;
+    var d = null;
+    var day = null;
     var days = [];
     var today = moment().startOf('day');
     for (var i = 0; i < 7; i += 1) {
@@ -119,9 +108,10 @@ var DesktopCalendarRow = React.createClass({displayName: "DesktopCalendarRow",
         dispDay = day.date();
       }
       var isToday = (today.diff(day, 'days') === 0);
-
       days[i] = (React.createElement(DesktopDate, {events: events, displayLength: 3, day: dispDay, key: 'd'+i, 
-                              isCurr: isCurr, isToday: isToday, printAll: printAll}));
+                              isCurr: isCurr, 
+                              isToday: isToday, 
+                              printAll: false}));
 
     }
     return (

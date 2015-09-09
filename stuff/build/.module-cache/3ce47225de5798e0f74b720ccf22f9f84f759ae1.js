@@ -9,10 +9,7 @@ var Event = React.createClass({displayName: "Event",
     var titleTag;
     var venueTag;
     if (this.props.narrow) {
-      var shortTitle = this.props.event.title;
-      if (this.props.event.venue) {
-        shortTitle += ' (' + venue + ')';
-      }
+      var shortTitle = this.props.event.title + ' (' + venue + ')';
       titleTag = React.createElement("span", {className: "title"}, shortTitle);
       venueTag = null;
     } else {
@@ -107,8 +104,7 @@ var EventDateList = React.createClass({displayName: "EventDateList",
     );
   }
 });
-// url=/json/calendar.json for local development
-// url=/publicapi/services/apexrest/events/calendar/all for production
+// url=json/calendar.json for local development
 React.render(
     React.createElement(EventDateList, {url: "/publicapi/services/apexrest/events/calendar/all"}),
     document.getElementById('prettyEvents')

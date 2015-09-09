@@ -21,13 +21,16 @@ var DesktopDate = React.createClass({displayName: "DesktopDate",
   getInitialState: function () {
     return {printAll: this.props.printAll};
   },
-  componentWillReceiveProps: function (newProps) {
-    this.setState({printAll: newProps.printAll});
+  componentWillReceiveProps: function () {
+    console.log('props:');
+    console.log(this.props);
+    this.setState({printAll: this.props.printAll});
   },
   handleMoreClick: function () {
     this.setState({printAll: !this.state.printAll});
   },
   render: function () {
+    console.log('printAll: ' + (this.state.printAll));
     var component = this;
     var remainder = null;
     var eventList = [];
@@ -97,6 +100,7 @@ var DesktopCalendarRow = React.createClass({displayName: "DesktopCalendarRow",
     });
   },
   render: function () {
+    console.log('expand: ' + this.state.expandAll);
     var printAll = this.state.expandAll;
     var d = null, day = null;
     var days = [];
@@ -120,6 +124,7 @@ var DesktopCalendarRow = React.createClass({displayName: "DesktopCalendarRow",
       }
       var isToday = (today.diff(day, 'days') === 0);
 
+      console.log('parent printAll: ' + printAll);
       days[i] = (React.createElement(DesktopDate, {events: events, displayLength: 3, day: dispDay, key: 'd'+i, 
                               isCurr: isCurr, isToday: isToday, printAll: printAll}));
 

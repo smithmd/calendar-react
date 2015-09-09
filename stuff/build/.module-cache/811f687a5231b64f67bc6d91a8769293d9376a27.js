@@ -108,8 +108,9 @@ var FilterList = React.createClass({displayName: "FilterList",
   filterClick: function () {
     dailyFilter.onNext(document.getElementById(this.props.prefix + 'dailyFilter').checked);
     performanceFilter.onNext(document.getElementById(this.props.prefix + 'performanceFilter').checked);
-    expandAll.onNext(document.getElementById(this.props.prefix + 'expand').checked);
-
+  },
+  expandAllClick: function () {
+    
   },
   render: function () {
     return (
