@@ -21,8 +21,8 @@ var DesktopDate = React.createClass({
   getInitialState: function () {
     return {printAll: this.props.printAll};
   },
-  componentWillReceiveProps: function () {
-    this.setState({printAll: this.props.printAll});
+  componentWillReceiveProps: function (newProps) {
+    this.setState({printAll: newProps.printAll});
   },
   handleMoreClick: function () {
     this.setState({printAll: !this.state.printAll});
@@ -40,8 +40,8 @@ var DesktopDate = React.createClass({
       for (var i = 0, end = component.props.displayLength; i < end; i += 1) {
         if (this.props.events[i]) {
           eventList.push(<DesktopEvent event={this.props.events[i]}
-                                isLast={i === (end - 1) || (this.props.events.length-1) === i}
-                                key={i}/>);
+                                       isLast={i === (end - 1) || (this.props.events.length-1) === i}
+                                       key={i}/>);
         }
       }
     }
@@ -85,9 +85,20 @@ var DesktopCalendarHeader = React.createClass({
 });
 
 var DesktopCalendarRow = React.createClass({
+  getInitialState: function () {
+    return {
+      expandAll: false
+    };
+  },
+  componentWillMount: function () {
+    var component = this;
+    expandAll.subscribe(function (s) {
+      component.setState({expandAll: s});
+    });
+  },
   render: function () {
-    var d = null;
-    var day = null;
+    var printAll = this.state.expandAll;
+    var d = null, day = null;
     var days = [];
     var today = moment().startOf('day');
     for (var i = 0; i < 7; i += 1) {
@@ -108,10 +119,9 @@ var DesktopCalendarRow = React.createClass({
         dispDay = day.date();
       }
       var isToday = (today.diff(day, 'days') === 0);
+
       days[i] = (<DesktopDate events={events} displayLength={3} day={dispDay} key={'d'+i}
-                              isCurr={isCurr}
-                              isToday={isToday}
-                              printAll={false}/>);
+                              isCurr={isCurr} isToday={isToday} printAll={printAll}/>);
 
     }
     return (

@@ -139,6 +139,6 @@ var Calendar = React.createClass({
 });
 
 React.render(
-    <Calendar url="/publicapi/services/apexrest/events/calendar/all"/>,
+    <Calendar url="json/calendar.json"/>,
     document.getElementById("Calendar")
 );

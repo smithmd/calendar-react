@@ -108,6 +108,8 @@ var FilterList = React.createClass({
   filterClick: function () {
     dailyFilter.onNext(document.getElementById(this.props.prefix + 'dailyFilter').checked);
     performanceFilter.onNext(document.getElementById(this.props.prefix + 'performanceFilter').checked);
+    expandAll.onNext(document.getElementById(this.props.prefix + 'expand').checked);
+
   },
   render: function () {
     return (
@@ -122,6 +124,12 @@ var FilterList = React.createClass({
             <span onClick={this.filterClick}>
               <input id={this.props.prefix + "performanceFilter"} type="checkbox" name="performanceFilter" />
               <label htmlFor={this.props.prefix + "performanceFilter"}>Performances</label>
+            </span>
+          </li>
+          <li>
+            <span onClick={this.filterClick}>
+              <input id={this.props.prefix + "expand"} type="checkbox" name="expandAll" />
+              <label htmlFor={this.props.prefix + "expand"}>Expand All</label>
             </span>
           </li>
           <li>
