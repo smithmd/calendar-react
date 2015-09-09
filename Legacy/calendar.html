@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>calendar of events</title>
+    <link href="eventCalendarStylesheet.css" rel="stylesheet" type="text/css"/>
+    <link href="../js/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="../js/moment.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="../js/jquery-ui/jquery-ui.min.js"></script>
+    <script>
+      // this script uses moment.js and jquery pretty heavily. I tried to use as much built-in JS functionality as I could before resorting to libraries.
+
+      // TODO: add ICCA events to calendar
+
+      // Bit flags for determining if a certain filter is set
+      var DATE_FILTER = 0x001;
+      var VENUE_FILTER = 0x002;
+      var DAILY_CALENDAR_FILTER = 0x004;
+      var CAMP_DIVISION_FILTER = 0x008;
+      var PERFORMANCE_FILTER = 0x010;
+      var ARTS_AREA_FILTER = 0x020;
+
+      // various data arrays. I would love for the venues array to be data driven somehow.
+      var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      var venues = ['Corson Auditorium', 'Kresge Auditorium', 'DeRoy Center for Film Studies', 'Dendrinos Chapel and Recital Hall',
+        'Fine Arts Building', 'Harvey Theatre', 'Phoenix Theatre', 'Mallory Towsley Center for Arts Leadership Great Room',
+        'Upton-Morley Pavilion', 'Interlochen Bowl'];
+      var campDivisions = ['Institute', 'High School', 'Intermediate', 'Junior'];
+      var artsAreas = ['Visual Arts', 'Theatre', 'Music', 'MPA', 'Dance', 'Creative Writing', 'Comparative Arts'];
+
+      var fixTimeZone = function (datetime) {
+        var d = new Date(datetime);
+        return new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
+      };
+
+      // function to sort events based on dates
+      var dateSort = function (a, b) {
+        var aStart = new Date(a.startTime);
+        var bStart = new Date(b.startTime);
+        // handle allDay events slightly differently
+        if (a.allDay == true) {
+          // shift to midnight GMT
+          aStart = fixTimeZone(a.startTime);
+        }
+        if (b.allDay == true) {
+          // shift to midnight GMT
+          bStart = fixTimeZone(b.startTime);
+        }
+        return aStart.getTime() - bStart.getTime();
+      };
+
+      var printDate = function (d) {
+        d = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
+        return weekdays[d.day()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ' ' + d.year();
+      };
+
+      var formatTime = function (d) {
+        var meridiem = "am";
+        var h = d.getHours();
+        if (h > 12) {
+          h = h - 12;
+          meridiem = "pm";
+        }
+        if (h == 12) {
+          meridiem = "pm";
+        }
+        var m = d.getMinutes();
+        if (m < 10) {
+          m = "0" + m;
+        }
+        return h + ':' + m + meridiem;
+      };
+
+      var printTime = function (event) {
+        return (event.allDay === false ? formatTime(new Date(event.startTime)) + '-' + formatTime(new Date(event.endTime)) : 'All Day');
+      };
+
+      var printVenue = function (venue) {
+        return (venue !== null ? venue : '');
+      };
+
+      var createDayNumber = function (date) {
+        var span_day = document.createElement('span');
+        span_day.setAttribute('class', 'dayNumber');
+        span_day.innerHTML = moment(date).format('M/D');
+        span_day.setAttribute('title', moment(date).format('dddd, MMMM Do, YYYY'));
+
+        return span_day;
+      };
+
+      var createBlankDay = function (blankdate) {
+
+        var td = document.createElement('td');
+        td.setAttribute('day', moment(blankdate).day());
+        td.setAttribute('week', moment(blankdate).week());
+        td.setAttribute('class', 'day');
+        td.id = moment(blankdate).format('YYYY-MM-DD');
+        td.appendChild(createDayNumber(blankdate));
+
+        return td;
+      };
+
+      var getDateByOffset = function (date, offsetDays) {
+        // 86400000 is one day in milliseconds
+        return new Date(date.getTime() + offsetDays * 86400000);
+      };
+
+      // trims blank rows from beginning and end of calendar after filtering occurs
+      var trimCalendar = function () {
+        // force calendar visible
+        var calendar = $('#calendar');
+        calendar.show();
+
+        // show all rows again, then hide them
+        $('tr').show();
+
+        // if this event is first in the list
+        var first = calendar.find('div:visible:first');
+        var last = calendar.find('div:visible:last');
+        // hide all previous rows
+        first.parent().parent().prevAll('tr').each(function () {
+          if ($(this).find('div:visible').length === 0) {
+            $(this).hide();
+          }
+        });
+        // hide all following blank rows
+        last.parent().parent().nextAll('tr').each(function () {
+          if ($(this).find('div:visible').length === 0) {
+            $(this).hide();
+          }
+        });
+
+        if (calendar.find('div:visible').length === 0) {
+          calendar.hide();
+          $('#prettyEvents').show().text('No events to display. Try changing your filters.')
+        } else {
+          calendar.show();
+          $('#prettyEvents').hide();
+        }
+      };
+
+      // callback used in forEach to print each event to prettyEvents list
+      var drawEvent = function (event, index, array) {
+        // roughly create this structure:
+        // tr for each week
+        //   td for each day of week
+        //     div for each event with metadata as attributes
+        var events = document.getElementById('events');
+
+        // check the start date and adjust to correct timezone if an all-day event
+        var d1 = new Date(event.startDate);
+        var startMoment = null;
+        if (!event.allDay) {
+          startMoment = moment(new Date(event.startTime).getTime());
+        }
+        // fixes date's timezone
+        var d = moment(d1.getTime() + (d1.getTimezoneOffset() * 60000));
+        if (lastWeek !== d.week() && lastWeek !== 0) {
+          // create days at end of last week
+          var prev_tr = document.getElementById(lastDate.format('ww-YYYY'));
+          if (prev_tr !== null) {
+            // alert ('found last week');
+            for (var i = lastDay + 1; i < 7; i++) {
+              lastDate.add(1, 'd');
+              var td = createBlankDay(lastDate);
+
+              prev_tr.appendChild(td);
+            }
+          }
+
+          var weekCheck = d.week() - 1;
+          // create any possibly needed blank rows
+          // TODO: potential break on some leap years if there are actually 54 weeks in that year
+          if (lastDate.year() !== d.year()) {
+            weekCheck += 53;
+          }
+          while (lastWeek++ < weekCheck) {
+            var tr = document.createElement('tr');
+            tr.id = lastDate.format('ww-YYYY');
+            tr.setAttribute('week', lastWeek);
+            // add class for zebra striping every other week
+            if (lastWeek % 2 === 0) {
+              tr.setAttribute('class', 'zebra week');
+            } else {
+              tr.setAttribute('class', 'week');
+            }
+            events.appendChild(tr);
+            blankdate = lastDate.clone();
+            // create an empty week worth of blank tds
+            for (var i = 0; i < 7; i++) {
+
+              blankdate.add(1, 'd');
+              var td = createBlankDay(blankdate);
+              tr.appendChild(td);
+
+              lastDate = blankdate.clone();
+            }
+          }
+        }
+
+        var weekId = d.format('ww-YYYY');
+        // find the correct row in the table to write to
+        var tr = document.getElementById(weekId);
+        if (tr === null) {
+          var w = d.week();
+          // create a new row and append to calendar
+          tr = document.createElement('tr');
+          tr.setAttribute('week', w);
+          // add class for zebra striping every other week
+          if (w % 2 === 0) {
+            tr.setAttribute('class', 'zebra week');
+          } else {
+            tr.setAttribute('class', 'week');
+          }
+          tr.id = weekId;
+          events.appendChild(tr);
+        }
+
+        // clone the moment
+        var blankdate = moment(d);
+        if (lastDate == null) {
+          lastDate = moment(d).add(-d.day() - 1, 'd');
+        }
+        blankdate.add(lastDate.dayOfYear() - d.dayOfYear(), 'd');
+
+        // TODO: potential break on new year and leap years... need to handle edge cases
+        while (lastDate === null || lastDate.dayOfYear() + 1 < d.dayOfYear()) {
+          blankdate.add(1, 'd');
+          var td = createBlankDay(blankdate);
+          tr.appendChild(td);
+          lastDate = blankdate.clone();
+        }
+
+        // get the td for the current date
+        var td = document.getElementById(event.startDate);
+        if (td === null) {
+          td = document.createElement('td');
+          td.id = event.startDate;
+          td.setAttribute('class', 'day');
+          td.setAttribute('day', d.day());
+          td.setAttribute('week', d.week());
+
+          td.appendChild(createDayNumber(d, 0));
+
+          tr.appendChild(td);
+        }
+
+        var div = document.createElement('div');
+        var description = '';
+
+        if (!event.allDay) {
+          description = startMoment.format('h:mma');
+          // div.setAttribute('title',startMoment.format('h:mm a'));
+        } else {
+          description = "All-Day";
+          // div.setAttribute('title','All Day');
+        }
+        description += ' - ' + event.title;
+        if (event.venue !== null && event.venue != '') {
+          description += ' (' + event.venue + ')';
+        }
+        div.innerHTML = description;
+        div.setAttribute('daily', event.includeOnDaily);
+        div.setAttribute('venue', event.venue);
+        div.setAttribute('campdivision', event.campDivision);
+        div.setAttribute('performance', event.isPerformance);
+        div.setAttribute('class', 'event');
+        div.setAttribute('artsareas', event.artsAreas);
+
+        td.appendChild(div);
+
+        lastWeek = d.week();
+        lastDay = d.day();
+        lastDate = d.clone();
+      }
+
+      $(document).ready(function () {
+        var mheight = $('#filterset').outerHeight(true);
+        $('#content').css('margin-top', mheight + 25 + 'px');
+
+        // if the user reloads the page, force the browser to clear the filter
+        $("#startDate, #endDate").val('');
+        $('#dailyCheckbox').prop('checked', true);
+
+        // create list of checkboxes for venues
+        var venueList = $('#venueFilter');
+        for (var i = -1; i++ < venues.length - 1;) {
+          var span = $('<span>').prependTo(venueList);
+          $('<label />', {'for': 'v_cb' + i, text: venues[i]}).prependTo(span);
+          $('<input />', {type: 'checkbox', id: 'v_cb' + i, value: venues[i]}).prependTo(span);
+        }
+
+        // create list of checkboxes for camp divisions
+        var campDivList = $('#campDivisionFilter');
+        for (var i = -1; i++ < campDivisions.length - 1;) {
+          var span = $('<span>').prependTo(campDivList);
+          $('<label />', {'for': 'cdiv_cb' + i, text: campDivisions[i]}).prependTo(span);
+          $('<input />', {type: 'checkbox', id: 'cdiv_cb' + i, value: campDivisions[i]}).prependTo(span);
+        }
+
+        var artsAreaList = $('#artsAreaFilter');
+        for (var i = -1; i++ < artsAreas.length - 1;) {
+          var span = $('<span>').prependTo(artsAreaList);
+          $('<label />', {'for': 'aa_cb' + i, text: artsAreas[i]}).prependTo(span);
+          $('<input />', {type: 'checkbox', id: 'aa_cb' + i, value: artsAreas[i]}).prependTo(span);
+        }
+
+        $('#filterHide').click(function () {
+          var self = $(this);
+          $('#filterset').slideToggle({
+            duration: 200,
+            step: function () {
+              var mheight = $('#filterset').outerHeight(true);
+              $('#content').css('margin-top', mheight + 'px');
+            },
+            done: function () {
+              if ($('#filterset').is(':visible')) {
+                self.text('[ - ] Hide Filters');
+              } else {
+                self.text('[ + ] Show Filters');
+              }
+            }
+          });
+        });
+
+        // get JSON event list from salesforce...
+        // the actual api call seems to be the slow part, the anonymous callback is reasonably fast
+        // prod: /publicapi/services/apexrest/events/calendar/all
+        $.get('../json/calendar.json',
+            function (data) {
+              // document.getElementById('events').innerHTML = JSON.stringify(data);
+              document.getElementById('prettyEvents').innerHTML = '';
+              $('#calendar').show();
+              // sorts based on function dateSort defined above.
+              data.sort(dateSort);
+              // some global variables because asynchronicity + anonymous functions can make my head explode.
+              // I'll get rid of these if I can.
+              window.lastDay = -1;
+              window.lastWeek = 0;
+              window.lastDate = null;
+
+              // iterate across all events and put them on the calendar, rendering the calendar as we go
+              data.forEach(drawEvent);
+
+              function getStartAndEnd() {
+                var firstCalendarDate;
+                var lastCalendarDate;
+                (function () {
+                  //get first day of calendar
+                  dateArray = $('.day:first').attr('id').split('-', 3);
+                  firstCalendarDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
+
+                  //get last day of calendar
+                  dateArray = $('.day:last').attr('id').split('-', 3);
+                  lastCalendarDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
+                })();
+
+                return [firstCalendarDate, lastCalendarDate];
+              }
+
+              (function () {
+                // get beginning and end dates for the filter
+                var dates = getStartAndEnd();
+                $("#startDate, #endDate").datepicker({
+                  minDate: dates[0],
+                  maxDate: dates[1],
+                  constrainInput: true,
+                  dateFormat: 'mm/dd/yy',
+                  changeYear: true,
+                  changeMonth: true
+                });
+
+                // initialize dates in datepicker
+                var m1 = moment(new Date());
+                var m2 = moment(dates[1]);
+                var m1Format = m1.format('MM/DD/YYYY');
+                var m2Format = m2.format('MM/DD/YYYY');
+                $('#startDate').val(m1Format);
+                $('#endDate').val(m2Format);
+
+                // reset button for date filter
+                $('#dateReset').click(function () {
+                  $('#startDate').datepicker('setDate', m1Format);
+                  $('#endDate').datepicker('setDate', m2Format);
+                  $('#startDate').change();
+                  $('#startDate, #endDate').datepicker('option', {minDate: dates[0], maxDate: dates[1]});
+                });
+
+                // reset button for venue filter
+                $('#venueReset').click(function () {
+                  $('#venueFilter input').prop('checked', false);
+                  $('#venueFilter input:last').change();
+                });
+
+                $('#campDivReset').click(function () {
+                  $('#campDivisionFilter input').prop('checked', false);
+                  $('#campDivisionFilter input:last').change();
+                })
+
+                $('#artsAreaReset').click(function () {
+                  $('#artsAreaFilter input').prop('checked', false);
+                  $('#artsAreaFilter input:last').change();
+                });
+
+                // handle date filters
+                var start, end;
+                $("#startDate, #endDate").change(function () {
+                  start = $("#startDate").val();
+                  dateArray = start.split('/', 3);
+                  var startDate = new Date(dateArray[2], dateArray[0] - 1, dateArray[1]);
+                  end = $("#endDate").val();
+                  dateArray = end.split('/', 3);
+                  var endDate = new Date(dateArray[2], dateArray[0] - 1, dateArray[1]);
+
+                  // set the minimum or maximum dates in calendar based on the other date picked
+                  if ($(this).attr('id') == 'startDate') {
+                    var dateArr = $('#startDate').val().split('/', 3);
+                    var d = new Date(dateArr[2], dateArr[0] - 1, dateArr[1])
+                    $("#endDate").datepicker('option', {minDate: d});
+                  }
+                  else if ($(this).attr('id') == 'endDate') {
+                    var dateArr = $('#endDate').val().split('/', 3);
+                    var d = new Date(dateArr[2], dateArr[0] - 1, dateArr[1])
+                    $("#startDate").datepicker('option', {maxDate: d});
+                  }
+
+                  // check each day for filtered events and potentially hide the entire week
+                  $('.day').each(function () {
+                    // check each day to make sure it's inside the filter date and hide days/weeks
+                    var currentID = $(this).attr('id');
+                    dateArray = currentID.split('-', 3);
+                    var idDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
+                    // get value of mask attribute or default to zero
+                    if (idDate >= startDate && idDate <= endDate) {
+                      // show divs if inside the filter
+                      $('div', this).each(function () {
+                        // grab mask off of event
+                        var mask = parseInt($(this).attr('mask'), 10) || 0;
+                        if ((mask & ~DATE_FILTER) === 0) {
+                          // show if DATE_FILTER is the only flag set on mask, then remove flag
+                          $(this).show().attr('mask', (mask & ~DATE_FILTER));
+                        } else {
+                          // just remove DATE_FILTER from mask, remain hidden
+                          $(this).attr('mask', (mask & ~DATE_FILTER));
+                        }
+                      });
+                    } else {
+                      // hide all divs in a date that is outside the filter
+                      $('div', this).each(function () {
+                        // grab mask off of event
+                        var mask = parseInt($(this).attr('mask'), 10) || 0;
+                        // hide and add DATE_FILTER to mask
+                        $(this).hide().attr('mask', (mask | DATE_FILTER));
+                      })
+                    }
+                  });
+                  // clean up empty leading/trailing calendar rows & handle empty calendar
+                  trimCalendar();
+                });
+
+                // single checkbox generic
+                var scb_check_change = function (ev) {
+                  $('.event').each(function () {
+                    // get mask or set to zero
+                    var mask = parseInt($(this).attr('mask'), 10) || 0;
+                    if (ev.data.checkbox.prop('checked') === true) {
+                      if ($(this).attr(ev.data.filter_attribute) == 'false') {
+                        // hide and add mask_flag to mask
+                        $(this).hide().attr('mask', (mask | ev.data.mask_flag));
+                      }
+                    } else {
+                      // show everything
+                      if ((mask & ~ev.data.mask_flag) === 0) {
+                        // show and remove flag if mask_flag flag set
+                        $(this).show().attr('mask', (mask & ~ev.data.mask_flag));
+                      } else {
+                        // just remove flag
+                        $(this).attr('mask', (mask & ~ev.data.mask_flag));
+                      }
+                    }
+                  });
+                  // clean up empty leading/trailing calendar rows & handle empty calendar
+                  trimCalendar();
+                };
+
+                // multiselect generic
+                // expects data in the form of {argList: venueCheckboxes, checkList: venues, comp_attribute: 'venue', mask_flag: VENUE_FILTER}
+                var ms_check_change = function (ev) {
+                  // check all checkboxes and add to list
+                  var filterList = [];
+                  // track a total mask value for all checkboxes currently checked
+                  var check_mask = 0;
+                  ev.data.argList.each(function () {
+                    if (this.checked) {
+                      filterList.push(this.value);
+                      // add filter value to venue_mask_check
+                      check_mask |= 1 << ev.data.checkList.indexOf(this.value);
+                    }
+                  });
+
+                  $('.event').each(function () {
+                    // get value of mask attribute or default to zero
+                    var mask = parseInt($(this).attr('mask'), 10) || 0;
+
+                    // get index in list of checkList that are being filtered
+                    var index = ev.data.checkList.indexOf($(this).attr(ev.data.comp_attribute));
+                    // if value is not in list, add ghost index to handle unlisted checkList (no checkbox in filter)
+                    if (index === -1) {
+                      index = ev.data.checkList.length;
+                    }
+                    // set flag based on index, bit shifted to multiply 1 by the index resulting in a set of powers of two
+                    var flag = 1 << index;
+
+                    // check to see if value is in list of displayed ev.data.checkList
+                    if (filterList.indexOf($(this).attr(ev.data.comp_attribute)) !== -1) {
+                      // check that mask_flag is only flag set
+                      if ((mask & ~ev.data.mask_flag) === 0) {
+                        // check that the value of the flag is in the list of boxes checked (check_mask)
+                        if ((check_mask & flag) === flag) {
+                          // show event and remove flag from mask
+                          $(this).show().attr('mask', (mask & ~ev.data.mask_flag));
+                        }
+                      } else {
+                        // only remove filter flag if filter is not the only filter hiding
+                        $(this).attr('mask', (mask & ~ev.data.mask_flag));
+                      }
+                    } else if (filterList.length === 0) {
+                      // potentially show all events if there is not a value filter selected
+                      // only show events that aren't filtered by something else
+                      if ((mask & ~ev.data.mask_flag) === 0) {
+                        // last filter: show and remove mask
+                        $(this).show().attr('mask', (mask & ~ev.data.mask_flag));
+                      } else {
+                        // not last filter: don't show, but remove mask
+                        $(this).attr('mask', (mask & ~ev.data.mask_flag));
+                      }
+                    } else {
+                      // hide this event and set the mask_flag on the mask
+                      $(this).hide().attr('mask', (mask | ev.data.mask_flag));
+                    }
+                  });
+                  // clean up empty leading/trailing calendar rows & handle empty calendar
+                  trimCalendar();
+                };
+
+                // multiselect generic for use when data comes from a multiselect field from sfdc. (semicolon delimited list)
+                // Should also be a safe replacement for the other multiselect generic function, but handles these cases also.
+                // expects data in the form of {argList: venueCheckboxes, checkList: venues, comp_attribute: 'venue', mask_flag: VENUE_FILTER}
+                var ms_from_list_check_change = function (ev) {
+                  // check all checkboxes and add to list
+                  var filterList = [];
+                  // track a total mask value for all checkboxes currently checked
+                  var check_mask = 0;
+                  ev.data.argList.each(function () {
+                    if (this.checked) {
+                      filterList.push(this.value);
+                      // add filter value to venue_mask_check
+                      check_mask |= 1 << ev.data.checkList.indexOf(this.value);
+                    }
+                  });
+
+                  $('.event').each(function () {
+                    // create object to mimic Set
+                    var attribute_list = {};
+                    var split_array = $(this).attr(ev.data.comp_attribute).split(';');
+
+                    for (i = -1; i++ < split_array.length - 1;) {
+                      // only put non-empty strings into object
+                      if (split_array[i] !== '') {
+                        attribute_list[split_array[i]] = split_array[i];
+                      }
+                    }
+
+                    // get value of mask attribute or default to zero
+                    var mask = parseInt($(this).attr('mask'), 10) || 0;
+
+                    var show = false;
+                    var flags = []; // store flags in array to track multiple values in single attribute
+                    // iterate across list of items in attribute (which should be unique) for comparisons
+                    for (str in attribute_list) {
+                      if (filterList.indexOf(str) !== -1) {
+                        // if we get this far, we know there's a chance we want to show this event
+                        show = true;
+                        // get index in list of checkList that are being filtered
+                        var index = ev.data.checkList.indexOf(str);
+                        // if value is not in list, add ghost index to handle unlisted checkList (no checkbox in filter)
+                        if (index === -1) {
+                          index = ev.data.checkList.length;
+                        }
+                        // set flag based on index, bit shifted to multiply 1 by the index resulting in a set of powers of two
+                        flags.push(1 << index);
+                      }
+                    }
+
+                    // check to see if value is in list of displayed ev.data.checkList and if value is contained in comp_attribute list
+                    if (show) {
+                      // check that mask_flag is only flag set
+                      if ((mask & ~ev.data.mask_flag) === 0) {
+                        // check that the value of the flag is in the list of boxes checked (check_mask)
+                        for (i = -1; i++ < flags.length;) {
+                          if ((check_mask & flags[i]) === flags[i]) {
+                            // show event and remove flag from mask
+                            $(this).show().attr('mask', (mask & ~ev.data.mask_flag));
+                          }
+                        }
+                      } else {
+                        // only remove filter flag if filter is not the only filter hiding
+                        $(this).attr('mask', (mask & ~ev.data.mask_flag));
+                      }
+                    } else if (filterList.length === 0) {
+                      // potentially show all events if there is not a value filter selected
+                      // only show events that aren't filtered by something else
+                      if ((mask & ~ev.data.mask_flag) === 0) {
+                        // last filter: show and remove mask
+                        $(this).show().attr('mask', (mask & ~ev.data.mask_flag));
+                      } else {
+                        // not last filter: don't show, but remove mask
+                        $(this).attr('mask', (mask & ~ev.data.mask_flag));
+                      }
+                    } else {
+                      // hide this event and set the mask_flag on the mask
+                      $(this).hide().attr('mask', (mask | ev.data.mask_flag));
+                    }
+                  });
+                  // clean up empty leading/trailing calendar rows & handle empty calendar
+                  trimCalendar();
+                };
+
+                // handle filtering for venue list
+                var venueCheckboxes = $('#venueFilter input');
+                var venueArgs = {
+                  argList: venueCheckboxes,
+                  checkList: venues,
+                  comp_attribute: 'venue',
+                  mask_flag: VENUE_FILTER
+                };
+                venueCheckboxes.change(venueArgs, ms_check_change);
+
+                // handle filtering for camp division list
+                var campDivisionCheckboxes = $('#campDivisionFilter input');
+                var campDivData = {
+                  argList: campDivisionCheckboxes,
+                  checkList: campDivisions,
+                  comp_attribute: 'campdivision',
+                  mask_flag: CAMP_DIVISION_FILTER
+                };
+                campDivisionCheckboxes.change(campDivData, ms_from_list_check_change);
+
+                // handle filtering for arts areas
+                var artsAreaCheckboxes = $('#artsAreaFilter input');
+                var artsAreaData = {
+                  argList: artsAreaCheckboxes,
+                  checkList: artsAreas,
+                  comp_attribute: 'artsareas',
+                  mask_flag: ARTS_AREA_FILTER
+                };
+                artsAreaCheckboxes.change(artsAreaData, ms_from_list_check_change);
+
+                // handle filtering for daily calendar
+                var dailyFilterCheckbox = $('#dailyCheckbox');
+                var dailyCalendarData = {
+                  checkbox: dailyFilterCheckbox,
+                  filter_attribute: 'daily',
+                  mask_flag: DAILY_CALENDAR_FILTER
+                };
+                dailyFilterCheckbox.change(dailyCalendarData, scb_check_change);
+
+                // handle filtering for performance calendar
+                var performanceFilterCheckbox = $('#performanceCheckbox');
+                var performanceCalendarData = {
+                  checkbox: performanceFilterCheckbox,
+                  filter_attribute: 'performance',
+                  mask_flag: PERFORMANCE_FILTER
+                };
+                performanceFilterCheckbox.change(performanceCalendarData, scb_check_change);
+
+                // force initial page state (hide things not on daily calendar and before today)
+                $('#startDate').change();
+                dailyFilterCheckbox.change();
+              })();
+            });
+      });
+    </script>
+  </head>
+  <body>
+    <span id='filterHide'>[ - ] Hide Filters</span>
+    <fieldset id="filterset">
+      <legend>Filters</legend>
+      <div id="dailyFilter">
+        <input type="checkbox" id="dailyCheckbox" checked="checked"/>
+        <label for="dailyCheckbox">Show Daily Calendar Events Only</label>
+      </div>
+      <div id="performanceFilter">
+        <input type="checkbox" id="performanceCheckbox"/>
+        <label for="performanceCheckbox">Show Performances Only</label>
+      </div>
+      <div id="datefilter">
+        <span>Start Date: <input type="text" id="startDate" name='startDate' readonly="readonly"/></span>
+        <span>End Date: <input type="text" id="endDate" name='endDate' readonly="readonly"/></span>
+        <button id="dateReset" name="dateReset" type="button">Reset Dates</button>
+      </div>
+      <div id="venueFilter">
+        <button id="venueReset" type="button">Reset Venues</button>
+      </div>
+      <div id="campDivisionFilter">
+        <button id="campDivReset" type="button">Reset Camp Divisions</button>
+      </div>
+      <div id="artsAreaFilter">
+        <button id="artsAreaReset" type="button">Reset Arts Areas</button>
+      </div>
+    </fieldset>
+    <div id="content">
+      <div id="rightlinks">
+        <a href="https://sites.google.com/a/interlochen.org/start/home/calendar-of-events" target="_blank">Calendar
+          Help</a>
+      </div>
+      <div id="links">
+        <a href="/pub/EventCalendarListView">View Printable List</a>
+      </div>
+      <div id="pageTitle">ICA Daily Schedule</div>
+      <div id="prettyEvents">Loading events...</div>
+      <table id="calendar">
+        <thead>
+          <th day='0'>Sunday</th>
+          <th day='1'>Monday</th>
+          <th day='2'>Tuesday</th>
+          <th day='3'>Wednesday</th>
+          <th day='4'>Thursday</th>
+          <th day='5'>Friday</th>
+          <th day='6'>Saturday</th>
+        </thead>
+        <tbody id='events'>
+        </tbody>
+      </table>
+    </div>
+    </apex:page>
+  </body>
+</html>

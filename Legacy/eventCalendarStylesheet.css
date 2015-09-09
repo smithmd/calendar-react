@@ -1,0 +1,164 @@
+@media all {
+	html {
+		font-family: Helvetica, Arial, sans-serif;
+	}
+	#calendar {
+		width:100%;
+		border-spacing: 0;
+		border-collapse: separate;
+		border-color:#ddd;
+	}
+	#calendar th {
+		text-align: center;
+	}
+	#calendar td {
+		border:1px solid #ccc;
+		border-radius: 2px;
+		min-height: 50px;
+		height:50px;
+		margin:0;
+		vertical-align: top;
+		width: 14.2%;
+		min-width: 14.2%;
+	}
+	#pageTitle {
+		font-weight: bold;
+		font-size: 1.3em;
+		margin:0 auto;
+		text-align: center;
+	}
+	#prettyEvents {
+		margin-top:15px;
+	}
+	#prettyEvents span {
+		padding-left:10px;
+		display:inline-block;
+	}
+	#prettyEvents span.date {
+		font-weight: bold;
+		display: block;
+		margin: 0 auto;
+		text-align: center;
+	}
+	#prettyEvents span.time {
+		width:20%;
+	}
+	#prettyEvents span.title {
+		width:40%;
+	}
+	#prettyEvents span.venue {
+		width:35%;
+	}
+	.dayNumber {
+		margin-bottom: 5px;
+		border-bottom:1px solid #ddd;
+		border-right:1px solid #ddd;
+		padding: 0 5px;
+	}
+	.event {
+		margin:3px;
+		padding:5px 8px 2px;
+		border-bottom:1px solid #eee;
+	}
+	#venueFilter label {
+		padding-right:10px;
+	}
+	#calendar {
+		display:none;
+	}
+}
+@media screen {
+	#links {
+		padding-left:10px;
+	}
+	#rightlinks {
+		float:right;
+		padding-right:10px;
+		top:10px;
+		position:relative;
+	}
+	#prettyEvents div.bordered {
+		background-color:#f8f8f8;
+		border:1px solid #bbb;
+		border-radius: 3px;
+		margin:10px;
+		padding:10px;
+	}
+	#filterset {
+		border:1px solid #999;
+		border-radius: 0 0 5px 5px;
+		background-color: #e8e8e8;
+		padding:10px;
+		margin:10px;
+		position:fixed;
+		z-index: 50;
+		top:0;
+		left: 0;
+	}
+	#filterset input[type=text] {
+		border:1px solid #999;
+		padding:2px;
+	}
+	#filterset legend {
+		padding:1px 20px;
+		border:1px solid #999;
+		border-radius: 0 0 4px 4px;
+		background-color: white;
+	}
+	#filterset span {
+		display:inline-block;
+	}
+	#filterset div {
+		margin-bottom:8px;
+	}
+	#filterHide {
+		position: fixed;
+		top:0;
+		right:0;
+		z-index:100;
+		display:inline-block;
+		padding:5px 10px;
+		background-color: white;
+		border:1px solid black;
+		border-top:0;
+		border-right:0;
+		cursor:pointer;
+	}
+}
+@media print {
+	html {
+		font-family: Tahoma, Helvetica, Arial, sans-serif;
+		font-size: 1.1em;
+	}
+	#prettyEvents div.bordered {
+		margin:0 10px 10px;
+		padding:0 10px 10px;
+	}
+	#prettyEvents span.date {
+		font-size: 1.1em;
+	}
+	#filterset, #filterHide {
+		display: none;
+	}
+	div.event {
+		border-bottom:1px solid #eee;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	#content {
+		margin-top:0px;
+	}
+	table {
+		page-break-inside:auto;
+	}
+	tr {
+		page-break-inside:avoid;
+		page-break-after:auto;
+	}
+	div {
+		page-break-inside:avoid;
+	}
+	thead {
+		display: table-header-group;
+	}
+}
