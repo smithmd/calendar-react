@@ -138,9 +138,7 @@ var Calendar = React.createClass({
   }
 });
 
-// url=/json/calendar.json for local development
-// url=/publicapi/services/apexrest/events/calendar/all for production
 React.render(
-    <Calendar url="/publicapi/services/apexrest/events/calendar/all"/>,
+    <Calendar url={window.jsonUrl}/>,
     document.getElementById("Calendar")
 );
