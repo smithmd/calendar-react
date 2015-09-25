@@ -139,7 +139,7 @@ var FilterList = React.createClass({displayName: "FilterList",
           ), 
           React.createElement(PickList, {data: venues, category: "venues", title: "Venues", filt: venueFilters}), 
           React.createElement(PickList, {data: campDivisions, category: "divisions", title: "Camp Divisions", filt: divisionFilters}), 
-          React.createElement(PickList, {data: artsAreas, category: "artsAreas", title: "Arts Areas", filt: artsAreaFilters})
+          React.createElement(PickList, {data: eventTypes, category: "eventTypes", title: "Event Types", filt: eventTypesFilters})
         )
     );
   }

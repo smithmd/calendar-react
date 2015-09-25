@@ -139,7 +139,7 @@ var FilterList = React.createClass({
           </li>
           <PickList data={venues} category='venues' title='Venues' filt={venueFilters}/>
           <PickList data={campDivisions} category='divisions' title='Camp Divisions' filt={divisionFilters}/>
-          <PickList data={artsAreas} category='artsAreas' title='Arts Areas' filt={artsAreaFilters}/>
+          <PickList data={eventTypes} category='eventTypes' title='Event Types' filt={eventTypesFilters}/>
         </ul>
     );
   }

@@ -48,7 +48,7 @@ var Calendar = React.createClass({
       // return if we find out we don't want to show this event
       if (component.filterArray(event.campDivision, component.state.divisions) === false) return false;
       if (component.filterArray(event.venue, component.state.venues) === false) return false;
-      if (component.filterArray(event.artsAreas, component.state.artsAreas) === false) return false;
+      if (component.filterArray(event.artsAreas, component.state.eventTypes) === false) return false;
 
       // should be true at this point
       return show;
@@ -69,8 +69,8 @@ var Calendar = React.createClass({
     venueFilters.subscribe(function (s) {
       component.setState({venues: s.venues});
     });
-    artsAreaFilters.subscribe(function (s) {
-      component.setState({artsAreas: s.artsAreas});
+    eventTypesFilters.subscribe(function (s) {
+      component.setState({eventTypes: s.eventTypes});
     });
     divisionFilters.subscribe(function (s) {
       component.setState({divisions: s.divisions});
@@ -98,7 +98,7 @@ var Calendar = React.createClass({
       dailyFilter: false,
       performanceFilter: false,
       venues: [],
-      artsAreas: [],
+      eventTypes: [],
       divisions: []
     };
   },
