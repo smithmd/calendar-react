@@ -24,6 +24,38 @@ var Calendar = React.createClass({displayName: "Calendar",
     }
     return show;
   },
+  filterFromSearch: function (eventObj, searchString) {
+    var string_exists = false;
+    // check various fields
+    // include multiple search terms
+    if (eventObj) {
+      // check if title matches string
+      if (eventObj.title) {
+        if (eventObj.title.toLowerCase().indexOf(searchString) > -1
+        ) {
+          return true;
+        }
+      }
+
+      // check if genre matches string
+      if (eventObj.genre) {
+        if (eventObj.genre.toLowerCase().indexOf(searchString) > -1
+        ) {
+          return true;
+        }
+      }
+
+      // check if division matches string
+      if (eventObj.campDivision) {
+        if (eventObj.campDivision.toLowerCase().indexOf(searchString) > -1
+        ) {
+          return true;
+        }
+      }
+    }
+
+    return string_exists;
+  },
   filterData: function (component, beginningDay, endingDay) {
     return function (event) {
       // check to see if date is in or very near selected month
@@ -50,6 +82,14 @@ var Calendar = React.createClass({displayName: "Calendar",
       if (component.filterArray(event.venue, component.state.venues) === false) return false;
       if (component.filterArray(event.artsAreas, component.state.eventTypes) === false) return false;
 
+      var search = component.state.searchText.toLowerCase().split(' ');
+
+      for (var i = 0; i < search.length; i += 1) {
+        if (search[i].length > 0) {
+          if (component.filterFromSearch(event, search[i]) === false) return false;
+        }
+      }
+
       // should be true at this point
       return show;
     }
@@ -64,7 +104,7 @@ var Calendar = React.createClass({displayName: "Calendar",
       component.setState({dailyFilter: s});
     });
     performanceFilter.subscribe(function (s) {
-      component.setState({performanceFilter:s});
+      component.setState({performanceFilter: s});
     });
     venueFilters.subscribe(function (s) {
       component.setState({venues: s.venues});
@@ -88,6 +128,9 @@ var Calendar = React.createClass({displayName: "Calendar",
         });
       }
     });
+    searchFilter.subscribe(function (s) {
+      component.setState({searchText: s.searchString});
+    });
   },
   getInitialState: function () {
     return {
@@ -99,7 +142,8 @@ var Calendar = React.createClass({displayName: "Calendar",
       performanceFilter: false,
       venues: [],
       eventTypes: [],
-      divisions: []
+      divisions: [],
+      searchText: ''
     };
   },
   componentDidMount: function () {

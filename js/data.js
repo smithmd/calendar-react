@@ -46,3 +46,7 @@ var calendarDateRange = new Rx.BehaviorSubject({
   start: null,
   end: null
 });
+
+var searchFilter = new Rx.BehaviorSubject({
+  searchString: ''
+});

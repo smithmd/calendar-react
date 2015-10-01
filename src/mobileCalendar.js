@@ -22,7 +22,9 @@ var MobileEvents = React.createClass({
       var description = event.title + (event.venue ? ' (' + printVenue(event.venue) + ')' : '');
       var zebra = (index % 2 ? '' : 'zebra');
       return (
-          <div key={index} className={zebra}>
+          <div key={index} className={zebra}
+             data-camp-division={this.props.event.campDivision}
+             data-genre={this.props.event.genre} >
             <span className="time">{time}
               <span className="meridiem">
                 {meridiem}

@@ -10,6 +10,8 @@ var DesktopEvent = React.createClass({
     }
     return (
         <div data-start-date={this.props.event.startDate}
+             data-camp-division={this.props.event.campDivision}
+             data-genre={this.props.event.genre}
              className={classNames('event',(this.props.isLast ? 'last' : ''))}>
           <span className='time'>{time}</span> - <span className='title'>{this.props.event.title}</span> {venue}
         </div>

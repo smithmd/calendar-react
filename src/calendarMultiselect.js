@@ -104,6 +104,20 @@ var PickList = React.createClass({
   }
 });
 
+var SearchFilter = React.createClass({
+  handleUpdate: function () {
+    var text = document.getElementById(this.props.id).value;
+    searchFilter.onNext({searchString: text});
+  },
+  render: function () {
+    return (
+        <li>
+          <input type="text" id={this.props.id} placeholder="Filter on more" onKeyUp={this.handleUpdate} />
+        </li>
+    );
+  }
+});
+
 var FilterList = React.createClass({
   filterClick: function () {
     dailyFilter.onNext(document.getElementById(this.props.prefix + 'dailyFilter').checked);
@@ -112,6 +126,8 @@ var FilterList = React.createClass({
 
   },
   render: function () {
+    // removed camp divisions from return:
+    // <PickList data={campDivisions} category='divisions' title='Camp Divisions' filt={divisionFilters}/>
     return (
         <ul className='filterList'>
           <li>
@@ -134,12 +150,12 @@ var FilterList = React.createClass({
           </li>
           <li>
             <span>
-              <input id={this.props.prefix + "datepicker"} name={this.props.prefix + "datepicker"} placeholder="Custom Date"/>
+              <input id={this.props.prefix + "datepicker"} name={this.props.prefix + "datepicker"} placeholder="Custom Date" />
             </span>
           </li>
           <PickList data={venues} category='venues' title='Venues' filt={venueFilters}/>
-          <PickList data={campDivisions} category='divisions' title='Camp Divisions' filt={divisionFilters}/>
           <PickList data={eventTypes} category='eventTypes' title='Event Types' filt={eventTypesFilters}/>
+          <SearchFilter id={this.props.prefix + 'search'} />
         </ul>
     );
   }
