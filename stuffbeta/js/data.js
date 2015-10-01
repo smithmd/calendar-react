@@ -5,8 +5,8 @@
 var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 var venues = ['Any', 'Corson Auditorium', 'Dendrinos Chapel and Recital Hall', 'DeRoy Center for Film Studies',
-  'Fine Arts Building', 'Harvey Theatre', 'Interlochen Bowl', 'Kresge Auditorium', 'Mallory Towsley Center for Arts Leadership Great Room', 'Phoenix Theatre',
-  'Upton-Morley Pavilion'];
+  'Fine Arts Building', 'Harvey Theatre', 'Interlochen Bowl', 'Kresge Auditorium', 'Mallory Towsley Center for Arts Leadership Great Room',
+  'Phoenix Theatre', 'Upton-Morley Pavilion'];
 var campDivisions = ['Any', 'Junior', 'Intermediate', 'High School', 'Institute'];
 var eventTypes = ['Any', 'Academic Info', 'Comparative Arts', 'Creative Writing', 'Dance',
   'Motion Picture Arts / Film', 'Music', 'Student Life', 'Theatre', 'Visual Arts'];
