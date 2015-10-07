@@ -146,6 +146,19 @@
         list-style: none;
         display: inline-block;
         margin-right: 10px;
+
+        input[type=text] {
+          position:relative;
+          border: 1px solid $input-border;
+          padding: 0.5em;
+          -webkit-box-shadow: inset 2px 2px 2px $background-light;
+          -moz-box-shadow: inset 2px 2px 2px $background-light;
+          box-shadow: inset 2px 2px 2px $background-light;
+          line-height: 1.45;
+          font-family: inherit;
+          font-size: inherit;
+          top:1px;
+        }
       }
     }
 
@@ -159,7 +172,7 @@
       min-width: 10em;
       display: inline-block;
       position: relative;
-      span {
+      span, input[type=text] {
         width: 10em;
         white-space: nowrap;
         overflow: hidden;
