@@ -104,6 +104,20 @@ var PickList = React.createClass({displayName: "PickList",
   }
 });
 
+var SearchFilter = React.createClass({displayName: "SearchFilter",
+  handleUpdate: function () {
+    var text = document.getElementById(this.props.id).value;
+    searchFilter.onNext({searchString: text});
+  },
+  render: function () {
+    return (
+        React.createElement("li", null, 
+          React.createElement("input", {type: "text", id: this.props.id, placeholder: "Filter on more", onKeyUp: this.handleUpdate})
+        )
+    );
+  }
+});
+
 var FilterList = React.createClass({displayName: "FilterList",
   filterClick: function () {
     dailyFilter.onNext(document.getElementById(this.props.prefix + 'dailyFilter').checked);
@@ -112,6 +126,8 @@ var FilterList = React.createClass({displayName: "FilterList",
 
   },
   render: function () {
+    // removed camp divisions from return:
+    // <PickList data={campDivisions} category='divisions' title='Camp Divisions' filt={divisionFilters}/>
     return (
         React.createElement("ul", {className: "filterList"}, 
           React.createElement("li", null, 
@@ -138,8 +154,8 @@ var FilterList = React.createClass({displayName: "FilterList",
             )
           ), 
           React.createElement(PickList, {data: venues, category: "venues", title: "Venues", filt: venueFilters}), 
-          React.createElement(PickList, {data: campDivisions, category: "divisions", title: "Camp Divisions", filt: divisionFilters}), 
-          React.createElement(PickList, {data: artsAreas, category: "artsAreas", title: "Arts Areas", filt: artsAreaFilters})
+          React.createElement(PickList, {data: eventTypes, category: "eventTypes", title: "Event Types", filt: eventTypesFilters}), 
+          React.createElement(SearchFilter, {id: this.props.prefix + 'search'})
         )
     );
   }

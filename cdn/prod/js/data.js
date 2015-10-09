@@ -5,10 +5,11 @@
 var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 var venues = ['Any', 'Corson Auditorium', 'Dendrinos Chapel and Recital Hall', 'DeRoy Center for Film Studies',
-  'Fine Arts Building', 'Harvey Theatre', 'Interlochen Bowl', 'Kresge Auditorium', 'Mallory Towsley Center for Arts Leadership Great Room', 'Phoenix Theatre',
-  'Upton-Morley Pavilion'];
+  'Fine Arts Building', 'Harvey Theatre', 'Interlochen Bowl', 'Kresge Auditorium', 'Mallory Towsley Center for Arts Leadership Great Room',
+  'Phoenix Theatre', 'Upton-Morley Pavilion'];
 var campDivisions = ['Any', 'Junior', 'Intermediate', 'High School', 'Institute'];
-var artsAreas = ['Any', 'Comparative Arts', 'Creative Writing', 'Dance', 'MPA', 'Music', 'Student Life', 'Theatre', 'Visual Arts'];
+var eventTypes = ['Any', 'Academic Info', 'Comparative Arts', 'Creative Writing', 'Dance',
+  'Motion Picture Arts / Film', 'Music', 'Student Life', 'Theatre', 'Visual Arts'];
 
 var selectedDate = new Rx.BehaviorSubject({date: moment().format('YYYY-MM-DD')});
 // selectedDate.onNext called by click and changes state
@@ -37,12 +38,16 @@ var divisionFilters = new Rx.BehaviorSubject({
   divisionsIndex: []
 });
 
-var artsAreaFilters = new Rx.BehaviorSubject({
-  artsAreas: [],
-  artsAreasIndex: []
+var eventTypesFilters = new Rx.BehaviorSubject({
+  eventTypes: [],
+  eventTypesIndex: []
 });
 
 var calendarDateRange = new Rx.BehaviorSubject({
   start: null,
   end: null
+});
+
+var searchFilter = new Rx.BehaviorSubject({
+  searchString: ''
 });
