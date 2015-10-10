@@ -836,17 +836,30 @@ html, body {
     display: inline-block;
     margin-right: 10px;
   }
-  /* line 155, ../sass/_tablet.scss */
+  /* line 152, ../sass/_tablet.scss */
+  #filters .filterList > li input[type=text] {
+    position: relative;
+    border: 1px solid #dcdcdc;
+    padding: 0.5em;
+    -webkit-box-shadow: inset 2px 2px 2px #f6f6f6;
+    -moz-box-shadow: inset 2px 2px 2px #f6f6f6;
+    box-shadow: inset 2px 2px 2px #f6f6f6;
+    line-height: 1.45;
+    font-family: inherit;
+    font-size: inherit;
+    top: 1px;
+  }
+  /* line 168, ../sass/_tablet.scss */
   #filters input[type=checkbox]:checked + label, #filters input[type=checkbox]:checked + span {
     color: #4e9ecd;
   }
-  /* line 160, ../sass/_tablet.scss */
+  /* line 173, ../sass/_tablet.scss */
   #filters .pickList {
     min-width: 8em;
     display: inline-block;
     position: relative;
   }
-  /* line 164, ../sass/_tablet.scss */
+  /* line 177, ../sass/_tablet.scss */
   #filters .pickList span {
     width: 8em;
     white-space: nowrap;
@@ -860,7 +873,7 @@ html, body {
     -moz-box-shadow: inset 2px 2px 2px #f6f6f6;
     box-shadow: inset 2px 2px 2px #f6f6f6;
   }
-  /* line 177, ../sass/_tablet.scss */
+  /* line 190, ../sass/_tablet.scss */
   #filters .pickList span div.bg-img {
     height: 17px;
     width: 17px;
@@ -871,7 +884,7 @@ html, body {
     top: 14px;
     box-shadow: -10px 0 5px white, 3px 0 0 white;
   }
-  /* line 187, ../sass/_tablet.scss */
+  /* line 200, ../sass/_tablet.scss */
   #filters .pickList span span {
     overflow: hidden;
     display: inline;
@@ -881,7 +894,7 @@ html, body {
     -moz-box-shadow: none;
     box-shadow: none;
   }
-  /* line 198, ../sass/_tablet.scss */
+  /* line 211, ../sass/_tablet.scss */
   #filters .pickList ul {
     position: absolute;
     padding: 0;
@@ -890,7 +903,7 @@ html, body {
     border: 1px solid #dcdcdc;
     margin: 0;
   }
-  /* line 206, ../sass/_tablet.scss */
+  /* line 219, ../sass/_tablet.scss */
   #filters .pickList ul li {
     float: none;
     padding: .2em;
@@ -902,19 +915,19 @@ html, body {
     list-style: none;
     cursor: pointer;
   }
-  /* line 216, ../sass/_tablet.scss */
+  /* line 229, ../sass/_tablet.scss */
   #filters .pickList ul li:hover {
     background-color: #f1f2f3;
   }
-  /* line 219, ../sass/_tablet.scss */
+  /* line 232, ../sass/_tablet.scss */
   #filters .pickList ul li label, #filters .pickList ul li input {
     cursor: pointer;
   }
-  /* line 222, ../sass/_tablet.scss */
+  /* line 235, ../sass/_tablet.scss */
   #filters .pickList ul li label {
     margin-left: 0.3em;
   }
-  /* line 229, ../sass/_tablet.scss */
+  /* line 242, ../sass/_tablet.scss */
   #filters button {
     min-width: 8em;
     white-space: nowrap;
@@ -934,13 +947,13 @@ html, body {
     line-height: inherit;
   }
 
-  /* line 248, ../sass/_tablet.scss */
+  /* line 261, ../sass/_tablet.scss */
   .comiseo-daterangepicker {
     background: white;
     border-radius: 0;
     font-family: inherit;
   }
-  /* line 254, ../sass/_tablet.scss */
+  /* line 267, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-buttonpanel button {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -948,106 +961,106 @@ html, body {
     font-weight: normal;
     background: #fbfbfb;
   }
-  /* line 262, ../sass/_tablet.scss */
+  /* line 275, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main {
     background: inherit;
   }
-  /* line 264, ../sass/_tablet.scss */
+  /* line 277, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-widget-content {
     background: inherit;
   }
-  /* line 267, ../sass/_tablet.scss */
+  /* line 280, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-presets {
     display: none;
   }
-  /* line 270, ../sass/_tablet.scss */
+  /* line 283, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar {
     border: 0;
   }
-  /* line 273, ../sass/_tablet.scss */
+  /* line 286, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-state-highlight {
     background: none #c5c3c3;
   }
-  /* line 276, ../sass/_tablet.scss */
+  /* line 289, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-state-highlight a.ui-state-default {
     color: white;
     border: 0;
     background-color: inherit;
   }
-  /* line 282, ../sass/_tablet.scss */
+  /* line 295, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-datepicker-current-day, .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .calendarOuterSelection {
     background: none #d42741;
   }
-  /* line 285, ../sass/_tablet.scss */
+  /* line 298, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-datepicker-current-day a.ui-state-default, .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .calendarOuterSelection a.ui-state-default {
     color: white;
     border: 0;
     background-color: inherit;
   }
-  /* line 292, ../sass/_tablet.scss */
+  /* line 305, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-header {
     background: none;
     border: 0;
     color: inherit;
   }
-  /* line 297, ../sass/_tablet.scss */
+  /* line 310, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-calendar {
     border-left: 1px solid #dcdcdc;
   }
-  /* line 301, ../sass/_tablet.scss */
+  /* line 314, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-widget-header .ui-state-hover {
     background: none;
     border: 0;
   }
-  /* line 307, ../sass/_tablet.scss */
+  /* line 320, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev {
     cursor: pointer;
   }
-  /* line 309, ../sass/_tablet.scss */
+  /* line 322, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev .ui-icon {
     opacity: .9;
     background: url(../img/sprites.png) 0 -14px;
   }
-  /* line 314, ../sass/_tablet.scss */
+  /* line 327, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev.ui-state-disabled .ui-icon {
     opacity: .3;
   }
-  /* line 319, ../sass/_tablet.scss */
+  /* line 332, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-prev.ui-state-hover .ui-icon {
     opacity: 1;
   }
-  /* line 324, ../sass/_tablet.scss */
+  /* line 337, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next {
     cursor: pointer;
   }
-  /* line 326, ../sass/_tablet.scss */
+  /* line 339, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next .ui-icon {
     opacity: .9;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 331, ../sass/_tablet.scss */
+  /* line 344, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next.ui-state-disabled .ui-icon {
     opacity: .3;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 337, ../sass/_tablet.scss */
+  /* line 350, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group .ui-datepicker-next.ui-state-hover .ui-icon {
     opacity: 1;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 345, ../sass/_tablet.scss */
+  /* line 358, ../sass/_tablet.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-group-first .ui-datepicker-calendar {
     border: 0;
   }
-  /* line 350, ../sass/_tablet.scss */
+  /* line 363, ../sass/_tablet.scss */
   .comiseo-daterangepicker td {
     text-align: center;
   }
-  /* line 352, ../sass/_tablet.scss */
+  /* line 365, ../sass/_tablet.scss */
   .comiseo-daterangepicker td .ui-datepicker-current-day {
     background-color: #c5c3c3;
   }
-  /* line 355, ../sass/_tablet.scss */
+  /* line 368, ../sass/_tablet.scss */
   .comiseo-daterangepicker td .ui-state-default {
     border: 0;
     font-weight: normal;
@@ -1055,11 +1068,11 @@ html, body {
     background: inherit;
   }
 
-  /* line 365, ../sass/_tablet.scss */
+  /* line 378, ../sass/_tablet.scss */
   #listHeader #innerHeader {
     display: none;
   }
-  /* line 368, ../sass/_tablet.scss */
+  /* line 381, ../sass/_tablet.scss */
   #listHeader #outerLogo {
     top: 10px;
     position: relative;
