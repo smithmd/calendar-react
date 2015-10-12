@@ -214,17 +214,19 @@
           display: -webkit-flex;
           display: flex;
           flex-direction: row;
-          label, input {
-            cursor: pointer;
-          }
           label {
             -webkit-order: 1;
             order: 1;
           }
-          input {
+          input[type=checkbox] {
             -webkit-order: 2;
             order: 2;
             margin-left: auto;
+          }
+          input[type=text] {
+            line-height:2;
+            border:0;
+            padding:0;
           }
         }
       }

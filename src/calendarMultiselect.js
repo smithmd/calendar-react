@@ -112,7 +112,9 @@ var SearchFilter = React.createClass({
   render: function () {
     return (
         <li>
-          <input type="text" id={this.props.id} placeholder="Filter on more" onKeyUp={this.handleUpdate} />
+          <span>
+            <input type="text" id={this.props.id} placeholder="Filter on more" onKeyUp={this.handleUpdate}/>
+          </span>
         </li>
     );
   }
@@ -138,24 +140,25 @@ var FilterList = React.createClass({
           </li>
           <li>
             <span onClick={this.filterClick}>
-              <input id={this.props.prefix + "performanceFilter"} type="checkbox" name="performanceFilter" />
+              <input id={this.props.prefix + "performanceFilter"} type="checkbox" name="performanceFilter"/>
               <label htmlFor={this.props.prefix + "performanceFilter"}>Performances</label>
             </span>
           </li>
           <li>
             <span onClick={this.filterClick}>
-              <input id={this.props.prefix + "expand"} type="checkbox" name="expandAll" />
+              <input id={this.props.prefix + "expand"} type="checkbox" name="expandAll"/>
               <label htmlFor={this.props.prefix + "expand"}>Expand All</label>
             </span>
           </li>
           <li>
             <span>
-              <input id={this.props.prefix + "datepicker"} name={this.props.prefix + "datepicker"} placeholder="Custom Date" />
+              <input id={this.props.prefix + "datepicker"} name={this.props.prefix + "datepicker"}
+                     placeholder="Custom Date"/>
             </span>
           </li>
           <PickList data={venues} category='venues' title='Venues' filt={venueFilters}/>
           <PickList data={eventTypes} category='eventTypes' title='Event Types' filt={eventTypesFilters}/>
-          <SearchFilter id={this.props.prefix + 'search'} />
+          <SearchFilter id={this.props.prefix + 'search'}/>
         </ul>
     );
   }
