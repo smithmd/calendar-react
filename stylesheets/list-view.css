@@ -1087,8 +1087,8 @@ html, body {
 }
 @media screen and (max-width: 800px) {
   /* line 2, ../sass/_mobile.scss */
-  html {
-    height: 100%;
+  html.ios, html.ios body {
+    height: 100% !important;
   }
 
   /* line 5, ../sass/_mobile.scss */

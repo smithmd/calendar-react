@@ -1,6 +1,6 @@
 @media screen and (max-width: 800px) {
-  html {
-    height:100%;
+  html.ios, html.ios body {
+    height:100% !important;
   }
   #Calendar {
     font-size: 4vw;
