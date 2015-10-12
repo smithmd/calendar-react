@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <title>Calendar of Events</title>
     <!-- phone icon links -->
     <link rel="apple-touch-icon" href="phone-icons/touch-icon-iphone.png">
@@ -14,7 +14,7 @@
     <!-- end phone icon links -->
     <link href="js/jquery-ui/jquery-ui.min.css" type="text/css" rel="stylesheet"/>
     <link href="stylesheets/jquery.comiseo.daterangepicker.css" type="text/css" rel="stylesheet"/>
-    <link href="js/mmenu/css/jquery.mmenu.all.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
     <link href="stylesheets/list-view.css" type="text/css" rel="stylesheet"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.min.js"></script>
     <script src="js/marmottajax.min.js"></script>
@@ -25,19 +25,23 @@
     <script src="node_modules/react-onclickoutside/index.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="js/jquery-ui/jquery-ui.min.js"></script>
-    <script src="js/mmenu/js/jquery.mmenu.min.all.js"></script>
     <script src="js/calendar.js"></script>
     <script src="js/data.js"></script>
     <script src="js/jquery.comiseo.daterangepicker.js"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
     <script>
       // url=/json/calendar.json for local development
       window.jsonUrl = 'json/calendar.json';
       // url=/publicapi/services/apexrest/events/calendar/all for production
-//      window.jsonUrl = '/publicapi/services/apexrest/events/calendar/all';
+      //      window.jsonUrl = '/publicapi/services/apexrest/events/calendar/all';
     </script>
   </head>
   <body>
-    <div>
+    <div class="ui wide sidebar right">
+      <h1>Filters</h1>
+      <nav id="filters-mobile"></nav>
+    </div>
+    <div class="pusher">
       <header id="calendarHeader">
         <header id="innerHeader">
           <span id="innerLogo"></span>
@@ -46,13 +50,13 @@
           </span>
         </header>
         <span id="outerLogo"></span>
+
         <h1 id="currentMonth">ICA Daily Schedule</h1>
         <span id="prev" onclick="prevMonth()">&lsaquo;</span>
         <span id="next" onclick="nextMonth()">&rsaquo;</span>
         <a id="viewPrintableOuter" class="linkButton" href="index-list.html">View as List</a>
         <a id="open-menu" href="#filters-mobile">Filters</a>
       </header>
-      <nav id="filters-mobile"></nav>
       <nav id="filters"></nav>
       <script src="build/calendarMultiselect.js"></script>
       <div id="Calendar"></div>

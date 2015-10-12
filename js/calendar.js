@@ -75,22 +75,7 @@ $(function () {
     document.getElementById('dsk-performanceFilter').checked = s;
   });
 
-  $('#filters-mobile').mmenu({
-        // options
-        navbar: {
-          title: 'Filters'
-        },
-        offCanvas: {
-          position: 'right'
-        },
-        "extensions": [
-          "pageshadow"
-        ]
-      },
-      {
-        // configuration
-      }
-  );
+  $('.ui.sidebar').first().sidebar('attach events', '#open-menu');
 });
 
 var prevMonth = function () {
