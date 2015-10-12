@@ -1320,7 +1320,7 @@ html, body {
   }
   /* line 227, ../sass/_mobile.scss */
   #filters-mobile ul li span input[type=text] {
-    line-height: 2;
+    line-height: 1.5;
     border: 0;
     padding: 0;
     width: 100%;
