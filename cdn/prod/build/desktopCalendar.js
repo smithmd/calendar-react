@@ -9,7 +9,7 @@ var DesktopEvent = React.createClass({displayName: "DesktopEvent",
       venue = React.createElement("span", {className: "venue"}, "(", this.props.event.venue, ")");
     }
     return (
-        React.createElement("div", {className: classNames('event',(this.props.isLast ? 'last' : ''))}, 
+        React.createElement("div", {className: classNames('event',(this.props.isLast ? 'last' : ''),(this.props.event.isDraft ? 'draft' : ''))}, 
           React.createElement("span", {className: "time"}, time), " - ", React.createElement("span", {className: "title"}, this.props.event.title), " ", venue
         )
     );

@@ -6,6 +6,16 @@ var Calendar = React.createClass({displayName: "Calendar",
       json: true
     }).then(function (result) {
       calendar.setState({data: result.sort(dateSort)});
+
+      // process events on draft calendar, if any
+      var draftEvents = result.filter(function (event) {
+        return event.isDraft;
+      });
+      if (draftEvents.length > 0) {
+        draftEvents.sort(dateSort);
+        var m = moment(draftEvents[0].startTime);
+        calendarDates.onNext({startYear: m.year(), startMonth: m.month(), endYear: m.year(), endMonth: m.month()});
+      }
     }).error(function (err) {
       console.error("Something went wrong", err);
     });
@@ -95,7 +105,6 @@ var Calendar = React.createClass({displayName: "Calendar",
     }
   },
   componentWillMount: function () {
-    this.loadEvents();
     var component = this;
     calendarDates.subscribe(function (s) {
       component.setState({dates: s});
@@ -147,6 +156,7 @@ var Calendar = React.createClass({displayName: "Calendar",
     };
   },
   componentDidMount: function () {
+    this.loadEvents();
     var component = this;
     var mql = window.matchMedia("screen and (max-width:800px)");
     mql.addListener(function (e) {
@@ -183,6 +193,6 @@ var Calendar = React.createClass({displayName: "Calendar",
 });
 
 React.render(
-    React.createElement(Calendar, {url: window.jsonUrl}),
+    React.createElement(Calendar, {url: window.jsonUrl, isDraft: window.isDraft}),
     document.getElementById("Calendar")
 );

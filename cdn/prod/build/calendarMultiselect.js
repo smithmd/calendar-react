@@ -112,7 +112,9 @@ var SearchFilter = React.createClass({displayName: "SearchFilter",
   render: function () {
     return (
         React.createElement("li", null, 
-          React.createElement("input", {type: "text", id: this.props.id, placeholder: "Filter on more", onKeyUp: this.handleUpdate})
+          React.createElement("span", null, 
+            React.createElement("input", {type: "text", id: this.props.id, placeholder: "Filter on more", onKeyUp: this.handleUpdate})
+          )
         )
     );
   }
@@ -150,7 +152,8 @@ var FilterList = React.createClass({displayName: "FilterList",
           ), 
           React.createElement("li", null, 
             React.createElement("span", null, 
-              React.createElement("input", {id: this.props.prefix + "datepicker", name: this.props.prefix + "datepicker", placeholder: "Custom Date"})
+              React.createElement("input", {id: this.props.prefix + "datepicker", name: this.props.prefix + "datepicker", 
+                     placeholder: "Custom Date"})
             )
           ), 
           React.createElement(PickList, {data: venues, category: "venues", title: "Venues", filt: venueFilters}), 
