@@ -9,7 +9,7 @@ var DesktopEvent = React.createClass({
       venue = <span className='venue'>({this.props.event.venue})</span>;
     }
     return (
-        <div className={classNames('event',(this.props.isLast ? 'last' : ''))}>
+        <div className={classNames('event',(this.props.isLast ? 'last' : ''),(this.props.event.isDraft ? 'draft' : ''))}>
           <span className='time'>{time}</span> - <span className='title'>{this.props.event.title}</span> {venue}
         </div>
     );
