@@ -1105,12 +1105,13 @@ html, body {
   #Calendar {
     font-size: 4vw;
     background-color: white;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
-  /* line 9, ../sass/_mobile.scss */
+  /* line 10, ../sass/_mobile.scss */
   #Calendar div {
     width: 100%;
   }
-  /* line 13, ../sass/_mobile.scss */
+  /* line 14, ../sass/_mobile.scss */
   #Calendar div #calendarHolder .calendarRow {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1121,7 +1122,7 @@ html, body {
     align-items: center;
     vertical-align: middle;
   }
-  /* line 23, ../sass/_mobile.scss */
+  /* line 24, ../sass/_mobile.scss */
   #Calendar div #calendarHolder .calendarRow .day {
     text-align: center;
     font-weight: bold;
@@ -1129,11 +1130,11 @@ html, body {
     align-items: center;
     color: #65707a;
   }
-  /* line 30, ../sass/_mobile.scss */
+  /* line 31, ../sass/_mobile.scss */
   #Calendar div #calendarHolder .calendarRow .day.notCurrentMonth {
     color: #adb2b6;
   }
-  /* line 36, ../sass/_mobile.scss */
+  /* line 37, ../sass/_mobile.scss */
   #Calendar div #calendarHolder .calendarRow .day.selected header {
     color: white;
     -webkit-border-radius: 50%;
@@ -1145,23 +1146,23 @@ html, body {
     width: 3em;
     margin: 0 auto;
   }
-  /* line 48, ../sass/_mobile.scss */
+  /* line 49, ../sass/_mobile.scss */
   #Calendar div #calendarHolder .calendarRow .day.selected .indicator {
     background-color: #618092;
   }
-  /* line 53, ../sass/_mobile.scss */
+  /* line 54, ../sass/_mobile.scss */
   #Calendar div #calendarHolder .calendarRow .day header {
     line-height: 3;
     background: none;
   }
-  /* line 57, ../sass/_mobile.scss */
+  /* line 58, ../sass/_mobile.scss */
   #Calendar div #calendarHolder .calendarRow .day div {
     width: 1vw;
     height: 1vw;
     top: -2vw;
     position: relative;
   }
-  /* line 64, ../sass/_mobile.scss */
+  /* line 65, ../sass/_mobile.scss */
   #Calendar div #calendarHolder .calendarRow .day .indicator {
     background-color: #51cfd4;
     -webkit-border-radius: 50%;
@@ -1169,11 +1170,11 @@ html, body {
     border-radius: 50%;
     margin: 0 auto;
   }
-  /* line 72, ../sass/_mobile.scss */
+  /* line 73, ../sass/_mobile.scss */
   #Calendar div #calendarHolder .calendarRow .day.today {
     background-color: #f9fae5;
   }
-  /* line 80, ../sass/_mobile.scss */
+  /* line 81, ../sass/_mobile.scss */
   #Calendar div #eventList div {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1184,25 +1185,25 @@ html, body {
     align-items: center;
     background-color: #f6f6f6;
   }
-  /* line 89, ../sass/_mobile.scss */
+  /* line 90, ../sass/_mobile.scss */
   #Calendar div #eventList div.zebra {
     background-color: #ecebeb;
   }
-  /* line 92, ../sass/_mobile.scss */
+  /* line 93, ../sass/_mobile.scss */
   #Calendar div #eventList div span {
     margin: 1em;
   }
-  /* line 94, ../sass/_mobile.scss */
+  /* line 95, ../sass/_mobile.scss */
   #Calendar div #eventList div span.time {
     min-width: 5em;
     max-width: 5em;
     color: #3e3e3e;
   }
-  /* line 98, ../sass/_mobile.scss */
+  /* line 99, ../sass/_mobile.scss */
   #Calendar div #eventList div span.time span {
     margin: 0;
   }
-  /* line 101, ../sass/_mobile.scss */
+  /* line 102, ../sass/_mobile.scss */
   #Calendar div #eventList div span.time .meridiem {
     padding-left: 0.6em;
     align-items: center;
@@ -1212,15 +1213,15 @@ html, body {
     position: relative;
     top: -.05em;
   }
-  /* line 111, ../sass/_mobile.scss */
+  /* line 112, ../sass/_mobile.scss */
   #Calendar div #eventList div span.description {
     color: #65707a;
   }
-  /* line 114, ../sass/_mobile.scss */
+  /* line 115, ../sass/_mobile.scss */
   #Calendar div #eventList div span.description.draft {
     color: rgba(0, 0, 0, 0.4);
   }
-  /* line 122, ../sass/_mobile.scss */
+  /* line 123, ../sass/_mobile.scss */
   #Calendar .dayOfWeek {
     color: #65707a;
     font-size: 0.8em;
@@ -1232,18 +1233,18 @@ html, body {
     align-items: center;
   }
 
-  /* line 134, ../sass/_mobile.scss */
+  /* line 135, ../sass/_mobile.scss */
   header#calendarHeader {
     font-size: 4vw;
     width: 100%;
   }
-  /* line 137, ../sass/_mobile.scss */
+  /* line 138, ../sass/_mobile.scss */
   header#calendarHeader #currentMonth {
     min-width: 5em;
     font-size: 4vw;
     position: relative;
   }
-  /* line 142, ../sass/_mobile.scss */
+  /* line 143, ../sass/_mobile.scss */
   header#calendarHeader > span {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -1257,36 +1258,36 @@ html, body {
     color: white;
     font-size: 6vw;
   }
-  /* line 155, ../sass/_mobile.scss */
+  /* line 156, ../sass/_mobile.scss */
   header#calendarHeader > span#next, header#calendarHeader > span#prev {
     background-color: #676666;
   }
-  /* line 157, ../sass/_mobile.scss */
+  /* line 158, ../sass/_mobile.scss */
   header#calendarHeader > span#next:hover, header#calendarHeader > span#prev:hover {
     background-color: #4d4d4d;
     color: #e6e6e6;
     cursor: pointer;
   }
-  /* line 165, ../sass/_mobile.scss */
+  /* line 166, ../sass/_mobile.scss */
   header#calendarHeader #outerLogo, header#calendarHeader #viewPrintableOuter {
     display: none;
   }
-  /* line 168, ../sass/_mobile.scss */
+  /* line 169, ../sass/_mobile.scss */
   header#calendarHeader #open-menu, header#calendarHeader .linkButton {
     margin: 3vw 2vw 0 0;
   }
-  /* line 171, ../sass/_mobile.scss */
+  /* line 172, ../sass/_mobile.scss */
   header#calendarHeader #open-menu {
     position: relative;
     top: 1vw;
   }
-  /* line 175, ../sass/_mobile.scss */
+  /* line 176, ../sass/_mobile.scss */
   header#calendarHeader header {
     color: white;
     line-height: 3;
     background-color: black;
   }
-  /* line 180, ../sass/_mobile.scss */
+  /* line 181, ../sass/_mobile.scss */
   header#calendarHeader header span#innerLogo {
     top: 10px;
     position: relative;
@@ -1299,16 +1300,16 @@ html, body {
     background-size: contain;
   }
 
-  /* line 194, ../sass/_mobile.scss */
+  /* line 195, ../sass/_mobile.scss */
   #filters {
     display: none !important;
   }
 
-  /* line 197, ../sass/_mobile.scss */
+  /* line 198, ../sass/_mobile.scss */
   .ui.sidebar {
     background-color: #f6f6f6;
   }
-  /* line 200, ../sass/_mobile.scss */
+  /* line 201, ../sass/_mobile.scss */
   .ui.sidebar h1 {
     font-size: 4vw;
     color: grey;
@@ -1316,26 +1317,26 @@ html, body {
     margin: 2vw auto;
     width: 25%;
   }
-  /* line 210, ../sass/_mobile.scss */
+  /* line 211, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile.mm-menu {
     background: white;
     height: 100%;
   }
-  /* line 215, ../sass/_mobile.scss */
+  /* line 216, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile input[type=checkbox]:checked + label, .ui.sidebar #filters-mobile input[type=checkbox]:checked + span {
     color: #4e9ecd;
   }
-  /* line 219, ../sass/_mobile.scss */
+  /* line 220, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile ul {
     padding: 2vw;
   }
-  /* line 222, ../sass/_mobile.scss */
+  /* line 223, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile ul li {
     line-height: 2;
     list-style: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
-  /* line 227, ../sass/_mobile.scss */
+  /* line 228, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile ul li span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1344,12 +1345,12 @@ html, body {
     flex-direction: row;
     font-size: 5vw;
   }
-  /* line 234, ../sass/_mobile.scss */
+  /* line 235, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile ul li span label {
     -webkit-order: 1;
     order: 1;
   }
-  /* line 238, ../sass/_mobile.scss */
+  /* line 239, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile ul li span input[type=checkbox] {
     -webkit-order: 2;
     order: 2;
@@ -1357,7 +1358,7 @@ html, body {
     top: .7em;
     position: relative;
   }
-  /* line 245, ../sass/_mobile.scss */
+  /* line 246, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile ul li span input[type=text] {
     line-height: 2;
     border: 0;
@@ -1366,19 +1367,19 @@ html, body {
     font-size: 5vw;
     background: inherit;
   }
-  /* line 257, ../sass/_mobile.scss */
+  /* line 258, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile .pickList span {
     white-space: nowrap;
     overflow: hidden;
     vertical-align: middle;
     cursor: pointer;
   }
-  /* line 264, ../sass/_mobile.scss */
+  /* line 265, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile .pickList ul {
     min-width: 11em;
     padding-left: 3vw;
   }
-  /* line 268, ../sass/_mobile.scss */
+  /* line 269, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile .pickList ul li {
     padding: .2em;
     display: -webkit-box;
@@ -1391,20 +1392,20 @@ html, body {
     vertical-align: middle;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
-  /* line 279, ../sass/_mobile.scss */
+  /* line 280, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile .pickList ul li:hover {
     background-color: #f1f2f3;
   }
-  /* line 283, ../sass/_mobile.scss */
+  /* line 284, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile .pickList ul li label, .ui.sidebar #filters-mobile .pickList ul li input {
     cursor: pointer;
   }
-  /* line 286, ../sass/_mobile.scss */
+  /* line 287, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile .pickList ul li label {
     -webkit-order: 1;
     order: 1;
   }
-  /* line 290, ../sass/_mobile.scss */
+  /* line 291, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile .pickList ul li input {
     -webkit-order: 2;
     order: 2;
@@ -1412,7 +1413,7 @@ html, body {
     top: .7em;
     position: relative;
   }
-  /* line 301, ../sass/_mobile.scss */
+  /* line 302, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile button {
     min-width: 12em;
     white-space: nowrap;
@@ -1429,23 +1430,23 @@ html, body {
     font: inherit;
     cursor: pointer;
   }
-  /* line 317, ../sass/_mobile.scss */
+  /* line 318, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile button.ui-button {
     position: static;
   }
-  /* line 321, ../sass/_mobile.scss */
+  /* line 322, ../sass/_mobile.scss */
   .ui.sidebar #filters-mobile button span.ui-button-text {
     padding: 0;
     line-height: 2;
   }
 
-  /* line 328, ../sass/_mobile.scss */
+  /* line 329, ../sass/_mobile.scss */
   .comiseo-daterangepicker {
     background: white;
     border-radius: 0;
     font-family: inherit;
   }
-  /* line 334, ../sass/_mobile.scss */
+  /* line 335, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-buttonpanel button {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -1453,107 +1454,107 @@ html, body {
     font-weight: normal;
     background: #fbfbfb;
   }
-  /* line 342, ../sass/_mobile.scss */
+  /* line 343, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main {
     background: inherit;
   }
-  /* line 344, ../sass/_mobile.scss */
+  /* line 345, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-widget-content {
     background: inherit;
   }
-  /* line 347, ../sass/_mobile.scss */
+  /* line 348, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-presets {
     display: none;
   }
-  /* line 350, ../sass/_mobile.scss */
+  /* line 351, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar {
     border: 0;
   }
-  /* line 353, ../sass/_mobile.scss */
+  /* line 354, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-state-highlight {
     background: none #c5c3c3;
   }
-  /* line 356, ../sass/_mobile.scss */
+  /* line 357, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-state-highlight a.ui-state-default {
     color: white;
     border: 0;
     background-color: inherit;
   }
-  /* line 362, ../sass/_mobile.scss */
+  /* line 363, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-datepicker-current-day, .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .calendarOuterSelection {
     background: none #d42741;
   }
-  /* line 365, ../sass/_mobile.scss */
+  /* line 366, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .ui-datepicker-current-day a.ui-state-default, .comiseo-daterangepicker .comiseo-daterangepicker-main .comiseo-daterangepicker-calendar .calendarOuterSelection a.ui-state-default {
     color: white;
     border: 0;
     background-color: inherit;
   }
-  /* line 372, ../sass/_mobile.scss */
+  /* line 373, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-header {
     background: none;
     border: 0;
     color: inherit;
   }
-  /* line 377, ../sass/_mobile.scss */
+  /* line 378, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-calendar {
     border-left: 1px solid #dcdcdc;
   }
-  /* line 381, ../sass/_mobile.scss */
+  /* line 382, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-widget-header .ui-state-hover {
     background: none;
     border: 0;
   }
-  /* line 386, ../sass/_mobile.scss */
+  /* line 387, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-prev {
     cursor: pointer;
   }
-  /* line 388, ../sass/_mobile.scss */
+  /* line 389, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-prev .ui-icon {
     opacity: .9;
     background: url(../img/sprites.png) 0 -14px;
   }
-  /* line 393, ../sass/_mobile.scss */
+  /* line 394, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-prev.ui-state-disabled .ui-icon {
     opacity: .3;
   }
-  /* line 398, ../sass/_mobile.scss */
+  /* line 399, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-prev.ui-state-hover .ui-icon {
     opacity: 1;
   }
-  /* line 403, ../sass/_mobile.scss */
+  /* line 404, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-next {
     cursor: pointer;
   }
-  /* line 405, ../sass/_mobile.scss */
+  /* line 406, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-next .ui-icon {
     opacity: .9;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 410, ../sass/_mobile.scss */
+  /* line 411, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-next.ui-state-disabled .ui-icon {
     opacity: .3;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 416, ../sass/_mobile.scss */
+  /* line 417, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-next.ui-state-hover .ui-icon {
     opacity: 1;
     background: url(../img/sprites.png) 0 -31px;
   }
-  /* line 423, ../sass/_mobile.scss */
+  /* line 424, ../sass/_mobile.scss */
   .comiseo-daterangepicker .comiseo-daterangepicker-main .ui-datepicker-calendar {
     border: 0;
     padding: 0;
   }
-  /* line 428, ../sass/_mobile.scss */
+  /* line 429, ../sass/_mobile.scss */
   .comiseo-daterangepicker td {
     text-align: center;
   }
-  /* line 430, ../sass/_mobile.scss */
+  /* line 431, ../sass/_mobile.scss */
   .comiseo-daterangepicker td .ui-datepicker-current-day {
     background-color: #c5c3c3;
   }
-  /* line 433, ../sass/_mobile.scss */
+  /* line 434, ../sass/_mobile.scss */
   .comiseo-daterangepicker td .ui-state-default {
     border: 0;
     font-weight: normal;
@@ -1561,18 +1562,18 @@ html, body {
     background: inherit;
   }
 
-  /* line 443, ../sass/_mobile.scss */
+  /* line 444, ../sass/_mobile.scss */
   #listHeader #outerLogo, #listHeader #viewCalendarOuter, #listHeader #viewPrintableOuter {
     display: none;
   }
-  /* line 446, ../sass/_mobile.scss */
+  /* line 447, ../sass/_mobile.scss */
   #listHeader header {
     overflow: auto;
     color: white;
     line-height: 3;
     background-color: black;
   }
-  /* line 452, ../sass/_mobile.scss */
+  /* line 453, ../sass/_mobile.scss */
   #listHeader header span#innerLogo {
     top: 10px;
     position: relative;
@@ -1584,7 +1585,7 @@ html, body {
     -webkit-background-size: contain;
     background-size: contain;
   }
-  /* line 465, ../sass/_mobile.scss */
+  /* line 466, ../sass/_mobile.scss */
   #listHeader h1 {
     font-size: 1em;
   }
