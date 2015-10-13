@@ -28,7 +28,7 @@ var MobileEvents = React.createClass({
                 {meridiem}
               </span>
             </span>
-            <span className="description">{description}</span>
+            <span className={classNames('description',(event.isDraft ? 'draft' : ''))}>{description}</span>
           </div>
       );
     });

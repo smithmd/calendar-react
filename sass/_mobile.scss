@@ -111,6 +111,9 @@
             &.description {
               color: $dark-text;
             }
+            &.description.draft {
+              color: rgba(0,0,0,0.4);
+            }
           }
         }
       }
@@ -186,10 +189,6 @@
         background-size: contain;
       }
     }
-  }
-
-  .pusher {
-    height:100% !important;
   }
 
   #filters {
