@@ -332,7 +332,7 @@ html, body {
   #Calendar div .calendarRow .day .event {
     margin: .5em auto;
     padding-bottom: .5em;
-    font-size: .8em;
+    font-size: .9em;
     width: 90%;
     border-bottom: 1px dotted #c5c5c5;
   }
@@ -746,7 +746,7 @@ html, body {
   #Calendar div .calendarRow .day .event {
     margin: .5em auto;
     padding-bottom: .5em;
-    font-size: .8em;
+    font-size: .9em;
     width: 90%;
     border-bottom: 1px dotted #c5c5c5;
   }
