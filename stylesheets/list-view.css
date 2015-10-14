@@ -1219,7 +1219,7 @@ html, body {
   }
   /* line 115, ../sass/_mobile.scss */
   #Calendar div #eventList div span.description.draft {
-    color: rgba(0, 0, 0, 0.4);
+    color: #D42741;
   }
   /* line 123, ../sass/_mobile.scss */
   #Calendar .dayOfWeek {
