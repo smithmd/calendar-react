@@ -346,7 +346,7 @@ html, body {
   }
   /* line 72, ../sass/_desktop.scss */
   #Calendar div .calendarRow .day .event.draft {
-    color: rgba(0, 0, 0, 0.5);
+    color: #D42741;
   }
   /* line 80, ../sass/_desktop.scss */
   #Calendar .dayOfWeek {
@@ -760,7 +760,7 @@ html, body {
   }
   /* line 73, ../sass/_tablet.scss */
   #Calendar div .calendarRow .day .event.draft {
-    color: rgba(0, 0, 0, 0.5);
+    color: #D42741;
   }
   /* line 81, ../sass/_tablet.scss */
   #Calendar .dayOfWeek {
