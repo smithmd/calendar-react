@@ -148,7 +148,7 @@ var MobileCalendar = React.createClass({displayName: "MobileCalendar",
     var eventWeeks = [];
     var maxWeeks = this.props.endingDay.diff(beginningDay, 'weeks') + 1;
 
-    var end = beginningDay.clone();
+    var end = beginningDay.clone().endOf('day');
     end.day(6);
     // create associative array for weeks of calendar
     for (var i = 0; i < maxWeeks; i += 1) {
