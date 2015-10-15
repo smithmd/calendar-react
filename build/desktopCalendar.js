@@ -102,11 +102,14 @@ var DesktopCalendarRow = React.createClass({displayName: "DesktopCalendarRow",
     var today = moment().startOf('day');
     for (var i = 0; i < 7; i += 1) {
       day = this.props.startDay.day(i);
+      //console.log('day: ' + day);
       var events = this.props.week.filter(function (event) {
         d = new Date(event.startDate);
         d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
+        //console.log('i: ' + i + ' / day: ' + d.getDay() + ' / date: ' + d.toDateString());
         return (i === d.getDay());
       });
+
 
       var isCurr;
       var dispDay;
@@ -136,7 +139,8 @@ var DesktopCalendar = React.createClass({displayName: "DesktopCalendar",
     return function (event) {
       var d = new Date(event.startDate);
       d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
-      return (beginningDay <= d && end >= d);
+      console.log('beg: ' + beginningDay.toDate().toDateString() + ' | this: ' + d.toDateString() + ' | end ' + end.toDate().toDateString());
+      return (beginningDay.toDate() <= d && end.endOf('day').toDate() >= d);
     }
   },
   render: function () {
@@ -149,6 +153,7 @@ var DesktopCalendar = React.createClass({displayName: "DesktopCalendar",
     end.day(6);
     // create associative array for weeks of calendar
     for (var i = 0; i < maxWeeks; i += 1) {
+      console.log('start: ' + beginningDay.toDate().toDateString() + ' / end: ' + end.toDate().toDateString());
       var week = this.props.events.filter(this.filterWeek(beginningDay, end));
       eventWeeks[i] = (React.createElement(DesktopCalendarRow, {key: "w"+i, startDay: beginningDay, week: week, 
                                            month: this.props.dates.startMonth, 
