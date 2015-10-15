@@ -108,6 +108,7 @@ var DesktopCalendarRow = React.createClass({displayName: "DesktopCalendarRow",
         return (i === d.getDay());
       });
 
+
       var isCurr;
       var dispDay;
       if (this.props.range.start && this.props.range.end) {
@@ -136,7 +137,7 @@ var DesktopCalendar = React.createClass({displayName: "DesktopCalendar",
     return function (event) {
       var d = new Date(event.startDate);
       d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
-      return (beginningDay <= d && end >= d);
+      return (beginningDay.toDate() <= d && end.toDate() >= d);
     }
   },
   render: function () {
@@ -145,7 +146,7 @@ var DesktopCalendar = React.createClass({displayName: "DesktopCalendar",
     var eventWeeks = [];
     var maxWeeks = this.props.endingDay.diff(beginningDay, 'weeks') + 1;
 
-    var end = beginningDay.clone();
+    var end = beginningDay.clone().endOf('day');
     end.day(6);
     // create associative array for weeks of calendar
     for (var i = 0; i < maxWeeks; i += 1) {
