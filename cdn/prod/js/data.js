@@ -22,7 +22,7 @@ var calendarDates = new Rx.BehaviorSubject({
   endYear: moment().year()
 });
 
-var dailyFilter = new Rx.BehaviorSubject(true);
+var dailyFilter = new Rx.BehaviorSubject(false);
 
 var performanceFilter = new Rx.BehaviorSubject(false);
 
