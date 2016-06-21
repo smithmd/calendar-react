@@ -1,3 +1,13 @@
+# Compilation
+
+```
+jsx --watch src build
+```
+
+A link to the old build tools (now deprecated but still works until I can figure out how the hell Babel works)  
+[React Tools](https://www.npmjs.com/package/react-tools)
+
+
 # [React](https://facebook.github.io/react) [![Build Status](https://travis-ci.org/facebook/react.svg?branch=0.13-stable)](https://travis-ci.org/facebook/react)
 
 React is a JavaScript library for building user interfaces.

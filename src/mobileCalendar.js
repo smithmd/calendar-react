@@ -148,8 +148,8 @@ var MobileCalendar = React.createClass({
     var eventWeeks = [];
     var maxWeeks = this.props.endingDay.diff(beginningDay, 'weeks') + 1;
 
-    var end = beginningDay.clone().endOf('day');
-    end.day(6);
+    var end = beginningDay.clone();
+    end.day(6).endOf('day');
     // create associative array for weeks of calendar
     for (var i = 0; i < maxWeeks; i += 1) {
       var week = this.props.events.filter(this.filterWeek(beginningDay, end));
@@ -159,7 +159,7 @@ var MobileCalendar = React.createClass({
 
       // move start to beginning of next week and end to end of next week
       beginningDay = beginningDay.clone().day(7);
-      end = end.clone().day(13);
+      end = end.clone().day(13).endOf('day');
       if (this.props.dateRange && !this.props.dateRange.end) {
         if (beginningDay.month() != this.props.dates.startMonth) {
           break;
