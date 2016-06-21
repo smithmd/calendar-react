@@ -1,4 +1,4 @@
-var Calendar = React.createClass({displayName: "Calendar",
+var Calendar = React.createClass({
   loadEvents: function () {
     var calendar = this;
     marmottajax({
@@ -186,17 +186,17 @@ var Calendar = React.createClass({displayName: "Calendar",
     var events = this.state.data.filter(this.filterData(component, beginningDay, endingDay));
     var ret = null;
     if (!this.state.narrow) {
-      ret = (React.createElement(DesktopCalendar, {events: events, beginningDay: beginningDay, endingDay: endingDay, dates: this.state.dates, 
-                              dateRange: this.state.dateRange}));
+      ret = (<DesktopCalendar events={events} beginningDay={beginningDay} endingDay={endingDay} dates={this.state.dates}
+                              dateRange={this.state.dateRange}/>);
     } else {
-      ret = (React.createElement(MobileCalendar, {events: events, beginningDay: beginningDay, endingDay: endingDay, dates: this.state.dates, 
-                             dateRange: this.state.dateRange}));
+      ret = (<MobileCalendar events={events} beginningDay={beginningDay} endingDay={endingDay} dates={this.state.dates}
+                             dateRange={this.state.dateRange}/>);
     }
     return ret;
   }
 });
 
 React.render(
-    React.createElement(Calendar, {url: window.jsonUrl, isDraft: window.isDraft}),
+    <Calendar url={window.jsonUrl} isDraft={window.isDraft}/>,
     document.getElementById("Calendar")
 );
