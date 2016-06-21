@@ -41,24 +41,28 @@ var Calendar = React.createClass({displayName: "Calendar",
     if (eventObj) {
       // check if title matches string
       if (eventObj.title) {
-        if (eventObj.title.toLowerCase().indexOf(searchString) > -1
-        ) {
+        if (eventObj.title.toLowerCase().indexOf(searchString) > -1) {
           return true;
         }
       }
 
       // check if genre matches string
       if (eventObj.genre) {
-        if (eventObj.genre.toLowerCase().indexOf(searchString) > -1
-        ) {
+        if (eventObj.genre.toLowerCase().indexOf(searchString) > -1) {
           return true;
         }
       }
 
       // check if division matches string
       if (eventObj.campDivision) {
-        if (eventObj.campDivision.toLowerCase().indexOf(searchString) > -1
-        ) {
+        if (eventObj.campDivision.toLowerCase().indexOf(searchString) > -1) {
+          return true;
+        }
+      }
+
+      // check if venue matches string
+      if (eventObj.venue) {
+        if (eventObj.venue.toLowerCase().indexOf(searchString) > -1) {
           return true;
         }
       }
